@@ -1,0 +1,323 @@
+#login_page {
+    background-color: #525461;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: auto auto;
+}
+
+#login_page .login_page_cover {
+    position: relative;
+    padding: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 700px;
+    border-radius: 40px;
+}
+
+#login_page .login_bg_img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#login_page .login_bg_img::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(70deg, #1E2229 30%, #1e2229ef 50%, #1e2229d3 60%, transparent);
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+}
+
+#login_page .login_bg_img img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    object-fit: cover;
+}
+
+#login_page .content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+
+#login_page .content .content_navbar {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+#login_page .content .content_navbar .logo {
+    width: 270px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login_page .content .content_navbar .logo img {
+    height: auto;
+    width: 120px;
+    object-fit: cover;
+}
+
+#login_page .content .content_navbar .menu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    height: 100%;
+}
+
+#login_page .content .content_navbar .menu .stuudent {
+    margin-right: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login_page .content .content_navbar .menu .stuudent a {
+    color: rgba(207, 207, 207, 0.63);
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    background-color: transparent;
+    padding: 10px 10px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+#login_page .content .content_navbar .menu .teacher {
+    margin-right: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login_page .content .content_navbar .menu .teacher a {
+    color: rgba(207, 207, 207, 0.63);
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    background-color: transparent;
+    padding: 10px 10px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+#login_page .content .content_navbar .menu .teacher a:hover,
+#login_page .content .content_navbar .menu .stuudent a:hover {
+    background-color: #545B69;
+    color: white;
+}
+
+
+#login_page .content .inner_content {
+    width: max-content;
+    margin-top: 100px;
+    margin-left: 80px;
+}
+
+#login_page .content .inner_content .log_type {
+    color: #b5c0ca;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border-bottom: 1px solid #b5c0ca;
+    width: max-content;
+    margin-bottom: 20px;
+}
+
+#login_page .content .inner_content .log_text {
+    color: white;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+#login_page .warning {
+    background-color: #F8D7DA;
+    padding-left: 50px;
+    font-size: 17px;
+}
+
+#login_page .warning .MuiAlert-icon {
+    font-size: 25px;
+    color: red;
+}
+
+
+
+
+.input_row {
+    position: relative;
+    margin-top: 40px !important;
+}
+
+.input_style {
+    width: max-content;
+}
+
+.input_style:nth-child(1) {
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.input_style:before {
+    position: absolute;
+    content: "";
+    display: block;
+    height: 100%;
+    z-index: -1;
+    background: inherit;
+}
+
+.input_style:nth-child(10) {
+    background: #134A46;
+}
+
+.input_style i {
+    position: relative;
+    font-size: 25px;
+    transform: translateX(-150%);
+    top: 4px;
+    color: #aaa;
+}
+
+.input_style span {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.balloon {
+    display: inline-block;
+    width: 315px;
+    padding: 10px 50px 10px 15px;
+    color: white;
+    background: #374050;
+    border: 0;
+    border-radius: 5px;
+    outline: 0;
+    text-indent: 100px;
+    transition: all .3s ease-in-out;
+}
+
+.balloon::after {
+    content: 'sadas';
+    position: absolute !important;
+    z-index: 222;
+    background-color: red;
+    width: 20px;
+    height: 42px;
+}
+
+.balloon::-webkit-input-placeholder {
+    color: #374050;
+    text-indent: 0;
+    font-weight: 300;
+}
+
+.balloon+label {
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    left: 0;
+    bottom: 8px;
+    padding: 5px 15px;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(19, 74, 70, 0);
+    transition: all .3s ease-in-out;
+    border-radius: 3px;
+    background: rgba(122, 184, 147, 0);
+}
+
+.balloon+label:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    top: 100%;
+    left: 50%;
+    margin-left: -3px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 3px solid rgba(122, 184, 147, 0);
+    transition: all .3s ease-in-out;
+}
+
+.balloon:focus,
+.balloon:active {
+    color: #377D6A;
+    text-indent: 0;
+    background: #fff;
+
+}
+
+.balloon:focus::-webkit-input-placeholder,
+.balloon:active::-webkit-input-placeholder {
+    color: #aaa;
+}
+
+.balloon:focus+label,
+.balloon:active+label {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
+    background: #7ab893;
+    transform: translateY(-45px);
+}
+
+.balloon:focus+label:after,
+.balloon:active+label:after {
+    border-top: 4px solid #7ab893;
+}
+
+.btn_group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 315px;
+}
+
+.login_btn,
+.detail_btn {
+    margin-top: 20px;
+    background-color: #7AB893;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: capitalize;
+    width: 250px;
+}
+
+.login_btn:hover,
+.detail_btn:hover {
+    background-color: #5a9773;
+    border-color: #7AB893;
+}
+
+.detail_btn {
+    background-color: transparent;
+}

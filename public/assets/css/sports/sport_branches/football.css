@@ -1,0 +1,514 @@
+@media only screen and (max-width: 1400px) {
+    #sport_football .sport_football_cover {
+        width: 100% !important;
+    }
+
+    #sport_football .sport_football_cover .announcement_part .title {
+        padding-left: 120px !important;
+    }
+
+    #sport_football .sport_football_cover .football_posts .title {
+        padding-left: 120px !important;
+    }
+}
+
+
+@media only screen and (max-width: 1000px) {
+    #sport_football .sport_football_cover .announcement_part .title {
+        padding-left: 50px !important;
+    }
+
+    #sport_football .sport_football_cover .football_posts .title {
+        padding-left: 50px !important;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    #sport_football .sport_football_cover {
+        min-width: 1400px !important;
+        width: auto !important;
+    }
+}
+
+
+
+#sport_football {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--theme_bg_color);
+    transition: 0.5s;
+}
+
+#sport_football .sport_football_cover {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background: var(--theme_bg_color);
+    transition: 0.5s;
+    margin-top: 45px;
+}
+
+
+
+/* football_image_part */
+
+#sport_football .sport_football_cover .football_image_part {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    height: 600px;
+}
+
+#sport_football .sport_football_cover .football_image_part .image_part {
+    position: relative;
+    height: 600px;
+}
+
+#sport_football .sport_football_cover .football_image_part .image_part .bg_blur {
+    position: absolute;
+    background: linear-gradient(180deg, transparent, black);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0.6;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#sport_football .sport_football_cover .football_image_part .image_part .football_image {
+    width: 100%;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#sport_football .sport_football_cover .football_image_part .content {
+    position: absolute;
+    top: 300px;
+    /* left: 180px; */
+    left: 15%;
+    z-index: 2;
+}
+
+#sport_football .sport_football_cover .football_image_part .content .header {
+    color: #ffffff;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 800;
+    font-size: 32px;
+}
+
+#sport_football .sport_football_cover .football_image_part .content .small_desc {
+    color: #ffffff;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+#sport_football .sport_football_cover .football_image_part .content a.btn {
+    color: #ffffff;
+    background-color: red;
+    border-radius: 10px;
+    margin-top: 40px;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 800;
+}
+
+
+
+/* announcement_part */
+
+#sport_football .sport_football_cover .announcement_part {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    padding-top: 60px;
+}
+
+#sport_football .sport_football_cover .announcement_part .title {
+    position: relative;
+    color: var(--theme_card_content_title_color);
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+#sport_football .sport_football_cover .announcement_part .announcement_part_wrapper {
+    margin-top: 30px;
+}
+
+#sport_football .sport_football_cover .announcement_part .announcement_part_wrapper .swiper {
+    width: 970px !important;
+}
+
+#sport_football .sport_football_cover .announcement_part .announcement_part_wrapper .swiper .swiper-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: row !important;
+    margin-bottom: 20px;
+}
+
+#sport_football .sport_football_cover .announcement_part .announcement_part_wrapper .swiper .swiper-wrapper .swiper-slide {
+    margin-bottom: 40px;
+}
+
+#sport_football .sport_football_cover .announcement_part .announcement_part_wrapper .swiper .swiper-wrapper .swiper-slide a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#sport_football .sport_football_cover .announcement_part .announcement_part_wrapper .swiper .swiper-wrapper .swiper-slide a .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    border-radius: 30px;
+    width: 450px;
+    box-shadow: var(--theme_sport_football_announcement_box_shadow);
+    background-color: var(--theme_components_card_bg_color);
+}
+
+#sport_football .sport_football_cover .announcement_part .announcement_part_wrapper .swiper .swiper-wrapper .swiper-slide a .slide-content .date {
+    background-color: red;
+    font-family: 'Abril Fatface', cursive;
+    margin-left: -1px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #ffffff;
+    height: 100%;
+    padding: 3px 25px;
+    text-align: center;
+    border-radius: 30px;
+}
+
+#sport_football .sport_football_cover .announcement_part .announcement_part_wrapper .swiper .swiper-wrapper .swiper-slide a .slide-content .content {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--theme_card_content_title_color);
+    height: 100%;
+    padding: 0px 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+
+
+#sport_football .announcement_part .swiper-button-prev {
+    top: 100% !important;
+    margin-left: 10px;
+}
+
+#sport_football .announcement_part .swiper-button-next {
+    top: 100% !important;
+}
+
+#sport_football .announcement_part .swiper-button-prev::after,
+#sport_football .announcement_part .swiper-button-next::after {
+    display: none;
+}
+
+#sport_football .announcement_part .swiper-button-prev .left-arrow {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 10px;
+    border-radius: 4px;
+    background-color: #484e5a;
+    transform: translateY(-50%);
+}
+
+#sport_football .announcement_part .swiper-button-next .right-arrow {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 10px;
+    border-radius: 4px;
+    background-color: #484e5a;
+    transform: rotateY(180deg) translateY(-50%);
+}
+
+#sport_football .announcement_part .swiper-pagination {
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    transform: translateY(10%);
+}
+
+#sport_football .announcement_part .swiper-pagination-bullet {
+    background-color: var(--theme_swipper_pagination_bg_color);
+}
+
+#sport_football .announcement_part .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: var(--theme_swipper_pagination_active_bg_color);
+    width: 12px;
+    height: 12px;
+    transition: 0.2s all !important;
+}
+
+
+
+/* football_posts */
+
+#sport_football .football_posts {
+    position: relative;
+    margin-top: 120px;
+    width: 100%;
+    max-width: 1400px;
+    padding-top: 30px;
+}
+
+#sport_football .football_posts .title {
+    position: relative;
+    color: var(--theme_card_content_title_color);
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+#sport_football .football_posts .football_posts_wrapper {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+    height: 100%;
+    padding: 0 10px;
+    margin-bottom: 100px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card {
+    height: 370px;
+    width: 100%;
+    background-color: var(--theme_components_card_bg_color);
+    border-radius: 20px;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.239);
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .content .left_side {
+    border-radius: 20px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .content .left_side img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .content .right_side {
+    padding-left: 25px;
+    padding-right: 15px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .content .right_side .header {
+    color: var(--theme_card_content_title_color);
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .content .right_side .desc {
+    margin-top: 15px;
+    color: var(--theme_card_content_title_color);
+    font-size: 16px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 15px 25px;
+    padding-left: 21px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .category {
+    background-color: var(--theme_bg_color);
+    padding: 7px 20px;
+    border-radius: 8px;
+    color: var(--theme_card_title_color);
+    font-weight: 600;
+    border: var(--theme_card_border);
+    border-width: 1px;
+    border-color: rgba(226, 226, 226, 0.301);
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .post_rank {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .post_rank img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .post_rank span {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--theme_card_title_color);
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .post_vote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .post_vote img {
+    width: 35px;
+    height: 30px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .post_vote span {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--theme_card_title_color);
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .post_date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .post_date img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_info .post_date span {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--theme_card_title_color);
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer {
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 0 20px;
+    padding-right: 15px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_user .user_img {
+    margin-right: 10px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_user .user_img img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_user .user_info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_user .user_info .user_name {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--theme_card_content_title_color);
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_user .user_info .more {
+    font-size: 15px;
+    color: var(--theme_card_title_color);
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF0000;
+    height: 40px;
+    width: 150px;
+    padding-left: 5px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_button img {
+    width: 15px;
+    height: 15px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_button img:nth-child(2) {
+    margin-right: -8px !important;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_button img:nth-child(3) {
+    margin-right: -8px !important;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_button span {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+#sport_football .football_posts .football_posts_wrapper .post_card .post_footer .post_button:hover {
+    background-color: #ff0000c0;
+}

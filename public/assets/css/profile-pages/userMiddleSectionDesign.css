@@ -1,0 +1,127 @@
+#userMiddleSectionDesign {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-right: 1px solid #E6E7EE;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover {
+    height: 100%;
+    max-width: 800px;
+    width: 100%;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .search_section {
+    padding: 0 10px;
+    border-bottom: 1px solid #E6E7EE;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .search_section img {
+    margin-right: 10px;
+    width: 30px;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .search_section input {
+    height: 30px;
+    background-color: transparent;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .search_section input {
+    font-family: 'Rubik', sans-serif;
+    color: var(--theme_card_content_title_color);
+    padding-left: 5px;
+    word-spacing: 2px;
+    letter-spacing: 0.6px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .search_section input::placeholder {
+    font-weight: 500;
+    color: #9BAAAC;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section {
+    padding: 10px 10px;
+    position: relative;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section::-webkit-scrollbar {
+    z-index: 99999;
+    width: 4px;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section::-webkit-scrollbar-track {
+    background-color: #F1F1F1;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #95A5A6 0%, #95A5A6 50%, #95A5A6 99%);
+}
+
+
+
+/** TAB MENU  */
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section .tab_menu button[aria-selected="true"] {
+    font-weight: 700;
+    font-size: 15px;
+    color: #61BEFA;
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section .tab_menu .MuiTabs-indicator {
+    border-bottom: 3px solid #61BEFA !important;
+
+}
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section .tab_menu .all_posts,
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section .tab_menu .photos-videos,
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section .tab_menu .more_info {
+    padding: 10px;
+    border-bottom: 3px solid #e3e5ec;
+    margin-bottom: -3px;
+    width: 33.3%;
+    text-align: center;
+}
+
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section .tab_menu button {
+    word-spacing: 2px;
+    letter-spacing: 0.6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #9BAAAC;
+    margin-bottom: 0 !important;
+}
+
+
+/** TAB MENU CONTENT */
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section .tab_menu_content {
+    height: 100%;
+    padding: 20px 0;
+}
+
+
+/** All Posts Tab 1 */
+
+#userMiddleSectionDesign .userMiddleSectionDesign_cover .content_section .tab_menu_content.content_1 {
+    /* border-left: 1px solid #9BAAAC;
+    border-right: 1px solid #9BAAAC; */
+    position: relative;
+    height: max-content;
+    padding-bottom: 50px;
+}

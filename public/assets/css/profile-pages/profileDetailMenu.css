@@ -1,0 +1,384 @@
+#profileDetailMenu {
+    max-width: 220px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-right: 1px solid #E6E7EE;
+    z-index: 9;
+}
+
+#profileDetailMenu .site-logo {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#profileDetailMenu .site-logo img {
+    width: 60%;
+    height: auto;
+}
+
+#profileDetailMenu .menu_content {
+    height: calc(100% - 100px);
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#profileDetailMenu .menu_content .authUser_account_menu {
+    margin-left: 20px;
+    width: 100%;
+}
+
+#profileDetailMenu .menu_content .authUser_account_menu .header {
+    height: 25px;
+    font-family: 'Abril Fatface', cursive;
+    font-weight: 600;
+    font-size: 13px;
+    color: #7D8494;
+}
+
+#profileDetailMenu .menu_content .authUser_account_menu .menu {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+#profileDetailMenu .menu_content .authUser_account_menu .menu a {
+    width: 100%;
+    padding: 10px 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    box-shadow: var(--theme_card_divider_box_shadow);
+}
+
+#profileDetailMenu .menu_content .authUser_account_menu .menu a:hover span {
+    color: #61BEFA;
+}
+
+#profileDetailMenu .menu_content .authUser_account_menu .menu a img {
+    width: auto;
+    height: 25px;
+}
+
+#profileDetailMenu .menu_content .authUser_account_menu .menu a span {
+    margin-left: 10px;
+    font-family: 'Rubik', sans-serif;
+    color: var(--theme_card_content_title_color);
+    font-weight: 800;
+    font-size: 13px;
+    word-spacing: 0px;
+    letter-spacing: 0.5px;
+}
+
+
+#profileDetailMenu .menu_content .common_menu {
+    margin-left: 20px;
+    margin-top: 30px;
+    width: 112%;
+}
+
+#profileDetailMenu .menu_content .common_menu .header {
+    height: 20px;
+    font-family: 'Abril Fatface', cursive;
+    font-weight: 600;
+    font-size: 13px;
+    color: #7D8494;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+
+#profileDetailMenu .menu_content .common_menu .menu a {
+    width: 100%;
+    padding: 10px 10px;
+    margin-top: 5px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    box-shadow: var(--theme_card_divider_box_shadow);
+}
+
+#profileDetailMenu .menu_content .common_menu .menu a:hover span {
+    color: #61BEFA;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu a img {
+    width: auto;
+    height: 25px;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu a.main-page span {
+    margin-bottom: -5px;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu a span {
+    margin-left: 10px;
+    font-family: 'Rubik', sans-serif;
+    color: var(--theme_card_content_title_color);
+    font-weight: 800;
+    font-size: 13px;
+    word-spacing: 0px;
+    letter-spacing: 0.5px;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu .menu_inner {
+    width: 100%;
+    margin-top: 10px;
+    padding-left: 10px;
+    position: relative;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu .menu_inner .more_menu {
+    position: relative;
+    width: 101%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px 0;
+    padding-bottom: 11px;
+    box-shadow: var(--theme_card_divider_box_shadow);
+}
+
+#profileDetailMenu .menu_content .common_menu .menu .menu_inner .more_menu img {
+    width: auto;
+    height: 25px;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu .menu_inner .more_menu span {
+    margin-left: 10px;
+    font-family: 'Rubik', sans-serif;
+    color: var(--theme_card_content_title_color);
+    font-weight: 800;
+    font-size: 13px;
+    word-spacing: 0px;
+    letter-spacing: 0.5px;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu .menu_inner .menu_inner_menu {
+    overflow-y: none;
+    background-color: #F5F7FA;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    position: absolute;
+    border-radius: 7px;
+    margin-left: 190px;
+    /* margin-top: -48px; */
+    margin-top: -48px;
+    width: 220px;
+    padding: 5px 15px;
+    padding-top: 0;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    animation-duration: 0.5s;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu .menu_inner .menu_inner_menu i {
+    position: absolute;
+    margin-left: -35px;
+    margin-top: 15px;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu .menu_inner .menu_inner_menu a {
+    width: 100%;
+    padding: 10px 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu .menu_inner .menu_inner_menu a img {
+    width: auto;
+    height: 28px;
+}
+
+#profileDetailMenu .menu_content .common_menu .menu .menu_inner .menu_inner_menu a span {
+    margin-left: 10px;
+    font-family: 'Rubik', sans-serif;
+    color: var(--theme_card_content_title_color);
+    font-weight: 500;
+    font-size: 14px;
+    word-spacing: 0px;
+    letter-spacing: 0.5px;
+}
+
+
+
+/** Auth User Info */
+
+#profileDetailMenu .menu_content .authUser_info {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    border-top: 1px solid #E6E7EE;
+    padding: 0;
+    cursor: pointer;
+  
+}
+
+#profileDetailMenu .menu_content .authUser_info i.fa-caret-up {
+    padding-right: 10px;
+}
+
+#profileDetailMenu .menu_content .authUser_info .small_user_info {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+#profileDetailMenu .menu_content .authUser_info .small_user_info .user_img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+#profileDetailMenu .menu_content .authUser_info .small_user_info .user_fullname {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-left: 10px;
+    font-family: 'Titillium Web', sans-serif;
+    color: var(--theme_card_content_title_color);
+    font-weight: 600;
+    font-size: 14px;
+    word-spacing: 0px;
+    letter-spacing: 0.5px;
+    margin-right: 4px;
+}
+
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu {
+    background-color: #F5F7FA;
+    position: absolute;
+    margin-top: -50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: stretch;
+    padding: 10px 5px;
+    border-top: 1px solid #E6E7EE;
+    animation-duration: 0.5s;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu i.fa-angle-down {
+    position: absolute;
+    top: 0;
+    transform: translateY(-110%);
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .user_img {
+    margin: 0 5px;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .user_img img {
+    width: 60px;
+    height: 90px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .user_fullname {
+    font-family: 'Titillium Web', sans-serif;
+    color: var(--theme_card_content_title_color);
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info .rank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info .rank img {
+    width: 21px;
+    height: 21px;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info .rank span {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--theme_for_inner_space_color);
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info .follow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info .follow img {
+    width: 21px;
+    height: 21px;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info .follow span {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--theme_for_inner_space_color);
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info .reliable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info .reliable img {
+    width: 21px;
+    height: 21px;
+}
+
+#profileDetailMenu .menu_content .authUser_info .auth_user_switch_menu .auth_user_more_info .info .reliable span {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--theme_for_inner_space_color);
+}
