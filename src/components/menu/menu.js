@@ -40,10 +40,10 @@ const Menu = () => {
     useEffect(() => {
         //!! GET Auth User İnfo  
         axios
-        .get(`http://localhost:8000/api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
+        .get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
         .then(res => {
             //!! GET Site Settings  
-            axios.get(`http://localhost:8000/api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
+            axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
             .then(theme_res => {
                 dispatch(login(res.data));
                 dispatch(setDarkMode(theme_res.data.dark_theme))
@@ -57,7 +57,7 @@ const Menu = () => {
     const themeHandler = () => {
         let theme_dark_mode = theme.dark
         //!! PATCH Site Settings Controll  
-        axios(`http://localhost:8000/api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`, {
+        axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`, {
                 auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
                 credentials: 'include',
                 method: 'PATCH',

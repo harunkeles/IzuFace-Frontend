@@ -1,0 +1,97 @@
+#Mh_Editor {
+    width: 99%;
+    margin-left: 6px;
+    border-radius: 10px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    background-color: #F5F7FA;
+    top: 0;
+}
+
+#Mh_Editor .Mh_Editor_cover {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+    border: 1px solid #F9F9F9;
+}
+
+
+#Mh_Editor .Mh_Editor_cover .Mh_Editor__item {
+    height: 35px;
+    width: auto;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    border-radius: 7px;
+    margin: 0 7px;
+    cursor: pointer;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#Mh_Editor .Mh_Editor_cover .Mh_Editor__item.setBoldItem {
+    width: 35px;
+    user-select: none;
+}
+
+#Mh_Editor .Mh_Editor_cover .Mh_Editor__item.setBoldItem svg {
+    user-select: none;
+}
+
+
+#Mh_Editor .Mh_Editor_cover .Mh_Editor__item.setItalicItem {
+    width: 35px;
+}
+
+
+
+
+
+
+/* ****** */
+
+
+#Mh_Editor_Content {
+    margin: 20px 0;
+    margin-bottom: 20px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+#Mh_Editor_Content textarea {
+    width: 100%;
+    /* font-weight: 500; */
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 15px;
+}
+
+#Mh_Editor_Content textarea::placeholder {
+    font-weight: 700;
+    color: #b2b5bb;
+}
+
+
+
+#Mh_Editor_Content::-webkit-scrollbar {
+    z-index: 99999;
+    width: 4px;
+    opacity: 0;
+    display: none;
+}
+
+#Mh_Editor_Content::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#Mh_Editor_Content::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #95A5A6 0%, #95A5A6 50%, #95A5A6 99%);
+}

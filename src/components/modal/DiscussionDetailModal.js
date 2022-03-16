@@ -40,7 +40,7 @@ function DiscussionDetailModal() {
 
         if (modal.modalIsOpen) {
             //!! GET Model Detail
-            axios.get(`http://127.0.0.1:8000/api/v0/discussions/${modal.modelID}`)
+            axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${modal.modelID}`)
             .then(res => { 
                 dispatch(setModalDetail(res.data)); 
                 if (modal.modelDetail) {
@@ -55,7 +55,7 @@ function DiscussionDetailModal() {
 
     //!! Discussion Like
     const onClickLikeButton = (discussionID) => {
-        axios.get(`http://127.0.0.1:8000/api/v0/discussions/${discussionID}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`)
         .then(res => {
             let this_discussion_liked_user = res.data.likes
 
@@ -64,7 +64,7 @@ function DiscussionDetailModal() {
                 var index = this_discussion_liked_user.indexOf(user.authUser.user_id);
                 if (index !== -1)
                     this_discussion_liked_user.splice(index, 1); 
-                axios(`http://127.0.0.1:8000/api/v0/discussions/${discussionID}`, {
+                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`, {
                     auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
                     credentials: 'include',
                     method: 'PATCH',
@@ -76,7 +76,7 @@ function DiscussionDetailModal() {
             }
             else { 
                 this_discussion_liked_user.push(user.authUser.user_id);
-                axios(`http://127.0.0.1:8000/api/v0/discussions/${discussionID}`, {
+                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`, {
                     auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
                     credentials: 'include',
                     method: 'PATCH',
@@ -93,7 +93,7 @@ function DiscussionDetailModal() {
 
     const forceUpdateHandler = () =>{
          //!! GET Discussions Api  
-         axios.get(`http://127.0.0.1:8000/api/v0/discussions/${modal.modelID}`)
+         axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${modal.modelID}`)
          .then(discussions_res => { 
             dispatch(setModalDetail(discussions_res.data)); 
          })

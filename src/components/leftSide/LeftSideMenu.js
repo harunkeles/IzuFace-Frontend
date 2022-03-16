@@ -33,7 +33,6 @@ function LeftSideMenu({user,theme,isPageReady}) {
     }
 
     theme = useSelector(state => state.theme)
-    user = useSelector(state => state.auth)
     const dispatch = useDispatch()
  
     const [ style, setStyle ] = useState({display: 'none'});
@@ -63,7 +62,7 @@ function LeftSideMenu({user,theme,isPageReady}) {
         if (isPageReady_) {
             console.log("girdi")
             axios
-            .get(`http://localhost:8000/api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
+            .get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
             .then(res => {
                 dispatch(login(res.data));
                 setIsPageReady_(true);
@@ -91,15 +90,15 @@ function LeftSideMenu({user,theme,isPageReady}) {
                                 <div className="list-about-user">
                                     <div className="auth_user">
                                         <div className="user-info">
-                                            <img className="user-img" src={routes.url + user.authUser.more_info.profImage } alt="" />
+                                            <img className="user-img" src={routes.url + user.more_info.profImage } alt="" />
                                             <div className="info">
                                                 <div className="rank animate__animated animate__backInLeft">
                                                     <img alt="" src={rank_icon} />
-                                                    <span>{user.authUser.more_info.user_rank}</span>
+                                                    <span>{user.more_info.user_rank}</span>
                                                 </div>
                                                 <div className="follow animate__animated animate__backInLeft">
                                                     <img alt="" src={like_icon} />
-                                                    <span>{user.authUser.more_info.followers}</span>
+                                                    <span>{user.more_info.followers}</span>
                                                 </div>
                                                 <div className="reliable animate__animated animate__backInLeft">
                                                     <img alt="" src={reliablity_icon} />
@@ -107,10 +106,10 @@ function LeftSideMenu({user,theme,isPageReady}) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <span className="user-name animate__animated animate__backInLeft"> {user.authUser.first_name} {user.authUser.last_name} </span>
+                                        <span className="user-name animate__animated animate__backInLeft"> {user.first_name} {user.last_name} </span>
                                     </div>
                                     <div className="auth_user_menus">
-                                        <a href={`/std/@${user.authUser.username}`} className="myprofile">
+                                        <a href={`/std/@${user.username}`} className="myprofile">
                                             <img alt="" src="https://img.icons8.com/external-sbts2018-outline-sbts2018/50/8D939F/external-profile-social-media-basic-1-sbts2018-outline-sbts2018.png"/>
                                             <span>Profilim</span>
                                         </a>

@@ -1,0 +1,257 @@
+#Create_Post {
+    background-color: #F5F7FA;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+#Create_Post .create_post_cover {
+    background-color: transparent;
+    height: 100%;
+    margin-top: 30px;
+}
+
+#Create_Post .create_post_cover .category_type_row {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+#Create_Post .create_post_cover .category_type_row .label {
+    margin-right: 30px;
+}
+
+#Create_Post .create_post_cover .category_type_row .label span {
+    font-family: 'Inika', serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 0;
+}
+
+#Create_Post .create_post_cover .category_type_row .toogle_post_type_category button {
+    margin: 0;
+    margin-right: 10px;
+    border-radius: 40px;
+    font-family: 'Titillium Web', sans-serif !important;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-size: 15px;
+    padding: 7px 15px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+#Create_Post .create_post_cover .category_type_row .toogle_post_type_category button.Mui-selected {
+    font-family: 'Titillium Web', sans-serif !important;
+    background-color: #233B55;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#Text_area {
+    margin-top: 20px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: stretch;
+}
+
+#Text_area .writing_area {
+    position: relative;
+    height: calc(100vh - 200px);
+    width: 75%;
+    flex: 5;
+    background-color: white;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+#Text_area .writing_area::-webkit-scrollbar {
+    z-index: 99999;
+    width: 4px;
+    opacity: 0;
+}
+
+#Text_area .writing_area::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#Text_area .writing_area::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #95A5A6 0%, #95A5A6 50%, #95A5A6 99%);
+}
+
+#Text_area .writing_area .cover_image_row {
+    width: 100%;
+    padding-left: 50px;
+
+}
+
+#Text_area .writing_area .cover_image_row button.cover_image_delete {
+    position: relative;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    min-height: 50px;
+    margin-left: 10px;
+}
+
+#Text_area .writing_area .cover_image_row button.cover_image_delete span {
+    position: relative;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 17px 10px;
+    color: #e60004;
+}
+
+#Text_area .writing_area img.cover_image {
+    position: relative;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 300px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#Text_area .writing_area button.cover_image {
+    position: relative;
+    background-color: transparent;
+    border: 2px solid #D6D6D7;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 7px 10px;
+    min-height: 50px;
+}
+
+#Text_area .writing_area button.cover_image span {
+    position: relative;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 7px 10px;
+}
+
+#Text_area .writing_area button.cover_image input {
+    position: absolute;
+    padding: 40px 10px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 0;
+}
+
+#Text_area .writing_area .article-form__body {
+    position: relative;
+    height: max-content;
+    width: 100%;
+
+}
+
+#Text_area .writing_area .article-form__body .article_base_title {
+    margin: 20px 0;
+    margin-bottom: 20px;
+    padding-right: 50px;
+    max-height: 500px;
+    overflow-y: scroll;
+    padding-left: 50px;
+}
+
+#Text_area .writing_area .article-form__body .article_base_title::-webkit-scrollbar {
+    z-index: 99999;
+    width: 4px;
+    opacity: 0;
+}
+
+#Text_area .writing_area .article-form__body .article_base_title::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#Text_area .writing_area .article-form__body .article_base_title::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #95A5A6 0%, #95A5A6 50%, #95A5A6 99%);
+}
+
+#Text_area .writing_area .article-form__body .article_base_title textarea {
+    width: 100%;
+    font-weight: 900;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 35px;
+    overflow: hidden;
+    display: block;
+    height:auto;
+}
+
+#Text_area .writing_area .article-form__body .article_base_title textarea::placeholder {
+    font-weight: 900;
+    color: #9197a3;
+}
+
+/* 
+#Text_area .writing_area .article-form__body .article_base_content {
+    margin: 20px 0;
+    margin-bottom: 20px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+#Text_area .writing_area .article-form__body .article_base_content textarea {
+    width: 100%;
+    font-weight: 700;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 15px;
+}
+
+#Text_area .writing_area .article-form__body .article_base_content textarea::placeholder {
+    font-weight: 700;
+    color: #b2b5bb;
+}
+
+
+
+#Text_area .writing_area .article-form__body .article_base_content::-webkit-scrollbar {
+    z-index: 99999;
+    width: 4px;
+    opacity: 0;
+    display: none;
+}
+
+#Text_area .writing_area .article-form__body .article_base_content::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#Text_area .writing_area .article-form__body .article_base_content::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #95A5A6 0%, #95A5A6 50%, #95A5A6 99%);
+}
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Text_area .suggestion_area {
+    flex: 2;
+    background-color: transparent;
+    padding: 20px 20px;
+}

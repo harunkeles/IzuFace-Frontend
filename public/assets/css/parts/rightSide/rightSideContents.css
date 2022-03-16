@@ -50,62 +50,39 @@
 #rightSideContents.right-side-contents .create_event_list {
     background-color: var(--theme_for_white_space_bg_color);
     box-shadow: var(--theme_border_effect);
+    position: relative;
     width: 100%;
-    padding: 15px 10px;
+    height: 70px;
     border-radius: 15px;
     margin-bottom: 20px;
     border: var(--theme_card_border);
 }
 
-#rightSideContents.right-side-contents .create_event_list ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-#rightSideContents.right-side-contents .create_event_list ul li {
-    margin-bottom: 15px;
-    box-shadow: var(--theme_card_divider_box_shadow);
-    padding: 0;
-}
-
-#rightSideContents.right-side-contents .create_event_list ul li:nth-last-child(1) {
-    margin-bottom: 0px;
-}
-
-
-#rightSideContents.right-side-contents .create_event_list ul li a {
+#rightSideContents.right-side-contents .create_event_list  a {
+    position: absolute;
     width: 100%;
-    /* background-color: red; */
-    
-}
-
-#rightSideContents.right-side-contents .create_event_list ul li a div {
     height: 100%;
-    padding: 7px 10px;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 15px;
 }
 
-#rightSideContents.right-side-contents .create_event_list ul li a div i {
-    color: var(--theme_card_content_title_color);
-    margin-right: 20px;
-    font-size: 25px;
-    width: 40px;
-    text-align: center;
+#rightSideContents.right-side-contents .create_event_list a img {
+    margin-right: 5px;
+    width: auto;
+    height: 30px;
 }
 
-#rightSideContents.right-side-contents .create_event_list ul li a div span {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-left: 12px;
-    font-family: 'Rubik', sans-serif;
+#rightSideContents.right-side-contents .create_event_list a span {
+    font-family: 'Titillium Web', sans-serif;
     color: var(--theme_card_content_title_color);
-    font-weight: 400;
-    font-size: 15px;
+    font-weight: 700;
+    font-size: 18px;
     word-spacing: 2px;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.7px;
+    color: #233B55;
 }
 
 

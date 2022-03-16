@@ -32,21 +32,21 @@ function StudentUserProfile() {
         if (username) {
             //!! GET Auth User Informations
             axios
-            .get(`http://localhost:8000/api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
+            .get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
             .then(res => {
                 dispatch(login(res.data))
                 //!! GET Site Settings  
-                axios.get(`http://localhost:8000/api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
+                axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
                 .then(theme_res => {
                     dispatch(setDarkMode(theme_res.data.dark_theme))
                 })
                 .then(() => {
                     //!! GET Profile Detail  
-                    axios.get(`http://localhost:8000/api/v0/all-endpoints/std/${username}`)
+                    axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/std/${username}`)
                     .then(profileDetail => {
                         dispatch(setProfileDetail(profileDetail.data))
                         //!! Post Rank
-                        axios.get(`http://localhost:8000/api/v0/all-endpoints/user-rank/${profileDetail.data.user_id}`)
+                        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/user-rank/${profileDetail.data.user_id}`)
                         setIsPageReady(true)
                     })
                 })

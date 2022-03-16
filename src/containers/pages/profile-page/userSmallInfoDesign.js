@@ -26,7 +26,7 @@ function UserSmallInfoDesign({theme,profileUser,user,setIsPageReady,isPageReady}
 
     const forceUpdateFollowHandler =() =>{
         //!! Post Rank
-        axios.get(`http://localhost:8000/api/v0/all-endpoints/user-rank/${profileUser.profile_detail.user_id}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/user-rank/${profileUser.profile_detail.user_id}`)
         .then(res_1=>{
             setIsPageReady(false)
             setIsPageReady(true)
@@ -39,7 +39,7 @@ function UserSmallInfoDesign({theme,profileUser,user,setIsPageReady,isPageReady}
         let deneme = user.authUser.more_info.following
         deneme = Object.assign([], deneme);
         deneme.push(profileUser.profile_detail.user_id);
-        axios(`http://localhost:8000/api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
+        axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
             auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
             credentials: 'include',
             method: 'PATCH',
@@ -57,7 +57,7 @@ function UserSmallInfoDesign({theme,profileUser,user,setIsPageReady,isPageReady}
             var index = deneme.indexOf(profileUser.profile_detail.user_id);
             if (index !== -1)
                 deneme.splice(index, 1); 
-            axios(`http://localhost:8000/api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
+            axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
                 auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
                 credentials: 'include',
                 method: 'PATCH',

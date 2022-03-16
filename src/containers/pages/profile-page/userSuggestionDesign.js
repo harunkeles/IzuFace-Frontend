@@ -15,7 +15,7 @@ function UserSuggestionDesign({theme,profileUser,user,setIsPageReady,isPageReady
 
     useEffect(()=>{
         var department = profileUser.profile_detail.more_info.departmentName
-        axios.get(`http://localhost:8000/api/v0/all-endpoints/std/department/${department}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/std/department/${department}`)
         .then(res => { setSameDepartment(res.data.users) })
     },[])
     

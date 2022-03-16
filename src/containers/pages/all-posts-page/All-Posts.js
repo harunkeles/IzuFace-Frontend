@@ -40,7 +40,7 @@ class All_Posts extends Component {
 
     componentDidMount(){
         //!! GET Site Settings  
-        axios.get(`http://localhost:8000/api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
             .then(theme_res => {
                 this.props.setDarkTheme(theme_res.data.dark_theme)
             })
@@ -114,10 +114,10 @@ class All_Posts extends Component {
 
     forceUpdateHandler =() =>{
         //!! Post Rank
-        axios.get(`http://localhost:8000/api/v0/all-endpoints/user-rank/${localStorage.getItem("_user_id")}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/user-rank/${localStorage.getItem("_user_id")}`)
         .then(res_1=>{
             axios
-            .get(`http://localhost:8000/api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
+            .get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
             .then(res => {
                 this.props.login(res.data);
             })
@@ -129,7 +129,7 @@ class All_Posts extends Component {
 
 
     post_with_filtered(){
-        axios.get('http://127.0.0.1:8000/api/v0/posts/post-with-filtered')
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/post-with-filtered`)
         .then(res => {
             this.setState({
                 posts: res.data,

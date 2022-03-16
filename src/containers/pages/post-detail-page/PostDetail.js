@@ -55,17 +55,17 @@ function PostDetail() {
         
         //!! GET Auth User Informations
         axios
-        .get(`http://localhost:8000/api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
+        .get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
         .then(res => {
             dispatch(login(res.data))
             //!! GET Site Settings  
-            axios.get(`http://localhost:8000/api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
+            axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
             .then(theme_res => {
                 dispatch(setDarkMode(theme_res.data.dark_theme))
             })
             .then(async() => {
                 //!! GET Post Informations  
-                await axios.get(`http://127.0.0.1:8000/api/v0/posts/postId=${postID}`)
+                await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/postId=${postID}`)
                 .then(single_post => {
                     dispatch(setSinglePost(single_post.data))
                     setIsPageReady(true)
@@ -73,7 +73,7 @@ function PostDetail() {
                 .then(async() =>  {
                     if (post.id) {
                         //!! GET Related Post Informations  
-                        await axios.get(`http://127.0.0.1:8000/api/v0/posts/related_posts/userId=${post.post_owner.id}`)
+                        await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/related_posts/userId=${post.post_owner.id}`)
                         .then(related_single_post => {
                             dispatch(setPosts(related_single_post.data))
                         })
@@ -90,7 +90,7 @@ function PostDetail() {
 
     const forceUpdateHandler =() =>{
         //!! GET Post Informations  
-        axios.get(`http://127.0.0.1:8000/api/v0/posts/postId=${postID}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/postId=${postID}`)
         .then(single_post => {
             dispatch(setSinglePost(single_post.data))
             setIsPageReady(true)
@@ -99,7 +99,7 @@ function PostDetail() {
     
 
     const onClickLikeButton = (postID) => {
-        axios.get(`http://127.0.0.1:8000/api/v0/posts/post-with-filtered/${postID}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/post-with-filtered/${postID}`)
         .then(res => {
             let this_post_liked_user = res.data.likes
 
@@ -108,7 +108,7 @@ function PostDetail() {
                 var index = this_post_liked_user.indexOf(user.authUser.user_id);
                 if (index !== -1)
                     this_post_liked_user.splice(index, 1); 
-                axios(`http://127.0.0.1:8000/api/v0/posts/post-with-filtered/${postID}`, {
+                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/post-with-filtered/${postID}`, {
                     auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
                     credentials: 'include',
                     method: 'PATCH',
@@ -120,7 +120,7 @@ function PostDetail() {
             }
             else { 
                 this_post_liked_user.push(user.authUser.user_id);
-                axios(`http://127.0.0.1:8000/api/v0/posts/post-with-filtered/${postID}`, {
+                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/post-with-filtered/${postID}`, {
                     auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
                     credentials: 'include',
                     method: 'PATCH',
@@ -137,7 +137,7 @@ function PostDetail() {
 
     const forceUpdateFollowHandler =() =>{
         //!! GET Post Informations  
-        axios.get(`http://127.0.0.1:8000/api/v0/posts/postId=${postID}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/postId=${postID}`)
         .then(single_post => {
             dispatch(setSinglePost(single_post.data))
             setIsPageReady(false)
@@ -150,7 +150,7 @@ function PostDetail() {
             let deneme = user.authUser.more_info.following
             deneme = Object.assign([], deneme);
             deneme.push(post.post_owner.id);
-            axios(`http://localhost:8000/api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
+            axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
                 auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
                 credentials: 'include',
                 method: 'PATCH',
@@ -169,7 +169,7 @@ function PostDetail() {
             var index = deneme.indexOf(post.post_owner.id);
             if (index !== -1)
                 deneme.splice(index, 1); 
-            axios(`http://localhost:8000/api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
+            axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
                 auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
                 credentials: 'include',
                 method: 'PATCH',

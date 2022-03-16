@@ -13,11 +13,13 @@ import cloud_2 from '../../assets/img/icons/weather/cloud_2.png'
 import heavy_rain from '../../assets/img/icons/weather/heavy_rain.png'
 import windy_cloud from '../../assets/img/icons/weather/windy_cloud.png'
 import storm_rain_cloud from '../../assets/img/icons/weather/storm_rain_cloud.png'
+import social_address from '../../assets/img/icons/main_icons/social_address.png'
 
 
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setWeatherState } from '../../stores/weatherSlice'
+import { routes } from '../../routes'
 
 
 
@@ -98,32 +100,10 @@ function RightSide() {
             <div id="rightSideContents" className="right-side-contents">
                 <div className="right-side__cover">
                     <div className='create_event_list'>
-                        <ul>
-                            <li>
-                                <a href='/#'>
-                                    <div>
-                                        <i className="fas fa-plus-circle"></i>
-                                        <span>Post oluştur</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href='/#'>
-                                    <div>
-                                        <i className="far fa-file-alt"></i>
-                                        <span>Haber oluştur</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href='/#'>
-                                    <div>
-                                    <i className="fas fa-bezier-curve"></i>
-                                        <span>Etkinlik oluştur</span>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
+                        <a href={routes.create.path}>
+                            <img src={social_address} alt=''/>
+                            <span>Gönderi oluştur</span>
+                        </a>
                     </div>
                     
                         <div id="daily_weather_part" className="sum_weather_part">

@@ -65,6 +65,10 @@ export const routes = {
             title: "Discussion Detail"
         }
     },
+    create:{
+        path: "/create",
+        title: "Create",
+    },
     
 }
 

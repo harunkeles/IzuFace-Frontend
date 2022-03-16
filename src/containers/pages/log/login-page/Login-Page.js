@@ -16,7 +16,7 @@ function LoginPage() {
 
 
     const handleLogin = () => {
-        axios(`http://localhost:8000/api/v0/all-endpoints/login/`, {
+        axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/login/`, {
             withCredentials: false,
             method: 'POST',
             headers: {'Content-Type': 'application/json', },

@@ -26,7 +26,7 @@ class Navbar extends Component {
     themeHandler = () => {
         let theme_dark_mode = this.props.theme.dark
         //!! PATCH Site Settings Controll  
-        axios(`http://localhost:8000/api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`, {
+        axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`, {
                 auth: { username: this.props.user.authUser.username, password: localStorage.getItem('user_password') },
                 credentials: 'include',
                 method: 'PATCH',

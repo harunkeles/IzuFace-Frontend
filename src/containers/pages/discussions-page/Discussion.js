@@ -41,22 +41,22 @@ class Discussion extends Component {
     componentDidMount(){
     
         //!! Sadece ilk girişte çalışması için kullandık
-        axios.get(`http://localhost:8000/api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
             .then(res => {
                 this.props.login(res.data);})
             .then(res_2=>{
                 //!! GET Site Settings  
-                axios.get(`http://localhost:8000/api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
+                axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
                 .then(theme_res => { this.props.setDarkTheme(theme_res.data.dark_theme)})
                 .catch(error => console.log(error))
             })
             .then(res_3=>{
                 //!! GET Discussions Api  
-                axios.get('http://localhost:8000/api/v0/discussions/')
+                axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/`)
                 .then(discussions_res => { 
                     this.props.setDiscussions(discussions_res.data); 
                     if (this.props.discussions != null) {
-                        axios.get('http://127.0.0.1:8000/api/v0/discussions/topics')
+                        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/topics`)
                         .then(topics=>this.setState({ topics: topics.data, isPageReady:true }))
                     }
                 })
@@ -112,7 +112,7 @@ class Discussion extends Component {
 
     //!! Discussion Like
     onClickLikeButton = (discussionID) => {
-        axios.get(`http://127.0.0.1:8000/api/v0/discussions/${discussionID}`)
+        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`)
         .then(res => {
             let this_discussion_liked_user = res.data.likes
 
@@ -121,7 +121,7 @@ class Discussion extends Component {
                 var index = this_discussion_liked_user.indexOf(this.props.user.authUser.user_id);
                 if (index !== -1)
                     this_discussion_liked_user.splice(index, 1); 
-                axios(`http://127.0.0.1:8000/api/v0/discussions/${discussionID}`, {
+                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`, {
                     auth: { username: this.props.user.authUser.username, password: localStorage.getItem('user_password') },
                     credentials: 'include',
                     method: 'PATCH',
@@ -133,7 +133,7 @@ class Discussion extends Component {
             }
             else { 
                 this_discussion_liked_user.push(this.props.user.authUser.user_id);
-                axios(`http://127.0.0.1:8000/api/v0/discussions/${discussionID}`, {
+                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`, {
                     auth: { username: this.props.user.authUser.username, password: localStorage.getItem('user_password') },
                     credentials: 'include',
                     method: 'PATCH',
@@ -150,11 +150,11 @@ class Discussion extends Component {
 
     forceUpdateHandler = () =>{
          //!! GET Discussions Api  
-         axios.get('http://localhost:8000/api/v0/discussions/')
+         axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/`)
          .then(discussions_res => { 
              this.props.setDiscussions(discussions_res.data); 
              if (this.props.discussions != null) {
-                 axios.get('http://127.0.0.1:8000/api/v0/discussions/topics')
+                 axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/topics`)
                  .then(topics=>this.setState({ topics: topics.data }))
              }
          })
