@@ -22,83 +22,67 @@ import PostDetail from "./containers/pages/post-detail-page/PostDetail";
 import Discussion from "./containers/pages/discussions-page/Discussion";
 import Create_post from "./containers/pages/create/create-post";
 import { routes } from './routes';
-import { Login_Api, Site_Settings_Api } from "../src/apis/Api"
+import { Site_Settings_Api } from "../src/apis/Api"
+import { useDispatch, useSelector } from "react-redux";
 
 Modal.setAppElement('#root')
 
 
-
 const App = () => {
 
-  const [theme, setTheme] = useState(false);
   const [isPageReady, setIsPageReady] = useState(false);
+  const site_settings = useSelector(state => state.siteSettings.site_settings)
 
-
+  // dark_theme
   const getApis = async () => {
-    if (localStorage.getItem("_authToken")) {
-      await Login_Api()
-        .then(res => {
-          console.log(res.data)
-        })
-      await Site_Settings_Api()
-        .then(res => {
-          setTheme(res.data.dark_theme)
-          console.log(theme)
-          setIsPageReady(true)
-        })
-        .catch(error => { setIsPageReady(false) })
-    }
+
+    // LocalStorage'dan verileri alıp JSON'a çevirdik
+    var lclStorage = JSON.parse(localStorage.getItem("lclStorage"))
+
+    console.log("_1")
+    console.log(lclStorage)
+    if (lclStorage) {
+      console.log("_2")
+      await Site_Settings_Api(lclStorage.user_id)
+      setIsPageReady(true)
+      console.log("_3")
+    } 
+
   }
 
-  useEffect(async () => {
-    await getApis()
+  useEffect(() => {
+    getApis()
   }, []);
 
 
-
   return (
-    <div className={theme ? 'App darkApp' : 'App lightApp'}>
+    <div className={site_settings.dark_theme ? 'App darkApp' : 'App lightApp'}>
       <Router history={history}>
         <Suspense fallback={<Loading />}>
           <Routes>
-            {!localStorage.getItem("_authToken") ?
+            
+            {!isPageReady ?
               <>
                 <Route path={routes.login.path} element={<LoginPage />} />
                 <Route path="*" element={<Navigate to="/login" />} />
               </>
               :
               <>
-                {!isPageReady ?
-                  <>
-                    <Route path="*" element={<Loading />} />
-                  </>
-                  :
-                  <>
-                    {!localStorage.getItem("_authToken") ?
-                      <>
-                        <Route path={routes.login.path} element={<LoginPage />} />
-                        <Route path="*" element={<Navigate to="/login" />} />
-                      </>
-                      :
-                      <>
-                        <Route path={routes.login.path} element={<Navigate to={routes.main.path} />} />
-                        <Route path={routes.main.path} element={<MainPage />} />
-                        <Route path={routes.posts.path} element={<AllPosts />} />
-                        <Route path={routes.student_user_profiles.path} element={<StudentUserProfile />} />
-                        <Route path={routes.news.path} element={<News />} />
-                        <Route path={routes.posts.path + '/:postID'} element={<PostDetail />} />
-                        <Route path={routes.sports.path} element={<Sports />} />
-                        <Route path={routes.sports.football.path} element={<Football />} />
-                        <Route path={routes.discussions.path} element={<Discussion />} />
-                        <Route path={routes.create.path} element={<Create_post />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                      </>
-                    }
-                    <Route path="*" element={<Navigate to={routes.login.path} replace={true} />} />
-                  </>
-                }
+                <Route path={routes.login.path} element={<Navigate to={routes.main.path} />} />
+                <Route path={routes.main.path} element={<MainPage />} />
+                <Route path={routes.posts.path} element={<AllPosts />} />
+                <Route path={routes.student_user_profiles.path} element={<StudentUserProfile />} />
+                <Route path={routes.news.path} element={<News />} />
+                <Route path={routes.posts.path + '/:postID'} element={<PostDetail />} />
+                <Route path={routes.sports.path} element={<Sports />} />
+                <Route path={routes.sports.football.path} element={<Football />} />
+                <Route path={routes.discussions.path} element={<Discussion />} />
+                <Route path={routes.create.path} element={<Create_post />} />
+                <Route path="*" element={<NotFoundPage />} />
               </>
             }
+            <Route path="*" element={<Navigate to={routes.login.path} replace={true} />} />
+               
           </Routes>
         </Suspense>
       </Router>

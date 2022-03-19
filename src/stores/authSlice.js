@@ -5,7 +5,6 @@ export const auth = createSlice({
   name: 'auth',
 
   initialState: {
-    isUser: localStorage.getItem('_authToken') ? true : false,
     authUser: {},
     username: '',
     password: ''
@@ -19,9 +18,6 @@ export const auth = createSlice({
     },
     login: (state, action) => {
         state.authUser = action.payload 
-    },
-    logout: state => {
-        state.isUser = false
     },
     setIsUser: (state, action) => {
         state.isUser = action.payload 

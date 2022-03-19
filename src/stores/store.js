@@ -7,6 +7,7 @@ import weatherReducer from "./weatherSlice"
 import discussionReducer from "./discussionSlice"
 import modalReducer from "./modalSlice"
 import profileDetailSlice from './profileDetailSlice'
+import siteSettingsSlice from './siteSettingsSlice'
 
 
 export default configureStore({
@@ -18,5 +19,6 @@ export default configureStore({
     discussions: discussionReducer,
     modal: modalReducer,
     profileDetail: profileDetailSlice,
+    siteSettings : siteSettingsSlice
   },
 })

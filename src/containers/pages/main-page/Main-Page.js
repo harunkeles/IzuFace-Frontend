@@ -22,38 +22,49 @@ const MainPage = () => {
     const [authUser, setAuthUser] = useState({});
     const [news, setNews] = useState({});
     const [posts, setPosts] = useState({});
-    const [theme, setTheme] = useState(false);
+    const [theme, setTheme] = useState(localStorage.getItem("dark_theme"));
     const [isPageReady, setIsPageReady] = useState(false);
 
 
     const getApis = async () => {
         await Login_Api()
             .then(res => {
+                console.log("1")
                 setAuthUser(res.data)
+                console.log(authUser)
+                console.log("2")
             })
-        await Site_Settings_Api()
+        await Site_Settings_Api(authUser.user_id)
             .then(res => {
+                console.log("3")
                 setTheme(res.data.dark_theme)
+                console.log("4")
             })
         await Filtered_News_Api()
             .then(res => {
+                console.log("5")
                 setNews(res.data)
+                console.log("6")
             })
         await Filtered_News_Api()
             .then(res => {
+                console.log("7")
                 setNews(res.data)
+                console.log("8")
             })
         await Filtered_Last_Posts_Api()
             .then(res => {
+                console.log("9")
                 setPosts(res.data)
+                console.log("10")
             })
             .then(res => { setIsPageReady(true) })
             .catch(error => { setIsPageReady(false) })
     }
 
 
-    useEffect(async () => {
-        await getApis()
+    useEffect(() => {
+        getApis()
     }, []);
 
 
@@ -67,9 +78,9 @@ const MainPage = () => {
                 : (
                     <>
                         <div id="main-page">
-                            <Navbar isPageReady={isPageReady} />
+                            <Navbar user={authUser}/>
                             <div className="main-page__cover">
-                                <LeftSideMenu theme={theme} user={authUser} isPageReady={isPageReady} />
+                                <LeftSideMenu theme={theme} user={authUser} />
                                 <div className="middle-side-contents">
                                     <div className="middle-side__cover">
                                         <Announcements />

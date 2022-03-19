@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+var val = localStorage.getItem('lclStorage') ? localStorage.getItem('lclStorage') : null
 //
 export const themeSlice = createSlice({
   name: 'theme',
   initialState: {
     dark: false
+    //keles.muhammet
   },
   reducers: {
     setDarkMode: (state, action) => {
