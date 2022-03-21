@@ -14,6 +14,7 @@ import {
     Filtered_News_Api,
     Filtered_Last_Posts_Api
 } from "../../../apis/Api"
+import { useSelector } from 'react-redux';
 
 
 
@@ -22,7 +23,8 @@ const MainPage = () => {
     const [authUser, setAuthUser] = useState({});
     const [news, setNews] = useState({});
     const [posts, setPosts] = useState({});
-    const [theme, setTheme] = useState(localStorage.getItem("dark_theme"));
+    const site_settings = useSelector(state => state.siteSettings.site_settings)
+    const [theme, setTheme] = useState(site_settings.dark_theme);
     const [isPageReady, setIsPageReady] = useState(false);
 
 
@@ -31,7 +33,6 @@ const MainPage = () => {
             .then(res => {
                 console.log("1")
                 setAuthUser(res.data)
-                console.log(authUser)
                 console.log("2")
             })
         await Site_Settings_Api(authUser.user_id)

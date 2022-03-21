@@ -5,7 +5,8 @@ export const auth = createSlice({
   name: 'auth',
 
   initialState: {
-    authUser: {},
+    authUser: JSON.parse(localStorage.getItem('lclStorage')) ? 
+    JSON.parse(localStorage.getItem('lclStorage')).authUser : {},
     username: '',
     password: ''
   },

@@ -44,8 +44,8 @@ function LoginPage() {
 
     }
 
-    const handleLogin = async() => {
-
+    const handleLogin = async(e) => {
+        e.preventDefault()
         // Login olmak için api'ye bilgileri yolladık
         await Post_Login_Api(user.username,user.password)
         .then(async(res) => {
@@ -75,102 +75,100 @@ function LoginPage() {
 
     return (
         <>
-            {isError ? <></> :
 
-                <div id="login_page">
-                    <div className="container login_page_cover">
-                        <div className='login_bg_img'>
-                            <img src={login_page_bg} alt=''/>
-                        </div>
-                        <div className="content">
-                            {isError ?
-                                <>
-                                    <Alert className='warning' severity="error">
-                                        <strong>Kullanıcı adı</strong> veya <strong>Şifresini</strong> yanlış girdiniz. 
-                                    </Alert>
-                                </>
-                                : <></>
-                            }
-                            <div className='content_navbar'>
-                                <div className='logo'>
-                                    <img src={dark_logo} alt=''/>
+            <div id="login_page">
+                <div className="container login_page_cover">
+                    <div className='login_bg_img'>
+                        <img src={login_page_bg} alt=''/>
+                    </div>
+                    <div className="content">
+                        {isError ?
+                            <>
+                                <Alert className='warning' severity="error">
+                                    <strong>Kullanıcı adı</strong> veya <strong>Şifresini</strong> yanlış girdiniz. 
+                                </Alert>
+                            </>
+                            : <></>
+                        }
+                        <div className='content_navbar'>
+                            <div className='logo'>
+                                <img src={dark_logo} alt=''/>
+                            </div>
+                            <div className='menu'>
+                                <div className='stuudent'>
+                                    <a href='/#'>
+                                        Öğrenci
+                                    </a>
                                 </div>
-                                <div className='menu'>
-                                    <div className='stuudent'>
-                                        <a href='/#'>
-                                            Öğrenci
-                                        </a>
-                                    </div>
-                                    <div className='teacher'>
-                                        <a href='/#'>
-                                            Öğretmen
-                                        </a>
-                                    </div>
+                                <div className='teacher'>
+                                    <a href='/#'>
+                                        Öğretmen
+                                    </a>
                                 </div>
                             </div>
-                            <div className='inner_content'>
-
-                                <div className='log_type'>
-                                    ÖĞRENCİ GİRİŞİ
-                                </div>
-                                <div className="log_text">
-                                    Giriş Yap
-                                </div>
-
-                                <div className=" input_row">
-                                    <div className="input_style">
-                                        <span>
-                                            <input 
-                                                className="balloon" 
-                                                id="input_style_email" 
-                                                type="text" 
-                                                name="email"
-                                                placeholder="soyad.ad"
-                                                onChange={ (e) => dispatch(setUsername(e.target.value))} 
-                                                src={dark_logo}
-                                            />
-                                            <label htmlFor="input_style_email">Kullanıcı Adı :</label>
-                                            <i className="fa-solid fa-envelope-open-text"></i>
-                                        </span>
-                                    </div>
-                                    <div className="input_style">
-                                        <span>
-                                            <input 
-                                                className="balloon" 
-                                                id="input_style_password" 
-                                                type="password"
-                                                name="password"
-                                                placeholder="********"
-                                                onChange={ (e) => dispatch(setPassword(e.target.value))}
-                                            />
-                                            <label htmlFor="input_style_password">Kullanıcı Şifre :</label>
-                                            <i className="fa-solid fa-key"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            
-                                <div className='btn_group'>
-                                    <button
-                                        type="button"
-                                        className="btn btn-primary login_btn"
-                                        onClick={handleLogin}>
-                                            Giriş Yap
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn btn-primary detail_btn"
-                                        onClick={handleLogin}>
-                                            Sayfa hakkında bilgi edin
-                                    </button>
-                                </div>
-
-                            </div>
-                            
                         </div>
+                        <div className='inner_content'>
+
+                            <div className='log_type'>
+                                ÖĞRENCİ GİRİŞİ
+                            </div>
+                            <div className="log_text">
+                                Giriş Yap
+                            </div>
+
+                            <div className=" input_row">
+                                <div className="input_style">
+                                    <span>
+                                        <input 
+                                            className="balloon" 
+                                            id="input_style_email" 
+                                            type="text" 
+                                            name="email"
+                                            placeholder="soyad.ad"
+                                            onChange={ (e) => dispatch(setUsername(e.target.value))} 
+                                            src={dark_logo}
+                                        />
+                                        <label htmlFor="input_style_email">Kullanıcı Adı :</label>
+                                        <i className="fa-solid fa-envelope-open-text"></i>
+                                    </span>
+                                </div>
+                                <div className="input_style">
+                                    <span>
+                                        <input 
+                                            className="balloon" 
+                                            id="input_style_password" 
+                                            type="password"
+                                            name="password"
+                                            placeholder="********"
+                                            onChange={ (e) => dispatch(setPassword(e.target.value))}
+                                        />
+                                        <label htmlFor="input_style_password">Kullanıcı Şifre :</label>
+                                        <i className="fa-solid fa-key"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        
+                            <div className='btn_group'>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary login_btn"
+                                    onClick={handleLogin}>
+                                        Giriş Yap
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary detail_btn"
+                                    onClick={handleLogin}>
+                                        Sayfa hakkında bilgi edin
+                                </button>
+                            </div>
+
+                        </div>
+                        
                     </div>
                 </div>
+            </div>
 
-            }
         </>
     );
 }

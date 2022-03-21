@@ -5,9 +5,8 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import history from './history';
 import Modal from 'react-modal';
-
+import history from './history';
 
 import Loading from "./components/loading/loading";
 import LoginPage from "./containers/pages/log/login-page/Login-Page";
@@ -22,7 +21,7 @@ import PostDetail from "./containers/pages/post-detail-page/PostDetail";
 import Discussion from "./containers/pages/discussions-page/Discussion";
 import Create_post from "./containers/pages/create/create-post";
 import { routes } from './routes';
-import { Site_Settings_Api } from "../src/apis/Api"
+import { Login_Api, Site_Settings_Api } from "../src/apis/Api"
 import { useDispatch, useSelector } from "react-redux";
 
 Modal.setAppElement('#root')
@@ -33,7 +32,7 @@ const App = () => {
   const [isPageReady, setIsPageReady] = useState(false);
   const site_settings = useSelector(state => state.siteSettings.site_settings)
 
-  // dark_theme
+
   const getApis = async () => {
 
     // LocalStorage'dan verileri alıp JSON'a çevirdik
@@ -52,23 +51,25 @@ const App = () => {
 
   useEffect(() => {
     getApis()
-  }, []);
+  });
 
 
   return (
     <div className={site_settings.dark_theme ? 'App darkApp' : 'App lightApp'}>
-      <Router history={history}>
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            
-            {!isPageReady ?
-              <>
-                <Route path={routes.login.path} element={<LoginPage />} />
-                <Route path="*" element={<Navigate to="/login" />} />
-              </>
-              :
-              <>
-                <Route path={routes.login.path} element={<Navigate to={routes.main.path} />} />
+      {!isPageReady ?
+        <>
+          <LoginPage />
+          {/* <Navigate to={routes.login.path} /> */}
+          {/* <Route path="*" element={<Navigate to={routes.login.path} />} /> */}
+        </>
+        :
+        <>
+          <Router history={history}>
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                {/* <Route path={routes.login.path} element={<LoginPage />} /> */}
+              
+                {/* <Route path={routes.login.path} element={<Navigate to={routes.main.path} />} /> */}
                 <Route path={routes.main.path} element={<MainPage />} />
                 <Route path={routes.posts.path} element={<AllPosts />} />
                 <Route path={routes.student_user_profiles.path} element={<StudentUserProfile />} />
@@ -79,13 +80,12 @@ const App = () => {
                 <Route path={routes.discussions.path} element={<Discussion />} />
                 <Route path={routes.create.path} element={<Create_post />} />
                 <Route path="*" element={<NotFoundPage />} />
-              </>
-            }
-            <Route path="*" element={<Navigate to={routes.login.path} replace={true} />} />
-               
-          </Routes>
-        </Suspense>
-      </Router>
+                
+              </Routes>
+            </Suspense>
+          </Router>
+        </>
+      }
     </div>
   );
 }

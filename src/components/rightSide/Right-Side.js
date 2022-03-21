@@ -9,17 +9,13 @@ import sun from '../../assets/img/icons/weather/sun.png'
 import partly_cloudy from '../../assets/img/icons/weather/partly_cloudy.png'
 import light_rain from '../../assets/img/icons/weather/light_rain.png'
 import cloud_1 from '../../assets/img/icons/weather/cloud_1.png'
-import cloud_2 from '../../assets/img/icons/weather/cloud_2.png'
-import heavy_rain from '../../assets/img/icons/weather/heavy_rain.png'
-import windy_cloud from '../../assets/img/icons/weather/windy_cloud.png'
-import storm_rain_cloud from '../../assets/img/icons/weather/storm_rain_cloud.png'
 import social_address from '../../assets/img/icons/main_icons/social_address.png'
 
 
-import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setWeatherState } from '../../stores/weatherSlice'
 import { routes } from '../../routes'
+import { Wheather_Api } from '../../apis/Api'
 
 
 
@@ -80,18 +76,17 @@ function RightSide() {
         return weather_suggest_list
     }
 
+    const getApi = async() => {
+        await Wheather_Api()
+        .then(res => {
+            dispatch(setWeatherState(res.data));
+            setWeatherReady(true);
+        })
+        .catch(error => console.log(error))
+    }
 
-    //!! GET Wheather Api  
     useEffect(() => {
-        if (localStorage.getItem("_authToken")) {
-           axios
-          .get(`https://api.openweathermap.org/data/2.5/weather?q=K%C3%BC%C3%A7%C3%BCk%C3%A7ekmece&lang=tr&appid=c6951d8c03cf8b12b18547e9d46e2128`)
-          .then(res => {
-              dispatch(setWeatherState(res.data));
-              setWeatherReady(true);
-            })
-          .catch(error => console.log(error))
-        }
+        getApi()
       }, []);
 
 

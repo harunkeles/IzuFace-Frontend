@@ -16,16 +16,17 @@ import like_icon from '../../assets/img/icons/main_icons/like_icon.png'
 import reliablity_icon from '../../assets/img/icons/main_icons/reliablity_icon.png'
 import discussion_icon from '../../assets/img/icons/main_icons/discussions_icon.png'
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { login } from '../../stores/authSlice';
 import { Login_Api } from '../../apis/Api';
 
 
 
-function LeftSideMenu({ user, theme }) {
+function LeftSideMenu() {
 
     const dispatch = useDispatch()
 
+    const user = useSelector((state) => state.auth.authUser)
+    const site_settings = useSelector(state => state.siteSettings.site_settings)
     const [style, setStyle] = useState({ display: 'none' });
     const [closeButton, setCloseButton] = useState({ display: 'none' });
 
@@ -120,7 +121,7 @@ function LeftSideMenu({ user, theme }) {
                                 </NavLink>
                                 <NavLink to={routes.posts.path} activeclassname="active" className="navlink all_posts">
                                     <div>
-                                        <img alt="" src={theme.dark ? all_posts_icon : all_posts_icon} />
+                                        <img alt="" src={site_settings.dark_theme ? all_posts_icon : all_posts_icon} />
                                         <span>Bütün Postlar</span>
                                     </div>
                                 </NavLink>
@@ -132,7 +133,7 @@ function LeftSideMenu({ user, theme }) {
                                 </NavLink>
                                 <NavLink to={routes.activities.path} activeclassname="active" className="navlink activities">
                                     <div>
-                                        <img alt="" src={theme.dark ? dark_activities_icon : light_activities_icon} />
+                                        <img alt="" src={site_settings.dark_theme ? dark_activities_icon : light_activities_icon} />
                                         <span>Etkinlikler</span>
                                     </div>
                                 </NavLink>

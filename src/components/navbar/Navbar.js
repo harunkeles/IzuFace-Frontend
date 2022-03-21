@@ -26,7 +26,6 @@ const Navbar = () => {
         lclStorage.site_settings.dark_theme =  lclStorage.site_settings.dark_theme ? false : true 
         localStorage.setItem('lclStorage' , JSON.stringify(lclStorage))
         await Patch_Site_Settings_Api(lclStorage.site_settings)
-        console.log(lclStorage)
         dispatch(setSiteSettings(lclStorage.site_settings))
     }
 
