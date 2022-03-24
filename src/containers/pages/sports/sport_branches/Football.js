@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { setDarkMode } from '../../../../stores/themeSlice';
+import React, { useState } from 'react';
 import Loading from '../../../../components/loading/loading';
-import { login } from '../../../../stores/authSlice';
 import football_page_main_img from '../../../../assets/img/bg_images/sports_page_images/football_page_main_img.png';
 import rank_icon from '../../../../assets/img/icons/main_icons/rank_icon.png';
 import calendar_icon from '../../../../assets/img/icons/main_icons/calendar_icon.png';
 import Admin_Resim from '../../../../assets/img/others/Admin_Resim.jpg';
 import upvote_icon from '../../../../assets/img/icons/main_icons/upvote_icon.png'
 import read_more from '../../../../assets/img/icons/main_icons/read_more.png'
-
 import { routes } from '../../../../routes';
 
 
@@ -23,28 +18,7 @@ SwiperCore.use([Grid,Pagination]);
 
 function Football() {
 
-  const dark = useSelector(state => state.theme.dark)
-  const user = useSelector(state => state.auth)
-  const dispatch = useDispatch()
-  const [ isPageReady, setIsPageReady ] = useState(false);
-
-
-  useEffect(() => {
-      //!! GET Auth User  
-      axios
-      .get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
-      .then(res => {
-        dispatch(login(res.data));
-        //!! GET Site Settings  
-        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
-        .then(theme_res => {
-          dispatch(setDarkMode(theme_res.data.dark_theme))
-          setIsPageReady(true)
-        })
-      })
-      .catch(error => console.log(error))
-      
-  }, [isPageReady]);
+  const [ isPageReady, setIsPageReady ] = useState(true);
 
 
   return <>
@@ -68,7 +42,7 @@ function Football() {
                             <div className='small_desc'>
                               Üniversitenin halı sahasından yararlanmak için randevu alabilirsiniz.
                             </div>  
-                            <a href={routes.sports.football.path} className='btn'>
+                            <a href={routes.sports.football_appointment.path} className='btn'>
                               Halı saha randevusu al
                             </a>
                           </div>

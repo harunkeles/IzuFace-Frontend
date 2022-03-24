@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import Modal from 'react-modal';
 import history from './history';
@@ -21,15 +20,16 @@ import PostDetail from "./containers/pages/post-detail-page/PostDetail";
 import Discussion from "./containers/pages/discussions-page/Discussion";
 import Create_post from "./containers/pages/create/create-post";
 import { routes } from './routes';
-import { Login_Api, Site_Settings_Api } from "../src/apis/Api"
-import { useDispatch, useSelector } from "react-redux";
+import { Site_Settings_Api } from "../src/apis/Api"
+import { useSelector } from "react-redux";
+import Football_Appointment from "./containers/pages/sports/appointment/Football-Appointment";
 
 Modal.setAppElement('#root')
 
 
 const App = () => {
 
-  const [isPageReady, setIsPageReady] = useState(false);
+  const [isLogin, setIslogin] = useState(false);
   const site_settings = useSelector(state => state.siteSettings.site_settings)
 
 
@@ -43,27 +43,24 @@ const App = () => {
     if (lclStorage) {
       console.log("_2")
       await Site_Settings_Api(lclStorage.user_id)
-      setIsPageReady(true)
       console.log("_3")
     } 
 
   }
 
   useEffect(() => {
-    getApis()
+    if (localStorage.getItem("lclStorage")) {
+      setIslogin(true)
+      getApis()
+    }
   });
 
 
   return (
     <div className={site_settings.dark_theme ? 'App darkApp' : 'App lightApp'}>
-      {!isPageReady ?
-        <>
+      {!isLogin ?
           <LoginPage />
-          {/* <Navigate to={routes.login.path} /> */}
-          {/* <Route path="*" element={<Navigate to={routes.login.path} />} /> */}
-        </>
         :
-        <>
           <Router history={history}>
             <Suspense fallback={<Loading />}>
               <Routes>
@@ -77,14 +74,15 @@ const App = () => {
                 <Route path={routes.posts.path + '/:postID'} element={<PostDetail />} />
                 <Route path={routes.sports.path} element={<Sports />} />
                 <Route path={routes.sports.football.path} element={<Football />} />
+                <Route path={routes.sports.football_appointment.path} element={<Football_Appointment />} />
                 <Route path={routes.discussions.path} element={<Discussion />} />
                 <Route path={routes.create.path} element={<Create_post />} />
+                <Route path={routes.notFound.path} element={<NotFoundPage />} />
                 <Route path="*" element={<NotFoundPage />} />
                 
               </Routes>
             </Suspense>
           </Router>
-        </>
       }
     </div>
   );

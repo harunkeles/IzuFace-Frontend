@@ -15,28 +15,7 @@ import { routes } from '../../../routes';
 
 function Sports() {
 
-  const dark = useSelector(state => state.theme.dark)
-  const user = useSelector(state => state.auth)
-  const dispatch = useDispatch()
-  const [ isPageReady, setIsPageReady ] = useState(false);
-
-
-  useEffect(() => {
-      //!! GET Auth User  
-      axios
-      .get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
-      .then(res => {
-        dispatch(login(res.data));
-        //!! GET Site Settings  
-        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
-        .then(theme_res => {
-          dispatch(setDarkMode(theme_res.data.dark_theme))
-          setIsPageReady(true)
-        })
-      })
-      .catch(error => console.log(error))
-      
-  }, [isPageReady]);
+  const [ isPageReady, setIsPageReady ] = useState(true);
 
 
   return <>
@@ -46,9 +25,9 @@ function Sports() {
               :
                 <>
                   <div id="sports_page">
-                    <Navbar isPageReady={isPageReady}/> 
+                    <Navbar /> 
                     <div className="sports_page__cover">
-                      <LeftSideMenu theme={dark}  user={user}  isPageReady={isPageReady}/>
+                      <LeftSideMenu />
                       <div className="middle-side-contents">
                           <a href={routes.sports.football.path} className='card card_football'>
                             <div className='bg-blur'></div>

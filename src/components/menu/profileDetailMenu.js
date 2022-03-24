@@ -37,10 +37,17 @@ import all_posts_color2 from '../../assets/img/icons/main_icons/all_posts_color2
 import home_page_color2 from '../../assets/img/icons/main_icons/home_page_color2.png'
 import user_color2 from '../../assets/img/icons/main_icons/user_color2.png'
 import more_menu_color2 from '../../assets/img/icons/main_icons/more_menu_color2.png'
+import { useSelector } from 'react-redux';
 
 
 
-function ProfileDetailMenu({theme,profileUser,user}) {
+function ProfileDetailMenu() {
+
+
+    const authUser = useSelector(state => state.auth.authUser)
+    const site_settings = useSelector(state => state.siteSettings.site_settings)
+    const [theme, setTheme] = useState(site_settings.dark_theme);
+
 
     const[ mystyle, setMystyle] = useState({display: "none"});
     const[ myAuthUserstyle, setMyAuthUserstyle] = useState({display: "none"});
@@ -65,14 +72,14 @@ function ProfileDetailMenu({theme,profileUser,user}) {
     <>
         <div id='profileDetailMenu'>
             <div className='site-logo'>
-                <img src={theme.dark ? dark_logo : light_logo} alt='' />
+                <img src={theme.dark_theme ? dark_logo : light_logo} alt='' />
             </div>
             <div className='menu_content'>
                 <div className='upper'>
                     <div className='authUser_account_menu'>
                             <div className='header'>HESAP BİLGİLERİM</div>
                             <div className='menu'>
-                                <a href={`/std/@${user.authUser.username}`} className="myprofile">
+                                <a href={`/std/@${authUser.username}`} className="myprofile">
                                     <img alt="" src={user_color2}/>
                                     <span>Profilim</span>
                                 </a>
@@ -141,24 +148,24 @@ function ProfileDetailMenu({theme,profileUser,user}) {
                 <div className='authUser_info' onMouseOver={more_authUser_menu_hover} onMouseOut={more_authUser_menu_leave} >
                     <div className='small_user_info'>
                         <div>
-                            <img className="user_img" src={routes.url + user.authUser.more_info.profImage } alt="" />
+                            <img className="user_img" src={routes.url + authUser.more_info.profImage } alt="" />
                         </div>
-                        <span className="user_fullname"> {user.authUser.first_name} {user.authUser.last_name} </span>
+                        <span className="user_fullname"> {authUser.first_name} {authUser.last_name} </span>
                     </div>
                     <div  style={myAuthUserstyle} className='auth_user_switch_menu animate__animated animate__fadeInUp'>
                         <div className='user_img'>
-                            <img src={routes.url + user.authUser.more_info.profImage } alt="" />
+                            <img src={routes.url + authUser.more_info.profImage } alt="" />
                         </div>
                         <div className='auth_user_more_info'>
-                            <span className="user_fullname"> {user.authUser.first_name} {user.authUser.last_name} </span>
+                            <span className="user_fullname"> {authUser.first_name} {authUser.last_name} </span>
                             <div className="info">
                                 <div className="rank">
                                     <img alt="" src={rank_icon} />
-                                    <span>{user.authUser.more_info.user_rank}</span>
+                                    <span>{authUser.more_info.user_rank}</span>
                                 </div>
                                 <div className="follow">
                                     <img alt="" src={like_icon} />
-                                    <span>{user.authUser.more_info.followers}</span>
+                                    <span>{authUser.more_info.followers}</span>
                                 </div>
                                 <div className="reliable">
                                     <img alt="" src={reliablity_icon} />

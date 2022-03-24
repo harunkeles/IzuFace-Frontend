@@ -1,6 +1,10 @@
 export const routes = {
     url: "http://127.0.0.1:8000",
 
+    notFound:{
+        path: "/404",
+        title: "Not Found"
+    },
     login:{
         path: "/login",
         title: "Login Page"
@@ -51,6 +55,10 @@ export const routes = {
         football:{
             path: "/sports/football",
             title: "Football"
+        },
+        football_appointment:{
+            path: "/sports/football/appointment",
+            title: "Football Appointment"
         },
         basketball:{
             path: "/sports/basketball",

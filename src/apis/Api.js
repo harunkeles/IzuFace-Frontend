@@ -1,4 +1,6 @@
 import axios from 'axios';
+import history from '../history';
+import { routes } from '../routes';
 
 const lclStorage = () => {
     var val = localStorage.getItem('lclStorage') 
@@ -11,15 +13,9 @@ const lclStorage = () => {
 export var Login_Api = async () => {
     var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${lclStorage().user_id}-${lclStorage().authToken}`)
         .catch(function (error) {
-            if (error.response)
-                // Request made and server responded
-                console.log(error.response.status);
-            else if (error.request)
-                // The request was made but no response was received
-                console.log(error.request);
-            else
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
+            console.log(error)
+            history.push(routes.notFound.path)
+            window.location.reload();
         })
     return result
 }
@@ -89,6 +85,37 @@ export var UserRank_Api = async () => {
 }
 
 
+//* GET
+//? Custom User Rank Api
+export var CustomUserRank_Api = async (id) => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/user-rank/${id}`)
+        .catch(error => console.log(error))
+    return result
+}
+
+
+//* GET
+//? Student User Profile Detail
+export var StudentUserProfileDetail_Api = async (username) => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/std/${username}`)
+        .catch(error => {
+            console.log(error)
+            history.push(routes.notFound.path)
+            window.location.reload();
+        })
+    return result
+}
+
+
+//* GET
+//? Student User Department 
+export var StudentUserDepartment_Api = async (department) => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/std/department/${department}`)
+        .catch(error => console.log(error))
+    return result
+}
+
+
 //* POST
 //? Login Api
 export var Post_Login_Api = async (username,password) => {
@@ -128,6 +155,23 @@ export var Patch_SinglePost_Api = async (postID,data) => {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json', },
                             data: JSON.stringify(data),
+                        })
+        .catch(error => console.log(error))
+    return result
+}
+
+
+//* PATCH
+//? Follow/Unfollow Api ( With Filtered)
+export var Follow_Unfollow_Api = async (followList) => {
+    console.log("data2 : " , followList)
+    
+    var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/student-user/studentId=${lclStorage().user_id}/`, {
+                            auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
+                            credentials: 'include',
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json', },
+                            data: { 'following' : followList },
                         })
         .catch(error => console.log(error))
     return result

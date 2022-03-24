@@ -6,18 +6,33 @@ import like_icon from '../../../assets/img/icons/main_icons/like_icon.png'
 import reliablity_icon from '../../../assets/img/icons/main_icons/reliablity_icon.png'
 import { routes } from '../../../routes'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { StudentUserDepartment_Api } from '../../../apis/Api'
 
 
-function UserSuggestionDesign({theme,profileUser,user,setIsPageReady,isPageReady}) {
-    console.log(user.authUser.user_id)
+function UserSuggestionDesign({ profileUser }) {
 
+    const authUser = useSelector(state => state.auth.authUser)
     const [ sameDepartment, setSameDepartment ] = useState();
 
+
     useEffect(()=>{
-        var department = profileUser.profile_detail.more_info.departmentName
-        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/std/department/${department}`)
-        .then(res => { setSameDepartment(res.data.users) })
+        getApis()
     },[])
+
+
+    const getApis = async () => {
+        
+        // Profiline girmiş olduğumuz kişi ile aynı departmente ait olan kişileri buluyoruz
+        var department = profileUser.profile_detail.more_info.departmentName
+        await StudentUserDepartment_Api(department)
+            .then(res => {
+                setSameDepartment(res.data.users)
+            }).catch(error => { console.log(error) })
+
+    }
+
+
     
   return (
     <>
@@ -31,9 +46,9 @@ function UserSuggestionDesign({theme,profileUser,user,setIsPageReady,isPageReady
                     { sameDepartment ?
                         Object.values(sameDepartment).map(( departmentUser, index ) => {
                             return(
-                                <>
-                                    { departmentUser.id != user.authUser.user_id ?
-                                            <a key={index} href={`/std/@${departmentUser.user_name}`}>
+                                <div key={index}>
+                                    { departmentUser.id != authUser.user_id ?
+                                            <a href={`/std/@${departmentUser.user_name}`}>
                                                 <div className='user_img'>
                                                     <img src={routes.url + '/media/' + departmentUser.prof_img} alt="" />
                                                 </div>
@@ -57,7 +72,7 @@ function UserSuggestionDesign({theme,profileUser,user,setIsPageReady,isPageReady
                                             </a> 
                                         : <></>
                                     }
-                                </>
+                                </div>
                             );
                         })
                         : <></>

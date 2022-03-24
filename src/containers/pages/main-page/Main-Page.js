@@ -9,38 +9,20 @@ import Activities from '../../../components/activities/Activities';
 import LastPosts from '../../../components/posts/Last-Posts';
 import Navbar from '../../../components/navbar/Navbar';
 import {
-    Login_Api,
-    Site_Settings_Api,
     Filtered_News_Api,
     Filtered_Last_Posts_Api
 } from "../../../apis/Api"
-import { useSelector } from 'react-redux';
 
 
 
 const MainPage = () => {
 
-    const [authUser, setAuthUser] = useState({});
     const [news, setNews] = useState({});
     const [posts, setPosts] = useState({});
-    const site_settings = useSelector(state => state.siteSettings.site_settings)
-    const [theme, setTheme] = useState(site_settings.dark_theme);
     const [isPageReady, setIsPageReady] = useState(false);
 
 
     const getApis = async () => {
-        await Login_Api()
-            .then(res => {
-                console.log("1")
-                setAuthUser(res.data)
-                console.log("2")
-            })
-        await Site_Settings_Api(authUser.user_id)
-            .then(res => {
-                console.log("3")
-                setTheme(res.data.dark_theme)
-                console.log("4")
-            })
         await Filtered_News_Api()
             .then(res => {
                 console.log("5")
@@ -79,9 +61,9 @@ const MainPage = () => {
                 : (
                     <>
                         <div id="main-page">
-                            <Navbar user={authUser}/>
+                            <Navbar />
                             <div className="main-page__cover">
-                                <LeftSideMenu theme={theme} user={authUser} />
+                                <LeftSideMenu />
                                 <div className="middle-side-contents">
                                     <div className="middle-side__cover">
                                         <Announcements />

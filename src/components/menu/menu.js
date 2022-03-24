@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import { routes } from '../../routes';
-import axios from 'axios';
-import { login } from '../../stores/authSlice';
 import Loading from '../loading/loading';
 
 
@@ -23,7 +21,8 @@ import reliablity_icon from '../../assets/img/icons/main_icons/reliablity_icon.p
 import dark_lamp_icon from '../../assets/img/icons/main_icons/dark_lamp_icon.png'
 import light_lamp_icon from '../../assets/img/icons/main_icons/light_lamp_icon.png'
 import discussion_icon from '../../assets/img/icons/main_icons/discussions_icon.png'
-import { setDarkMode } from '../../stores/themeSlice';
+import { setSiteSettings } from '../../stores/siteSettingsSlice';
+import { Patch_Site_Settings_Api } from '../../apis/Api';
 
 
 
@@ -31,39 +30,20 @@ import { setDarkMode } from '../../stores/themeSlice';
 const Menu = () => {
 
 
-    const theme = useSelector(state => state.theme)
-    const user = useSelector(state => state.auth)
     const dispatch = useDispatch()
-  
-    const [ isPageReady, setIsPageReady ] = useState(false);
-  
-    useEffect(() => {
-        //!! GET Auth User İnfo  
-        axios
-        .get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
-        .then(res => {
-            //!! GET Site Settings  
-            axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
-            .then(theme_res => {
-                dispatch(login(res.data));
-                dispatch(setDarkMode(theme_res.data.dark_theme))
-                setIsPageReady(true)
-            })
-        })
-        .catch(error => console.log(error))
-    }, [isPageReady]);
 
-
-    const themeHandler = () => {
-        let theme_dark_mode = theme.dark
-        //!! PATCH Site Settings Controll  
-        axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`, {
-                auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
-                credentials: 'include',
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json', },
-                data:{'dark_theme':!theme_dark_mode},
-            }).then(val =>{dispatch(setDarkMode(!theme_dark_mode))})
+    const user = useSelector((state) => state.auth.authUser)
+    const site_settings = useSelector(state => state.siteSettings.site_settings)
+  
+    const [ isPageReady, setIsPageReady ] = useState(true);
+  
+    // localStorage'dan verileri alıyorum tema rengini değiştirip tekrardan lcl'a atıyorum
+    const themeHandler = async () => {
+        var lclStorage = JSON.parse(localStorage.getItem('lclStorage'))
+        lclStorage.site_settings.dark_theme =  lclStorage.site_settings.dark_theme ? false : true 
+        localStorage.setItem('lclStorage' , JSON.stringify(lclStorage))
+        await Patch_Site_Settings_Api(lclStorage.site_settings)
+        dispatch(setSiteSettings(lclStorage.site_settings))
     }
 
 
@@ -80,7 +60,7 @@ const Menu = () => {
                     <div className="pageCover">
 
                         <a href='/' className="izu_face_logo">
-                            <img src={theme.dark ? dark_logo : light_logo} alt="" />
+                            <img src={site_settings.dark_theme ? dark_logo : light_logo} alt="" />
                         </a>
 
                         <section className="banner">
@@ -88,9 +68,9 @@ const Menu = () => {
                             <div className="bg"></div>
 
                             <label htmlFor="menu-control" className="hamburger" >
-                                <i className="hamburger__icon" style={theme.dark ? {backgroundColor:"#fefeff"} : {backgroundColor:"#233B55"}}></i>
-                                <i className="hamburger__icon" style={theme.dark ? {backgroundColor:"#fefeff"} : {backgroundColor:"#233B55"}}></i>
-                                <i className="hamburger__icon" style={theme.dark ? {backgroundColor:"#fefeff"} : {backgroundColor:"#233B55"}}></i>
+                                <i className="hamburger__icon" style={site_settings.dark_theme ? {backgroundColor:"#fefeff"} : {backgroundColor:"#233B55"}}></i>
+                                <i className="hamburger__icon" style={site_settings.dark_theme ? {backgroundColor:"#fefeff"} : {backgroundColor:"#233B55"}}></i>
+                                <i className="hamburger__icon" style={site_settings.dark_theme ? {backgroundColor:"#fefeff"} : {backgroundColor:"#233B55"}}></i>
 
                             </label>
 
@@ -98,19 +78,19 @@ const Menu = () => {
                             <aside className="sidebar">
 
                                 <div className="auth_user_about">
-                                    <img src={routes.url + user.authUser.more_info.profImage } alt="" />
+                                    <img src={routes.url + user.more_info.profImage } alt="" />
                                     <div className="auth_user_info">
                                         <div className="user_name">
-                                            {user.authUser.first_name} {user.authUser.last_name}
+                                            {user.first_name} {user.last_name}
                                         </div>        
                                         <div className="info">
                                             <div className="rank">
                                                 <img alt="" src={rank_icon} />
-                                                <span>140</span>
+                                                <span>{user.more_info.user_rank}</span>
                                             </div>
                                             <div className="follow">
                                                 <img alt="" src={like_icon} />
-                                                <span>12</span>
+                                                <span>{user.more_info.followers}</span>
                                             </div>
                                             <div className="reliable">
                                                 <img alt="" src={reliablity_icon} />
@@ -129,7 +109,7 @@ const Menu = () => {
                                     </li>
                                     <li className="all_posts">
                                         <a href={routes.posts.path}>
-                                            <img alt="" src={theme.dark ? all_posts_icon : all_posts_icon} />
+                                            <img alt="" src={site_settings.dark_theme ? all_posts_icon : all_posts_icon} />
                                             <span>Bütün Postlar</span>
                                         </a>
                                     </li>
@@ -141,7 +121,7 @@ const Menu = () => {
                                     </li>
                                     <li className="activities">
                                         <a href={routes.activities.path}>
-                                            <img alt="" src={theme.dark ? dark_activities_icon : light_activities_icon} />
+                                            <img alt="" src={site_settings.dark_theme ? dark_activities_icon : light_activities_icon} />
                                             <span>Etkinlikler</span>
                                         </a>
                                     </li>
@@ -199,7 +179,7 @@ const Menu = () => {
                                         <img alt='' src="https://img.icons8.com/color/36/000000/appointment-reminders--v1.png" />
                                     </li>
                                     <li>
-                                        <img onClick={themeHandler} alt='' src={theme.dark ? dark_lamp_icon : light_lamp_icon} data-toggle="tooltip" data-placement="top" title="Gece görünümü"/>
+                                        <img onClick={themeHandler} alt='' src={site_settings.dark_theme ? dark_lamp_icon : light_lamp_icon} data-toggle="tooltip" data-placement="top" title="Gece görünümü"/>
                                     </li>
                                 </ul>
 
