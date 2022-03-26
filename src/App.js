@@ -38,12 +38,9 @@ const App = () => {
     // LocalStorage'dan verileri alıp JSON'a çevirdik
     var lclStorage = JSON.parse(localStorage.getItem("lclStorage"))
 
-    console.log("_1")
     console.log(lclStorage)
     if (lclStorage) {
-      console.log("_2")
       await Site_Settings_Api(lclStorage.user_id)
-      console.log("_3")
     } 
 
   }

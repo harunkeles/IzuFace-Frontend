@@ -12,19 +12,144 @@ const Football_Appointment = () => {
     const user = useSelector(state => state.auth.authUser)
     const [selectedIndex, setSelectedIndex] = useState(null)
     const [selected_e_, setSelected_e_] = useState(null)
+    const [modalSelectedDate, setModalSelectedDate] = useState(null)
+    const [selectedDate, setSelectedDate] = useState(null)
+
     // var innerhtml = `<img src=${routes.url + user.more_info.profImage} alt=''/>`
 
-    const onClickHandler = (index, e) => {
-        if (index > 6) {
-            document.getElementsByClassName(e.target.className)[0].classList.add('selected_hour')
-            console.log("first : ", document.getElementsByClassName(e.target.className)[0].classList)
-            setSelectedIndex(index)
-            setSelected_e_(e)
+
+    const onModalSelectedDate = (selectedIndex) => {
+        console.log("girdi")
+        console.log(selectedIndex)
+        var hour = null
+        var date = null
+        if (selectedIndex % 7 === 0) {
+            console.log(selectedIndex)
+            date = {
+                'year': calcDateNumAndName()['dateYearList'][0],
+                'month': calcDateNumAndName()['dateMonthList'][0],
+                'day': calcDateNumAndName()['dateNumList'][0],
+                'dayName': calcDateNumAndName()['dateNameList'][0]
+            }
         }
+        else if (selectedIndex % 7 === 1) {
+            console.log(selectedIndex)
+            date = {
+                'year': calcDateNumAndName()['dateYearList'][1],
+                'month': calcDateNumAndName()['dateMonthList'][1],
+                'day': calcDateNumAndName()['dateNumList'][1],
+                'dayName': calcDateNumAndName()['dateNameList'][1]
+            }
+        }
+        else if (selectedIndex % 7 === 2) {
+            console.log(selectedIndex)
+            date = {
+                'year': calcDateNumAndName()['dateYearList'][2],
+                'month': calcDateNumAndName()['dateMonthList'][2],
+                'day': calcDateNumAndName()['dateNumList'][2],
+                'dayName': calcDateNumAndName()['dateNameList'][2]
+            }
+        }
+        else if (selectedIndex % 7 === 3) {
+            console.log(selectedIndex)
+            date = {
+                'year': calcDateNumAndName()['dateYearList'][3],
+                'month': calcDateNumAndName()['dateMonthList'][3],
+                'day': calcDateNumAndName()['dateNumList'][3],
+                'dayName': calcDateNumAndName()['dateNameList'][3]
+            }
+        }
+        else if (selectedIndex % 7 === 4) {
+            console.log(selectedIndex)
+            date = {
+                'year': calcDateNumAndName()['dateYearList'][4],
+                'month': calcDateNumAndName()['dateMonthList'][4],
+                'day': calcDateNumAndName()['dateNumList'][4],
+                'dayName': calcDateNumAndName()['dateNameList'][4]
+            }
+        }
+        else if (selectedIndex % 7 === 5) {
+            console.log(selectedIndex)
+            date = {
+                'year': calcDateNumAndName()['dateYearList'][5],
+                'month': calcDateNumAndName()['dateMonthList'][5],
+                'day': calcDateNumAndName()['dateNumList'][5],
+                'dayName': calcDateNumAndName()['dateNameList'][5]
+            }
+        }
+        else if (selectedIndex % 7 === 6) {
+            console.log(selectedIndex)
+            date = {
+                'year': calcDateNumAndName()['dateYearList'][6],
+                'month': calcDateNumAndName()['dateMonthList'][6],
+                'day': calcDateNumAndName()['dateNumList'][6],
+                'dayName': calcDateNumAndName()['dateNameList'][6]
+            }
+        }
+        switch (selectedIndex >= 0) {
+            case selectedIndex <= 6:
+                hour = '09:00'
+                console.log(hour)
+                break;
+            case selectedIndex > 6 && selectedIndex <= 13:
+                hour = '10:00'
+                console.log(hour)
+                break;
+            case selectedIndex > 13 && selectedIndex <= 20:
+                hour = '11:00'
+                console.log(hour)
+                break;
+            case selectedIndex > 20 && selectedIndex <= 27:
+                hour = '12:00'
+                console.log(hour)
+                break;
+            case selectedIndex > 27 && selectedIndex <= 34:
+                hour = '13:00'
+                break;
+            case selectedIndex > 34 && selectedIndex <= 41:
+                hour = '14:00'
+                break;
+            case selectedIndex > 41 && selectedIndex <= 48:
+                hour = '15:00'
+                break;
+            case selectedIndex > 48 && selectedIndex <= 55:
+                hour = '16:00'
+                break;
+            case selectedIndex > 55 && selectedIndex <= 62:
+                hour = '17:00'
+                break;
+            case selectedIndex > 62 && selectedIndex <= 69:
+                hour = '18:00'
+                break;
+            case selectedIndex > 69 && selectedIndex <= 76:
+                hour = '19:00'
+                break;
+            case selectedIndex > 76 && selectedIndex <= 83:
+                hour = '20:00'
+                break;
+
+            default:
+                break;
+        }
+        var newDate = {
+            'hour': hour,
+            'date': date
+        }
+
+        setSelectedDate(newDate)
+
+        return newDate
+
     }
 
-    const onModalOpen = () => {
 
+    const onClickHandler = async (index, e) => {
+        document.getElementsByClassName(e.target.className)[0].classList.add('selected_hour')
+        console.log("first : ", document.getElementsByClassName(e.target.className)[0].classList)
+        setSelectedIndex(index)
+        setSelected_e_(e)
+        await onModalSelectedDate(index)
+        console.log("onModalSelectedDate : ", onModalSelectedDate)
     }
 
     const onModalClose = () => {
@@ -33,48 +158,55 @@ const Football_Appointment = () => {
         setSelected_e_(null)
     }
 
-
-    function renderDay(props, currentDate, selectedDate) {
-        // Adds 0 to the days in the days view
-        return <td {...props}>{currentDate.date()}</td>;
-    }
-    function renderMonth(props, month, year, selectedDate) {
-        // Display the month index in the months view
-        return <td {...props}>{month}</td>;
-    }
-    function renderYear(props, year, selectedDate) {
-        // Just display the last 2 digits of the year in the years view
-        return <td {...props}>{year % 100}</td>;
-    }
-
+    //* Bugünün tarih değerlerini aldık
     var dt = new Date();
     var day = dt.getDate();
     var month = dt.getMonth();
     var year = dt.getFullYear();
-    var startedDay = new Date(2022, 4, 22).getDate();
+    var dateList = {}
 
-    var son = new Date(2022, 4, 22)
-    
-    var list = []
-    const deneme = () => {
-        
-        while (son.getFullYear() === 2022) {
-            console.log("first")
-            son.setDate(son.getDate() + 1);
-            list.push(new Date(son).getDate().toString())
+    //* Alacağımız yılların şuanki tarihini belirledik
+    var startedDate = new Date(year, month, dt.getDate())
+
+    //* Yılları. İlk elemana bugünün yılını ekledik
+    var dateYearList = [year.toString()]
+
+    //* Ayları aldık. İlk elemana bugünün ayını ekledik
+    var dateMonthList = [month.toString()]
+
+    //* Günlerin numarasını aldık. İlk elemana bugünün numarasını ekledik
+    var dateNumList = [day.toString()]
+
+    //* Günlerin adını aldık. İlk elemana bugünün adını ekledik
+    var dateNameList = [new Date(startedDate).toLocaleDateString('tr-TR', { weekday: 'long' })]
+
+    //* Günlerin numaralarını ve adlarını her gün bir bir arttırarak aldık.
+    const calcDateNumAndName = () => {
+        while (startedDate.getFullYear() === year) {
+            startedDate.setDate(startedDate.getDate() + 1);
+            var newDateYear = new Date(startedDate).getFullYear().toString()
+            var newDateMonth = new Date(startedDate).getMonth().toString()
+            var newDateNum = new Date(startedDate).getDate().toString()
+            var newDateName = new Date(startedDate).toLocaleDateString('tr-TR', { weekday: 'long' })
+            dateYearList.push(newDateYear)
+            dateMonthList.push(newDateMonth)
+            dateNumList.push(newDateNum)
+            dateNameList.push(newDateName)
         }
-        console.log(list)
-
-        return list
-
+        dateList = {
+            dateNumList: dateNumList,
+            dateNameList: dateNameList,
+            dateMonthList: dateMonthList,
+            dateYearList: dateYearList
+        }
+        return dateList
     }
-    useEffect(()=>{
-        deneme()
-    },[])
 
-    var newDay = new Date(year, month + 1, 0).getDate();
-    var newMonth = new Date(year, month + 1, 0).getMonth();
-    var newYear = new Date(year, month + 1, 0).getFullYear();
+
+    useEffect(() => {
+        calcDateNumAndName()
+    }, [])
+
 
     return (
         <>
@@ -82,66 +214,38 @@ const Football_Appointment = () => {
             <div id='Football_Appointment'>
                 <div className='Football_Appointment_cover'>
                     <div className='filter_part'>
-                        <div className='date-settings'>
-                            <span>Bir tarih aralığı seçiniz.</span>
-                            <Datetime
-                                renderDay={renderDay}
-                                renderMonth={renderMonth}
-                                renderYear={renderYear}
-                                dateFormat="DD-MM-YYYY" timeFormat={false}
-                            />
-                            {day} - {month} - {year} ------
-                            {newDay} - {newMonth} - {newYear}
-
+                        <div className='text'>
+                            <span>İstediğiniz saat ve günü seçerek halı saha randevusu alabilirsiniz.</span>
                         </div>
+                        <ul>
+                            <li>
+                                <a href="#"><i className="fa-solid fa-angle-left"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i className="fa-solid fa-angle-right"></i></a>
+                            </li>
+                        </ul>
                     </div>
                     <div className='date_row'>
-                        <div className='single_day row_icon'>
+                        <div className='row_icon'>
                             <img className='date_icon' src={time_icon} alt='' />
                         </div>
+                        <div className='day_row'>
 
-                            {
-                                deneme().map((day,index)=>{
-                                    if (index <= 7){ 
-                                        
-                                        return (
-                                            <div className='single_day'>
-                                                <span className='day_num'>{day}</span>
-                                                <span className='day_name'>/ Paz</span>
-                                            </div>
-                                        );
-                                    }
-                                })
-                            }
+                            {[...Array(calcDateNumAndName()['dateNameList'].length)].map((e, index) => {
+                                if (index <= 6) {
 
-                        {/* <div className='single_day'>
-                        <span className='day_num'>{startedDay}</span>
-                        <span className='day_name'>/ Paz</span>
-                    </div>
-                    <div className='single_day'>
-                        <span className='day_num'>{son}</span>
-                        <span className='day_name'>/ Sal</span>
-                    </div> */}
-                        {/* <div className='single_day'>
-                        <span className='day_num'>26</span>
-                        <span className='day_name'>/ Çar</span>
-                    </div>
-                    <div className='single_day'>
-                        <span className='day_num'>27</span>
-                        <span className='day_name'>/ Per</span>
-                    </div>
-                    <div className='single_day'>
-                        <span className='day_num'>28</span>
-                        <span className='day_name'>/ Cum</span>
-                    </div>
-                    <div className='single_day'>
-                        <span className='day_num'>29</span>
-                        <span className='day_name'>/ Cmt</span>
-                    </div>
-                    <div className='single_day'>
-                        <span className='day_num'>30</span>
-                        <span className='day_name'>/ Pzr</span>
-                    </div> */}
+                                    return (
+                                        <div className='single_day' key={index}>
+                                            <span className='day_num'>{calcDateNumAndName()['dateNumList'][index]}</span>
+                                            <span className='day_name'>{calcDateNumAndName()['dateNameList'][index]}</span>
+                                        </div>
+                                    );
+
+                                }
+                            })}
+
+                        </div>
                     </div>
                     <div className='bottom_schdule_side'>
                         <div className='hours_side'>
@@ -185,11 +289,11 @@ const Football_Appointment = () => {
                         </div>
                         <div className='schdule_side'>
 
-                            {[...Array(91)].map((e, index) => {
+                            {[...Array(84)].map((e, index) => {
                                 return (
                                     <div
                                         data-mdb-toggle="modal"
-                                        data-mdb-target={index > 6 ? `#exampleModal` : ``}
+                                        data-mdb-target="#selectedDateSettings"
                                         className={`draw_row this_hour_key_${index}`}
                                         key={index}
                                         onClick={(e) => onClickHandler(index, e)}
@@ -215,19 +319,39 @@ const Football_Appointment = () => {
 
                         </div>
 
-                        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div className="modal-dialog">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h5 className="modal-title" id="exampleModalLabel">{selectedIndex}</h5>
-                                    </div>
-                                    <div className="modal-body">...</div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal" onClick={selectedIndex > 6 ? onModalClose : null}>Close</button>
-                                        <button type="button" className="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                id="selectedDateSettings"
+                className="modal fade"
+                tabIndex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+                data-mdb-backdrop="static"
+                data-mdb-keyboard="false">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
+                                
+                                {selectedDate ?
+                                                <>
+                                                    Saat : {selectedDate['hour']} &nbsp; <br/>
+                                                    Tarih : {selectedDate['date']['dayName'] } &nbsp;
+                                                    {selectedDate['date']['day'] } / {parseInt(selectedDate['date']['month'])+1} / {selectedDate['date']['year']}
+                                                </>
+                                                :
+                                                <></>
+                                            }
+                            </h5>
+                        </div>
+                        <div className="modal-body">
+                        Seçtiğiniz tarihe randevu almak istiyor musunuz?
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-danger" data-mdb-dismiss="modal" onClick={onModalClose}>Hayır</button>
+                            <button type="button" className="btn btn-primary">Evet, Onaylıyorum</button>
                         </div>
                     </div>
                 </div>
