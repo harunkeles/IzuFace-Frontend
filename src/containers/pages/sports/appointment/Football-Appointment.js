@@ -11,20 +11,34 @@ const Football_Appointment = () => {
 
     const user = useSelector(state => state.auth.authUser)
     const [selectedIndex, setSelectedIndex] = useState(null)
+    const [selectedIndexList, setSelectedIndexList] = useState([])
     const [selected_e_, setSelected_e_] = useState(null)
-    const [modalSelectedDate, setModalSelectedDate] = useState(null)
     const [selectedDate, setSelectedDate] = useState(null)
 
-    // var innerhtml = `<img src=${routes.url + user.more_info.profImage} alt=''/>`
 
 
+    //* Modal Açıldığında Çalışır
+    const onClickHandler = async (index, e) => {
+
+        //* Modal açıldığında seçilen kutunun index'i ve özelliklerinin ataması yapılır.
+        setSelectedIndex(index)
+        setSelected_e_(e)
+
+        //* Tarih ve saat ataması yapılacak olan func çağrılır.
+        await onModalSelectedDate(index)
+
+    }
+
+
+    //* Modal Açıldıktan sonra seçilen tarih ve saat belirlemesi yapar
     const onModalSelectedDate = (selectedIndex) => {
-        console.log("girdi")
-        console.log(selectedIndex)
         var hour = null
         var date = null
+
+        //* Seçilen kutunun indexinin 7 ile bölümünden kalana göre bir tarih ataması yapılır
+        //* Bu tarih ataması calcDateNumAndName() func'dan dönen tarih ile yapılır.
+        //* Seçilen kutunun indexinin 7 ile bölümünden kalan 0 ise 0.column alınır.Eğer 1 ise 1.column alınır...
         if (selectedIndex % 7 === 0) {
-            console.log(selectedIndex)
             date = {
                 'year': calcDateNumAndName()['dateYearList'][0],
                 'month': calcDateNumAndName()['dateMonthList'][0],
@@ -33,7 +47,6 @@ const Football_Appointment = () => {
             }
         }
         else if (selectedIndex % 7 === 1) {
-            console.log(selectedIndex)
             date = {
                 'year': calcDateNumAndName()['dateYearList'][1],
                 'month': calcDateNumAndName()['dateMonthList'][1],
@@ -42,7 +55,6 @@ const Football_Appointment = () => {
             }
         }
         else if (selectedIndex % 7 === 2) {
-            console.log(selectedIndex)
             date = {
                 'year': calcDateNumAndName()['dateYearList'][2],
                 'month': calcDateNumAndName()['dateMonthList'][2],
@@ -51,7 +63,6 @@ const Football_Appointment = () => {
             }
         }
         else if (selectedIndex % 7 === 3) {
-            console.log(selectedIndex)
             date = {
                 'year': calcDateNumAndName()['dateYearList'][3],
                 'month': calcDateNumAndName()['dateMonthList'][3],
@@ -60,7 +71,6 @@ const Football_Appointment = () => {
             }
         }
         else if (selectedIndex % 7 === 4) {
-            console.log(selectedIndex)
             date = {
                 'year': calcDateNumAndName()['dateYearList'][4],
                 'month': calcDateNumAndName()['dateMonthList'][4],
@@ -69,7 +79,6 @@ const Football_Appointment = () => {
             }
         }
         else if (selectedIndex % 7 === 5) {
-            console.log(selectedIndex)
             date = {
                 'year': calcDateNumAndName()['dateYearList'][5],
                 'month': calcDateNumAndName()['dateMonthList'][5],
@@ -78,7 +87,6 @@ const Football_Appointment = () => {
             }
         }
         else if (selectedIndex % 7 === 6) {
-            console.log(selectedIndex)
             date = {
                 'year': calcDateNumAndName()['dateYearList'][6],
                 'month': calcDateNumAndName()['dateMonthList'][6],
@@ -86,22 +94,20 @@ const Football_Appointment = () => {
                 'dayName': calcDateNumAndName()['dateNameList'][6]
             }
         }
+
+        //* Seçilen kutunun indexinin aralığına göre bir saat ataması yapılır
         switch (selectedIndex >= 0) {
             case selectedIndex <= 6:
                 hour = '09:00'
-                console.log(hour)
                 break;
             case selectedIndex > 6 && selectedIndex <= 13:
                 hour = '10:00'
-                console.log(hour)
                 break;
             case selectedIndex > 13 && selectedIndex <= 20:
                 hour = '11:00'
-                console.log(hour)
                 break;
             case selectedIndex > 20 && selectedIndex <= 27:
                 hour = '12:00'
-                console.log(hour)
                 break;
             case selectedIndex > 27 && selectedIndex <= 34:
                 hour = '13:00'
@@ -143,20 +149,34 @@ const Football_Appointment = () => {
     }
 
 
-    const onClickHandler = async (index, e) => {
-        document.getElementsByClassName(e.target.className)[0].classList.add('selected_hour')
-        console.log("first : ", document.getElementsByClassName(e.target.className)[0].classList)
-        setSelectedIndex(index)
-        setSelected_e_(e)
-        await onModalSelectedDate(index)
-        console.log("onModalSelectedDate : ", onModalSelectedDate)
-    }
+    //* Seçilmiş olan box'ı siliyor
+    const onModalDeleteSelectedBox = () => {
 
-    const onModalClose = () => {
+        var selected_index = selectedIndexList.indexOf(selectedIndex);
+        selectedIndexList.splice(selected_index, 1);
+        setSelectedIndexList(selectedIndexList)
+
         document.getElementsByClassName(selected_e_.target.className)[0].classList.remove('selected_hour')
         setSelectedIndex(null)
         setSelected_e_(null)
+
     }
+
+
+    //* Modal kabul edilirse çalışır
+    const onModalAcceptButton = async () => {
+
+        //* Modal açıldığında seçilen kutu şekillenir
+        document.getElementsByClassName(selected_e_.target.className)[0].classList.add('selected_hour')
+
+        //* Seçilen box'ın index numarasını daha önceden index'i eklemiş olduğumuz listeye tekrar ekliyoruz.
+        var list = selectedIndexList
+        list.push(selectedIndex)
+        setSelectedIndexList(list)
+        setSelectedIndex(null)
+        setSelected_e_(null)
+    }
+
 
     //* Bugünün tarih değerlerini aldık
     var dt = new Date();
@@ -208,14 +228,18 @@ const Football_Appointment = () => {
     }, [])
 
 
+
     return (
         <>
             <Menu />
+            <div id='Football_Appointment_bg_cover'></div>
             <div id='Football_Appointment'>
                 <div className='Football_Appointment_cover'>
                     <div className='filter_part'>
                         <div className='text'>
-                            <span>İstediğiniz saat ve günü seçerek halı saha randevusu alabilirsiniz.</span>
+                            <p> **Randevular en geç <span>30 dakika</span> önceden alınabilir.</p>
+                            <p> **Alacak olduğunuz randevunun onaylanması halinde okul mailinize <span>sporbirimi@izu.edu.tr</span> adresi tarafından bildirim gelecektir.</p>
+                            <p> Daha fazla bilgi için <span>sks@izu.edu.tr</span> mail adresi ile iletişime geçiniz.</p>
                         </div>
                         <ul>
                             <li>
@@ -288,7 +312,6 @@ const Football_Appointment = () => {
 
                         </div>
                         <div className='schdule_side'>
-
                             {[...Array(84)].map((e, index) => {
                                 return (
                                     <div
@@ -297,21 +320,23 @@ const Football_Appointment = () => {
                                         className={`draw_row this_hour_key_${index}`}
                                         key={index}
                                         onClick={(e) => onClickHandler(index, e)}
-                                    // dangerouslySetInnerHTML={{__html: innerhtml}} 
                                     >
-                                        {index === 15 ?
-                                            <>
-                                                <div className='owner_img_of_selected_date'>
-                                                    <img src={routes.url + user.more_info.profImage} alt='' />
-                                                </div>
-                                                <div className='owner_name_of_selected_date'>
-                                                    <span>Muhammet Harun Keleş</span>
-                                                </div>
-                                            </>
-                                            :
-                                            <></>
-
+                                        {selectedIndexList.map((res, i) => {
+                                            if (res === index) {
+                                                return (
+                                                    <div key={i}>
+                                                        <div className='owner_img_of_selected_date'>
+                                                            <img src={routes.url + user.more_info.profImage} alt='' />
+                                                        </div>
+                                                        <div className='owner_name_of_selected_date'>
+                                                            <span>{user.first_name} {user.last_name}</span>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            }
+                                        })
                                         }
+
 
                                     </div>
                                 );
@@ -330,30 +355,80 @@ const Football_Appointment = () => {
                 aria-hidden="true"
                 data-mdb-backdrop="static"
                 data-mdb-keyboard="false">
+
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">
-                                
+
                                 {selectedDate ?
-                                                <>
-                                                    Saat : {selectedDate['hour']} &nbsp; <br/>
-                                                    Tarih : {selectedDate['date']['dayName'] } &nbsp;
-                                                    {selectedDate['date']['day'] } / {parseInt(selectedDate['date']['month'])+1} / {selectedDate['date']['year']}
-                                                </>
-                                                :
-                                                <></>
-                                            }
+                                    <>
+                                        Saat : {selectedDate['hour']} &nbsp; <br />
+                                        Tarih : {selectedDate['date']['dayName']} &nbsp;
+                                        {selectedDate['date']['day']} / {parseInt(selectedDate['date']['month']) + 1} / {selectedDate['date']['year']}
+                                    </>
+                                    :
+                                    <></>
+                                }
+                                {console.log(selectedIndexList)}
                             </h5>
                         </div>
-                        <div className="modal-body">
-                        Seçtiğiniz tarihe randevu almak istiyor musunuz?
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-danger" data-mdb-dismiss="modal" onClick={onModalClose}>Hayır</button>
-                            <button type="button" className="btn btn-primary">Evet, Onaylıyorum</button>
-                        </div>
+
+
+                        {selectedIndexList.length === 0 ?
+                            <>
+                                <div className="modal-body">
+                                    Seçtiğiniz tarihe randevu almak istiyor musunuz?
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-danger" data-mdb-dismiss="modal">Hayır</button>
+                                    <button type="button" className="btn btn-primary" data-mdb-dismiss="modal" onClick={() => onModalAcceptButton()}>Evet, Onaylıyorum</button>
+                                </div>
+                            </>
+                            :
+                            <>
+                                {
+                                    selectedIndexList.map(res => {
+                                        console.log("res : ", res)
+                                        if (res === selectedIndex) {
+                                            console.log("selectedIndex 1 : " , selectedIndex)
+                                            return (
+                                                <>
+                                                    <div className="modal-body">
+                                                        Seçtiğiniz tarihili halı saha randevunuzu silmek istiyor musunuz?
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-light" data-mdb-dismiss="modal">Hayır</button>
+                                                        <button type="button" className="btn btn-danger" data-mdb-dismiss="modal" onClick={() => onModalDeleteSelectedBox()}>Evet, Sil</button>
+                                                    </div>
+                                                </>
+                                            );
+                                        }
+                                       
+                                    })
+
+                                }
+
+                            </>
+                        }
+
+                        { !selectedIndexList.find(res=> res === selectedIndex) && selectedIndexList.length > 0 ?
+                                <>
+                                <div className="modal-body">
+                                    Seçtiğiniz tarihe randevu almak istiyor musunuz?
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-danger" data-mdb-dismiss="modal" >Hayır</button>
+                                    <button type="button" className="btn btn-primary" data-mdb-dismiss="modal" onClick={() => onModalAcceptButton()}>Evet, Onaylıyorum</button>
+                                </div>
+                                </>
+                            :
+                            <></>
+                        
+                        }
+
                     </div>
+
                 </div>
             </div>
         </>

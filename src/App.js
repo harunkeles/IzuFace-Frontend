@@ -29,23 +29,27 @@ Modal.setAppElement('#root')
 
 const App = () => {
 
-  const [isLogin, setIslogin] = useState(false);
   const site_settings = useSelector(state => state.siteSettings.site_settings)
+  const [isLogin, setIslogin] = useState(
+    JSON.parse(localStorage.getItem('lclStorage')) ? 
+    true : false,
+  );
 
 
   const getApis = async () => {
 
-    // LocalStorage'dan verileri alıp JSON'a çevirdik
+    //* LocalStorage'dan verileri alıp JSON'a çevirdik
     var lclStorage = JSON.parse(localStorage.getItem("lclStorage"))
-
-    console.log(lclStorage)
+    
     if (lclStorage) {
       await Site_Settings_Api(lclStorage.user_id)
     } 
 
   }
 
+
   useEffect(() => {
+    getApis()
     if (localStorage.getItem("lclStorage")) {
       setIslogin(true)
       getApis()
