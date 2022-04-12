@@ -25,21 +25,11 @@ const MainPage = () => {
     const getApis = async () => {
         await Filtered_News_Api()
             .then(res => {
-                console.log("5")
                 setNews(res.data)
-                console.log("6")
-            })
-        await Filtered_News_Api()
-            .then(res => {
-                console.log("7")
-                setNews(res.data)
-                console.log("8")
             })
         await Filtered_Last_Posts_Api()
             .then(res => {
-                console.log("9")
                 setPosts(res.data)
-                console.log("10")
             })
             .then(res => { setIsPageReady(true) })
             .catch(error => { setIsPageReady(false) })

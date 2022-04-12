@@ -46,8 +46,9 @@ function UserSmallInfoDesign({ profileUser }) {
 
     // Bu kod sadece authUser veya profile_user_rank değişmesi durumunda kullanılacak
     useEffect(() => {
-        setLoginInfoToLclStorage()
-    }, [authUser], [profile_user_rank])
+        console.log("first")
+        // setLoginInfoToLclStorage()
+    }, [authUser], [profile_user_rank],)
 
 
     // ComponentDidMounth tarzında sayfa Dom'a ilk render edildikten sonra bu kod çalışıcak

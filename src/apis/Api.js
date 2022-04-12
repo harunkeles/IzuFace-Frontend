@@ -3,7 +3,7 @@ import history from '../history';
 import { routes } from '../routes';
 
 const lclStorage = () => {
-    var val = localStorage.getItem('lclStorage') 
+    var val = localStorage.getItem('lclStorage')
     return JSON.parse(val)
 }
 
@@ -24,7 +24,7 @@ export var Login_Api = async () => {
 //* GET
 //? Site Settings Api
 export var Site_Settings_Api = async (user_id) => {
-    var id = user_id ? user_id : lclStorage().user_id 
+    var id = user_id ? user_id : lclStorage().user_id
     var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${id}`)
         .catch(error => console.log(error))
     return result
@@ -93,6 +93,30 @@ export var CustomUserRank_Api = async (id) => {
     return result
 }
 
+//* GET
+//? Discussions Api
+export var Discussions_Api = async () => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/`)
+        .catch(error => console.log(error))
+    return result
+}
+
+//* GET
+//? Topics Of Discussions Api
+export var DiscussionsTopics_Api = async () => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/topics`)
+        .catch(error => console.log(error))
+    return result
+}
+
+//* GET
+//? Single Discussions Api
+export var SingleDiscussions_Api = async (discussionID) => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`)
+        .catch(error => console.log(error))
+    return result
+}
+
 
 //* GET
 //? Student User Profile Detail
@@ -118,13 +142,13 @@ export var StudentUserDepartment_Api = async (department) => {
 
 //* POST
 //? Login Api
-export var Post_Login_Api = async (username,password) => {
-    var result = await  axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/login/`, {
-                            withCredentials: false,
-                            method: 'POST',
-                            headers: {'Content-Type': 'application/json', },
-                            data: { username: username, password: password },
-                        })
+export var Post_Login_Api = async (username, password) => {
+    var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/login/`, {
+        withCredentials: false,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        data: { username: username, password: password },
+    })
     return result
 }
 
@@ -135,27 +159,27 @@ export var Patch_Site_Settings_Api = async (site_settings) => {
     console.log(site_settings.dark_theme)
     console.log(lclStorage())
     var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${lclStorage().user_id}`, {
-                            auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
-                            credentials: 'include',
-                            method: 'PATCH',
-                            headers: {'Content-Type': 'application/json', },
-                            data:{'dark_theme': site_settings.dark_theme},
-                            })
-                        .catch(error => console.log(error))
+        auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
+        credentials: 'include',
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', },
+        data: { 'dark_theme': site_settings.dark_theme },
+    })
+        .catch(error => console.log(error))
     return result
 }
 
 
 //* PATCH
 //? Patch Single Post Api ( With Filtered)
-export var Patch_SinglePost_Api = async (postID,data) => {
+export var Patch_SinglePost_Api = async (postID, data) => {
     var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/post-with-filtered/${postID}`, {
-                            auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
-                            credentials: 'include',
-                            method: 'PATCH',
-                            headers: { 'Content-Type': 'application/json', },
-                            data: JSON.stringify(data),
-                        })
+        auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
+        credentials: 'include',
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', },
+        data: JSON.stringify(data),
+    })
         .catch(error => console.log(error))
     return result
 }
@@ -164,15 +188,30 @@ export var Patch_SinglePost_Api = async (postID,data) => {
 //* PATCH
 //? Follow/Unfollow Api ( With Filtered)
 export var Follow_Unfollow_Api = async (followList) => {
-    console.log("data2 : " , followList)
-    
+    console.log("data2 : ", followList)
+
     var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/student-user/studentId=${lclStorage().user_id}/`, {
-                            auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
-                            credentials: 'include',
-                            method: 'PATCH',
-                            headers: { 'Content-Type': 'application/json', },
-                            data: { 'following' : followList },
-                        })
+        auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
+        credentials: 'include',
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', },
+        data: { 'following': followList },
+    })
+        .catch(error => console.log(error))
+    return result
+}
+
+
+//* PATCH
+//? Discussion Like Api
+export var PatchDiscussionData_Api = async (discussionID, data) => {
+    var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`, {
+        auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
+        credentials: 'include',
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', },
+        data: JSON.stringify(data),
+    })
         .catch(error => console.log(error))
     return result
 }

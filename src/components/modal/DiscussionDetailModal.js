@@ -23,10 +23,10 @@ import department_icon from '../../assets/img/icons/department_icons/department_
 import more_icon from '../../assets/img/icons/post_detail_icons/more_icon.png'
 import like_icon_1 from '../../assets/img/icons/post_detail_icons/like_icon_1.png'
 import share from '../../assets/img/icons/post_detail_icons/share.png'
+import { Discussions_Api, PatchDiscussionData_Api, SingleDiscussions_Api } from '../../apis/Api';
 
 
 function DiscussionDetailModal() {
-    console.log("DiscussionDetailModal")
     const modal = useSelector(state => state.modal)
     const user = useSelector(state => state.auth)
     const theme = useSelector(state => state.theme)
@@ -36,12 +36,10 @@ function DiscussionDetailModal() {
     const [ media, setMedia ] = useState()
 
 
-    useEffect(() => {
 
-        if (modal.modalIsOpen) {
-            //!! GET Model Detail
-            axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${modal.modelID}`)
-            .then(res => { 
+    const getApis = async () => {
+        await SingleDiscussions_Api(modal.modelID)
+            .then(res => {
                 dispatch(setModalDetail(res.data)); 
                 if (modal.modelDetail) {
                     setPageReady(true);
@@ -49,56 +47,60 @@ function DiscussionDetailModal() {
                     setMedia(studentUserSocialMedia.split(", "))
                 }
             })
-        }
+            .catch(error => { setPageReady(false)  })
+    }
+    
+
+
+    useEffect(() => {
+            getApis()
     }, [])
     
 
-    //!! Discussion Like
-    const onClickLikeButton = (discussionID) => {
-        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`)
-        .then(res => {
-            let this_discussion_liked_user = res.data.likes
+    
+    //* Discussion Like
+    const onClickLikeButton = async (discussionID) => {
+        await SingleDiscussions_Api(discussionID)
+            .then(async (res) => {
+                let this_discussion_liked_user = res.data.likes
 
-            //!! Giriş yapmış olan kullanıcının id'si bu tartışmayı beğenen kişi id'leri içinde varmı
-            if (user.authUser.user_id === this_discussion_liked_user.find(res => res === user.authUser.user_id)) {
-                var index = this_discussion_liked_user.indexOf(user.authUser.user_id);
-                if (index !== -1)
-                    this_discussion_liked_user.splice(index, 1); 
-                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`, {
-                    auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
-                    credentials: 'include',
-                    method: 'PATCH',
-                    headers: {'Content-Type': 'application/json', },
-                    data:{'likes':this_discussion_liked_user},
-                }).then(result => {
-                    forceUpdateHandler()
-                })
-            }
-            else { 
-                this_discussion_liked_user.push(user.authUser.user_id);
-                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${discussionID}`, {
-                    auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
-                    credentials: 'include',
-                    method: 'PATCH',
-                    headers: {'Content-Type': 'application/json', },
-                    data:{'likes':this_discussion_liked_user},
-                }).then(result => {
-                    forceUpdateHandler()
-                })
-            }
-        })
-        .catch(error => console.log(error))
-        
+                //* Giriş yapmış olan kullanıcının id'si bu tartışmayı beğenen kişi id'leri içinde varmı
+                if (this_discussion_liked_user.find(res => res === user.authUser.user_id)) {
+
+                    //* ilk önce kişinin listede ki index numarasını bulduk
+                    var index = this_discussion_liked_user.indexOf(user.authUser.user_id);
+                    this_discussion_liked_user.splice(index, 1);
+
+                    //* Giriş yapmış kişinin id'sini listeden çıkardık
+                    var data = {
+                        'likes': this_discussion_liked_user
+                    }
+
+                    await PatchDiscussionData_Api(discussionID,data).then(result =>  getApis())
+                }
+                else {
+
+                    //* Giriş yapmış kişinin id'sini listeye ekledik
+                    this_discussion_liked_user.push(user.authUser.user_id);
+
+                    var data = {
+                        'likes': this_discussion_liked_user
+                    }
+
+                    await PatchDiscussionData_Api(discussionID,data).then(result =>  getApis())
+                }
+            })
+            .catch(error => console.log(error))
+
     };
 
-    const forceUpdateHandler = () =>{
-         //!! GET Discussions Api  
-         axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/discussions/${modal.modelID}`)
-         .then(discussions_res => { 
-            dispatch(setModalDetail(discussions_res.data)); 
-         })
-    };
+    const deneme = () => {
+        if (modal.modalIsOpen === false) {
+            console.log("firstfirstfirstfirstfirstfirst")
+        }
+        // Discussions_Api()
 
+    }
 
 
   return (
@@ -110,10 +112,12 @@ function DiscussionDetailModal() {
                 {!isPageReady ? <><Loading/></> :
                    <>
                         <Modal 
+                        key={modal.modelID}
                         id='discussion_detail_modal'
                         className="discussion_detail_modal container"
                         closeTimeoutMS={200}
                         isOpen={modal.modalIsOpen} 
+                        onAfterClose={deneme()}
                         aria={{
                             labelledby: "heading",
                             describedby: "full_description"

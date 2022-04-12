@@ -58,14 +58,14 @@ const All_Posts = () => {
             let this_post_liked_user = res.data.likes
             
 
-            // Giriş yapmış olan kullanıcının id'si bu postu beğenen kişi id'leri içinde varmı
+            //* Giriş yapmış olan kullanıcının id'si bu postu beğenen kişi id'leri içinde varmı
             if (this_post_liked_user.find(val => val === authUser.user_id)){
                 
-                // ilk önce kişinin listede ki index numarasını bulduk
+                //* ilk önce kişinin listede ki index numarasını bulduk
                 var index = this_post_liked_user.indexOf(authUser.user_id);
                 this_post_liked_user.splice(index, 1);
                 
-                // Giriş yapmış kişinin id'sini listeden çıkardık
+                //* Giriş yapmış kişinin id'sini listeden çıkardık
                 var data = {
                     'likes': this_post_liked_user 
                 }
@@ -88,7 +88,7 @@ const All_Posts = () => {
 
             } else {
                 
-                // Giriş yapmış kişinin id'sini listeye ekledik
+                //* Giriş yapmış kişinin id'sini listeye ekledik
                 this_post_liked_user.push(authUser.user_id);
 
                 var data = {
