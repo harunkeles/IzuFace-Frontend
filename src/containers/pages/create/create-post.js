@@ -21,6 +21,7 @@ import ali_asaf2 from '../../../assets/img/others/ali-asaf2.jpg'
 import ali_asaf3 from '../../../assets/img/others/ali-asaf3.jpg'
 import { useSelector } from 'react-redux';
 import { routes } from '../../../routes';
+import { DialogContent, DialogContentText } from '@mui/material';
 
 
 
@@ -103,7 +104,7 @@ function Create_post() {
 
 
 
-    const getData = async e => {
+    const setData = async e => {
         const formData = new FormData();
 
         formData.append('text', articleTitle);
@@ -113,6 +114,25 @@ function Create_post() {
 
         await PostMiniPost_Api(formData)
     }
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        if (imageData == null && articleTitle == "" ) {
+            alert("Lütfen resim veya başlık bilgisi giriniz")
+        } else {
+            setOpen(true);
+        }
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+
+
+
+
 
 
 
@@ -402,8 +422,27 @@ function Create_post() {
                                     )
                                 }
                                 <div className='buttons_group'>
-                                    <button className='previewButton' type='button' onClick={handlePreview} >Önİzleme</button>
-                                    <button className='submitButton' type='submit' onClick={getData}>Paylaş</button>
+                                    <button className='previewButton' type='button' onClick={handlePreview}>
+                                        {isPreviewActive.display == "flex" ? "Önizlemeden çık" : "Önİzleme"}
+                                        
+                                    </button>
+                                    <button variant="outlined" className='submitButton' type='submit' onClick={handleClickOpen}>Paylaş</button>
+                                    <Dialog
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="alert-dialog-title"
+                                        aria-describedby="alert-dialog-description"
+                                    >
+                                        <DialogTitle id="alert-dialog-title">
+                                        Gönderi'yi paylaşmak istiyor musunuz?
+                                        </DialogTitle>
+                                        <DialogActions>
+                                        <Button className='modalCloseButton' onClick={handleClose}>Kapat</Button>
+                                        <Button className='modalPublishButton' onClick={setData} autoFocus>
+                                            PAYLAŞ
+                                        </Button>
+                                        </DialogActions>
+                                    </Dialog>
                                 </div>
                             </div>
 
