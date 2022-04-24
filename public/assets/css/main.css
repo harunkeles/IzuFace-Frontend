@@ -102,6 +102,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap');
 /* font-family: 'Inika', serif; */
 
+@font-face {
+    font-family: 'deneme';
+    src: local('deneme'),
+         url('./../../../src/assets/fonts/Segou_UI/Segoe UI.ttf') format('ttf'),
+}
+
+
 /** Text overflow */
 /* 
     overflow: hidden;

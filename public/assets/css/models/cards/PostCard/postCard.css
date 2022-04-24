@@ -6,6 +6,7 @@
     align-items: flex-start;
     margin-bottom: 30px;
     background-color: white;
+    width: 100%;
 }
 
 #PostCard .publisher_img {
@@ -23,7 +24,9 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-#PostCard .card_inner {}
+#PostCard .card_inner {
+    width: 100%;
+}
 
 #PostCard .card_inner .info_about_publisher {
     display: flex;
@@ -58,20 +61,44 @@
     height: 5px;
     border-radius: 100%;
     margin-right: 15px;
-    margin-left: 15px;
+    margin-left: 0px;
 }
 
 #PostCard .card_inner .info_about_publisher .more_publisher_info .about_post .post_category {
     border-radius: 50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
 }
 
-#PostCard .card_inner .info_about_publisher .more_publisher_info .about_post .post_category span {
-    color: #95A5A6;
+#PostCard .card_inner .info_about_publisher .more_publisher_info .about_post .post_category div {
+    background-color: #F5F7FA;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding: 2px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+
+#PostCard .card_inner .info_about_publisher .more_publisher_info .about_post .post_category span.color {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    margin-right: 3px;
+}
+
+#PostCard .card_inner .info_about_publisher .more_publisher_info .about_post .post_category span.tag_title {
+    color: var(--theme_card_content_title_color);
     font-family: 'Rubik', sans-serif;
     font-weight: 400;
     font-size: 13px;
     word-spacing: 2px;
     letter-spacing: 0.6px;
+
 }
 
 #PostCard .card_inner .info_about_publisher .more_publisher_info .about_post .published_time {
@@ -114,6 +141,7 @@
     font-size: 15px;
     word-spacing: 2px;
     letter-spacing: 0.6px;
+    word-wrap: break-word;
 }
 
 #PostCard .card_inner .card_content .content_media {
@@ -125,6 +153,7 @@
     height: auto;
     max-height: 600px;
     border-radius: 7px;
+    object-fit: contain;
 }
 
 #PostCard .card_inner .card_reactions {

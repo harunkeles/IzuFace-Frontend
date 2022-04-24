@@ -140,6 +140,15 @@ export var StudentUserDepartment_Api = async (department) => {
 }
 
 
+//* GET
+//? Mini Post Tags 
+export var AllMiniPostTags_Api = async () => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/mini-post-tags/`)
+        .catch(error => console.log(error))
+    return result
+}
+
+
 //* POST
 //? Login Api
 export var Post_Login_Api = async (username, password) => {
@@ -211,6 +220,22 @@ export var PatchDiscussionData_Api = async (discussionID, data) => {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', },
         data: JSON.stringify(data),
+    })
+        .catch(error => console.log(error))
+    return result
+}
+
+
+
+//* POST
+//? Mini Post Post Api
+export var PostMiniPost_Api = async (data) => {
+    var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/mini-posts/create`, {
+        auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
+        credentials: 'include',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        data: data,
     })
         .catch(error => console.log(error))
     return result

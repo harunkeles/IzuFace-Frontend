@@ -7,6 +7,11 @@ import React, { useState } from 'react'
 
 import search_icon from '../../../assets/img/icons/main_icons/search_icon.png'
 import PostCard from '../../../components/cards/postCard';
+import Admin_Resim from '../../../assets/img/others/Admin_Resim.jpg'
+import login_page_bg from '../../../assets/img/bg_images/log_images/login_page_bg.jpg'
+import ali_asaf from '../../../assets/img/others/ali-asaf.jpg'
+import ali_asaf2 from '../../../assets/img/others/ali-asaf2.jpg'
+import ali_asaf3 from '../../../assets/img/others/ali-asaf3.jpg'
 
 function UserMiddleSectionDesign() {
 
@@ -52,11 +57,77 @@ export default UserMiddleSectionDesign
 
 
 function content_1(){
+    var data = {
+        publisher_img : Admin_Resim,
+        publisher_name : 'Muhammet Harun Keleş',
+        post_tags : [
+            {
+                id:0,
+                title : "Gündem",
+                color : "#0AFF3A"
+            },
+            {
+                id:0,
+                title : "İzü",
+                color : "#FCFF68"
+            },
+        ],
+        published_time : '23 Aralık 2020',
+        card_content : 'İstanbul Sabahattin Zaim Üniversitesi öğrencisiyim. Okuduğum üniversiteden çok memnunum.',
+        content_media : login_page_bg,
+        liked_users : [
+            {
+                id: 0,
+                liked_user_img: Admin_Resim,
+                liked_user_name : "Merve Kuru",
+            },
+            {
+                id: 1,
+                liked_user_img: ali_asaf,
+                liked_user_name : "ali_asaf",
+            },
+            {
+                id: 2,
+                liked_user_img: ali_asaf2,
+                liked_user_name : "ali_asaf2",
+            },
+            {
+                id: 3,
+                liked_user_img: ali_asaf3,
+                liked_user_name : "ali_asaf3",
+            },
+        ],
+        liked_users_count : 15,
+        comment_count : 3,
+        commenters : [
+            {
+                id: 0,
+                commenters_user_img: Admin_Resim,
+                commenters_user_name : "Merve Kuru",
+                comment_time : "10 saat önce",
+                comment_text : "Okuduğum üniversiteden çok memnunum. Bu yüzdene de okulumuzun blog sitesini yapma",
+            },
+            {
+                id: 1,
+                commenters_user_img: ali_asaf3,
+                commenters_user_name : "Merve Kuru",
+                comment_time : "10 saat önce",
+                comment_text : "This package hosts the incubator components that are not yet ready to move to core.",
+            },
+            {
+                id: 2,
+                commenters_user_img: ali_asaf3,
+                commenters_user_name : "Merve Kuru",
+                comment_time : "10 saat önce",
+                comment_text : "Bu yüzdene de okuluini yapma  u yüzdene de a  Bu yüzdene de oumuzun blog sitesini yapma  Bu yüzdene de okulumuzun blog sitesini yapma  Bu yüzdene de okulumuzun blog sitesini yapma  Bu yüzdene de okulumuzun blog sie de okulumuzun blog sitesini yapma  Bu lumuzun blog sitesini yapma",
+            }
+        ],
+    }
     return (
         <>
-            <PostCard abc="sssssssssssssssssss"/>
-            <PostCard abc="sssssssssssssssssss"/>
-            <PostCard abc="sssssssssssssssssss"/>
+            <PostCard data={data}/>
+            <PostCard data={data}/>
+            <PostCard data={data}/>
         </>
     )
 }

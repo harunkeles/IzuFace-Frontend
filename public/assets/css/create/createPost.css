@@ -1,5 +1,5 @@
 #Create_Post {
-    background-color: #F5F7FA;
+    background-color: var(--theme_bg_color);
     width: 100%;
     height: 100%;
     position: fixed;
@@ -29,27 +29,45 @@
     font-size: 20px;
     font-weight: 500;
     line-height: 0;
+    color: var(--theme_card_content_title_color);
 }
 
 #Create_Post .create_post_cover .category_type_row .toogle_post_type_category button {
     margin: 0;
     margin-right: 10px;
-    border-radius: 40px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e07d;
     font-family: 'Titillium Web', sans-serif !important;
     text-transform: capitalize;
     letter-spacing: 1px;
     font-size: 15px;
     padding: 7px 15px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    color: var(--theme_card_content_title_color);
 }
 
 #Create_Post .create_post_cover .category_type_row .toogle_post_type_category button.Mui-selected {
-    font-family: 'Titillium Web', sans-serif !important;
-    background-color: #233B55;
-    color: white;
-    font-size: 15px;
+    background-color: var(--theme_for_white_space_bg_color);
+    color: var(--theme_card_content_title_color);
+    font-size: 16px;
     font-weight: 700;
+
 }
+
+.darkApp #Create_Post .create_post_cover .category_type_row .toogle_post_type_category button {
+    border: 1px solid #e0e0e01c;
+    font-family: 'Titillium Web', sans-serif !important;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-size: 15px;
+    padding: 7px 15px;
+    box-shadow: var(--theme_card_divider_box_shadow);
+}
+
+.darkApp #Create_Post .create_post_cover .category_type_row .toogle_post_type_category button.Mui-selected {
+    border: 2px solid #3D3D3D;
+    box-shadow: rgba(94, 94, 94, 0.35) 0px -50px 36px -28px inset;
+}
+
 
 #Text_area {
     margin-top: 20px;
@@ -64,8 +82,8 @@
     height: calc(100vh - 200px);
     width: 75%;
     flex: 5;
-    background-color: white;
-    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    background-color: var(--theme_for_white_space_bg_color);
+    box-shadow: var(--theme_sport_football_announcement_box_shadow);
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -115,21 +133,23 @@
     position: relative;
     width: auto;
     height: auto;
-    max-width: 100%;
-    max-height: 300px;
+    max-width: 400px;
+    max-height: 200px;
     margin-bottom: 20px;
     margin-top: 20px;
+    padding-left: 50px;
 }
 
 #Text_area .writing_area button.cover_image {
     position: relative;
     background-color: transparent;
-    border: 2px solid #D6D6D7;
+    border: 2px solid #3D3D3D;
     border-radius: 5px;
     cursor: pointer;
     overflow: hidden;
     padding: 7px 10px;
     min-height: 50px;
+    color: var(--theme_card_content_title_color);
 }
 
 #Text_area .writing_area button.cover_image span {
@@ -182,19 +202,98 @@
 }
 
 #Text_area .writing_area .article-form__body .article_base_title textarea {
+    resize: none;
     width: 100%;
     font-weight: 900;
     font-family: 'Titillium Web', sans-serif;
     font-size: 35px;
     overflow: hidden;
     display: block;
-    height:auto;
+    background-color: var(--theme_for_white_space_bg_color);
+    color: var(--theme_card_content_title_color);
+
 }
 
 #Text_area .writing_area .article-form__body .article_base_title textarea::placeholder {
     font-weight: 900;
     color: #9197a3;
 }
+
+#Text_area .writing_area .article-form__body .css-1hfcwwv-MuiStack-root {
+    margin-left: 50px !important;
+}
+
+#Text_area .writing_area .article-form__body .MuiAutocomplete-root {
+    width: 99% !important;
+    padding-left: 50px;
+
+}
+
+#Text_area .writing_area .article-form__body .MuiInput-root.MuiInput-underline::after {
+    display: none;
+}
+
+#Text_area .writing_area .article-form__body .MuiAutocomplete-root .MuiButtonBase-root.MuiAutocomplete-tag {
+    background-color: transparent;
+    color: var(--theme_card_content_title_color);
+    background-color: var(--theme_for_white_space_bg_color);
+}
+
+#Text_area .writing_area .article-form__body .MuiAutocomplete-root .MuiButtonBase-root.MuiAutocomplete-tag span {
+    font-family: 'Abril Fatface', cursive;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 3px 10px;
+    padding-left: 3px;
+    border-radius: 5px;
+    color: var(--theme_card_content_title_color);
+    background-color: transparent !important;
+
+}
+
+#Text_area .writing_area .article-form__body .MuiAutocomplete-root .MuiButtonBase-root.MuiAutocomplete-tag svg {
+    border-radius: 100%;
+}
+
+#Text_area .writing_area .article-form__body .MuiAutocomplete-root .MuiButtonBase-root.MuiAutocomplete-tag svg path {
+    color: #9197a3;
+}
+
+#Text_area .writing_area .article-form__body .MuiAutocomplete-root input {
+    color: var(--theme_card_content_title_color) !important;
+    background-color: var(--theme_for_white_space_bg_color) !important;
+}
+
+#Text_area .writing_area .article-form__body .MuiAutocomplete-root ::before {
+    display: none;
+}
+
+#Text_area .writing_area .article-form__body .MuiAutocomplete-root svg.MuiSvgIcon-fontSizeSmall,
+#Text_area .writing_area .article-form__body .MuiAutocomplete-root svg.MuiSvgIcon-fontSizeMedium {
+    color: var(--theme_card_content_title_color) !important;
+}
+
+
+.MuiAutocomplete-popper div {
+    background-color: var(--theme_for_white_space_bg_color) !important;
+    border: 1px solid #3D3D3D;
+}
+
+.MuiAutocomplete-popper div li {
+    border-radius: 5px;
+    width: max-content;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--theme_card_content_title_color) !important;
+}
+
+.MuiAutocomplete-popper div li:hover {
+    color: var(--theme_card_content_title_color) !important;
+
+}
+
+
 
 /* 
 #Text_area .writing_area .article-form__body .article_base_content {
@@ -242,16 +341,146 @@
 
 
 
-
-
-
-
-
-
-
-
 #Text_area .suggestion_area {
     flex: 2;
-    background-color: transparent;
+    position: relative;
+    /* background-color: transparent; */
+    /* border: 1px solid #3D3D3D; */
+    height: calc(100vh - 200px);
+}
+
+
+#Text_area .suggestion_area .post_media_info {
+    position: absolute;
+    width: 100%;
+    padding: 20px 20px;
+    top: 20px;
+    color: var(--theme_card_content_title_color) !important;
+    animation-duration: 0.5s !important;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+
+#Text_area .suggestion_area .post_title_info {
+    position: absolute;
+    width: 100%;
+    padding: 20px 20px;
+    top: 100px;
+    color: var(--theme_card_content_title_color) !important;
+    animation-duration: 0.5s !important;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+#Text_area .suggestion_area .post_tags_info {
+    position: absolute;
+    width: 100%;
+    padding: 20px 20px;
+    top: 160px;
+    color: var(--theme_card_content_title_color) !important;
+    animation-duration: 0.5s !important;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+
+#Text_area .suggestion_area .post_media_info span,
+#Text_area .suggestion_area .post_title_info span,
+#Text_area .suggestion_area .post_tags_info span {
+    font-weight: 800;
+    font-size: 18px;
+}
+
+#Text_area .suggestion_area .post_media_info ul,
+#Text_area .suggestion_area .post_title_info ul,
+#Text_area .suggestion_area .post_tags_info ul {
+    margin: 0;
+    padding: 0;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+#Text_area .suggestion_area .post_media_info ul li,
+#Text_area .suggestion_area .post_title_info ul li,
+#Text_area .suggestion_area .post_tags_info ul li {
+    font-weight: 400;
+    font-size: 17px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+
+
+
+
+
+
+#Text_area .suggestion_area .buttons_group {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 20px;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#Text_area .suggestion_area .buttons_group button {
+    position: relative;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+#Text_area .suggestion_area .buttons_group button.submitButton {
+    color: #ffffff;
+    background-color: #8B2232;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    margin-left: 10px;
+}
+
+#Text_area .suggestion_area .buttons_group button.previewButton {
+    color: #8B2232;
+    background-color: #ffffff;
+    border: 1px solid #3d3d3d49;
+}
+
+.darkApp #Text_area .suggestion_area .buttons_group button.previewButton {
+    color: #ffffff;
+    background-color: #1E2229;
+    border: 1px solid #3d3d3d49;
+}
+
+
+
+#Preview_writing_area {
+    position: relative;
+    height: calc(100vh - 200px);
+    width: 75%;
+    background-color: var(--theme_for_white_space_bg_color);
+    box-shadow: var(--theme_sport_football_announcement_box_shadow);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow-y: scroll;
     padding: 20px 20px;
 }
+
+#Preview_writing_area::-webkit-scrollbar {
+    z-index: 99999;
+    width: 4px;
+    opacity: 0;
+}
+
+#Preview_writing_area::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#Preview_writing_area::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #95A5A6 0%, #95A5A6 50%, #95A5A6 99%);
+}
+

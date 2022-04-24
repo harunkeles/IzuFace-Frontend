@@ -44,16 +44,12 @@ function UserSmallInfoDesign({ profileUser }) {
         }
     }
 
-    // Bu kod sadece authUser veya profile_user_rank değişmesi durumunda kullanılacak
-    useEffect(() => {
-        console.log("first")
-        // setLoginInfoToLclStorage()
-    }, [authUser], [profile_user_rank],)
 
 
     // ComponentDidMounth tarzında sayfa Dom'a ilk render edildikten sonra bu kod çalışıcak
     useEffect(() => {
         checkSocialMedia()
+        setLoginInfoToLclStorage()
     }, [])
 
 
@@ -79,6 +75,7 @@ function UserSmallInfoDesign({ profileUser }) {
         followList.push(profileUser.profile_detail.user_id);
 
         await Follow_Unfollow_Api(followList)
+        await setLoginInfoToLclStorage()
 
     };
 
@@ -99,6 +96,8 @@ function UserSmallInfoDesign({ profileUser }) {
             followList.splice(index, 1);
 
         await Follow_Unfollow_Api(followList)
+        await setLoginInfoToLclStorage()
+
     };
 
 
