@@ -22,6 +22,7 @@ import ali_asaf3 from '../../../assets/img/others/ali-asaf3.jpg'
 import { useSelector } from 'react-redux';
 import { routes } from '../../../routes';
 import { DialogContent, DialogContentText } from '@mui/material';
+import history from '../../../history';
 
 
 
@@ -33,6 +34,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function Create_post() {
+
+
+    const user = useSelector(state => state.auth)
+
+
 
     const [postType, setPostType] = useState('classic');
 
@@ -113,6 +119,10 @@ function Create_post() {
 
 
         await PostMiniPost_Api(formData)
+        .then(val=>{
+            history.push("/std/@"+user.authUser.username)
+            history.go()
+        })
     }
 
     const [open, setOpen] = React.useState(false);
@@ -237,13 +247,11 @@ function Create_post() {
 
 
 
-
-    const user = useSelector(state => state.auth)
     var data = {
         publisher_img: routes.url + user.authUser.more_info.profImage,
         publisher_name: user.authUser.first_name + ' ' + user.authUser.last_name,
         post_tags: selectedTagProp,
-        published_time: '23 Aralık 2020',
+        published_time: '',
         card_content: articleTitle,
         content_media: coverImage,
         liked_users: [
@@ -363,7 +371,7 @@ function Create_post() {
                             </div>
 
                             <div style={isPreviewActive} id='Preview_writing_area'>
-                                <PostCard data={data} />
+                               <PostCard data={data} />
                             </div>
 
                             <div className='suggestion_area'>
@@ -473,7 +481,7 @@ function Classic_post_type(emptyList, dizim, setDizim, notSelectedItems, setNotS
             if (values.length == 4) {
                 values.map(val => {
                     tagIdList.push(val.id)
-                    selectedTagPropList.push(val)
+                    selectedTagPropList.push([val.title,val.color])
                 })
                 setDizim(emptyList)
             } else {
@@ -483,7 +491,7 @@ function Classic_post_type(emptyList, dizim, setDizim, notSelectedItems, setNotS
                         var son = dizim.filter(res => res != val)
                         setNotSelectedItems(son)
                     }
-                    selectedTagPropList.push(val)
+                    selectedTagPropList.push([val.title,val.color])
                 })
                 setDizim(notSelectedItems)
             }

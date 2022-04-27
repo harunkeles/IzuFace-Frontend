@@ -3,6 +3,302 @@
     height: 100%;
     left: 50%;
     transform: translateX(-50%);
+    background-color: var(--theme_bg_color);
+}
+
+#Football_Appointment_bg_cover {
+    background-color: var(--theme_bg_color);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+#Football_Appointment .Football_Appointment_cover {
+    position: relative;
+    width: 100%;
+    height: max-content;
+    padding: 0;
+    margin-top: 70px;
+    background-color: var(--theme_bg_color);
+}
+
+#Football_Appointment .filter_part {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 0;
+}
+
+#Football_Appointment .filter_part .text {
+    /* background-color: #edfcfd; */
+    /* border: 1px solid #FE9B33; */
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#Football_Appointment .filter_part .text p {
+    margin: auto 0;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--theme_card_content_title_color);
+}
+
+#Football_Appointment .filter_part .text p span {
+    font-weight: 700;
+}
+
+
+
+#Football_Appointment .filter_part ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    margin-left: 60px;
+    display: none;
+}
+
+#Football_Appointment .filter_part ul li {
+    list-style: none;
+    margin: 0 5px;
+    transition: 1s all ease-in;
+}
+
+#Football_Appointment .filter_part ul li a {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 10px 15px;
+    background-color: white;
+    border-radius: 7px;
+}
+
+#Football_Appointment .filter_part ul li a i {
+    color: #183153;
+    font-size: 18px;
+}
+
+
+
+
+
+#Football_Appointment .bottom_schdule_side {
+    height: calc(100% - 80px);
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-top: 20px;
+    background-color: var(--theme_bg_color)
+}
+
+
+
+#Football_Appointment .bottom_schdule_side .single_row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-bottom: 40px;
+    
+}
+
+
+#Football_Appointment .bottom_schdule_side .single_row.row_main {}
+
+#Football_Appointment .bottom_schdule_side .single_row.row_main .row_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 98px;
+    min-width: 98px;
+    height: 100%;
+}
+
+#Football_Appointment .bottom_schdule_side .single_row.row_main .row_icon img {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+#Football_Appointment .bottom_schdule_side .single_row.row_main .day_row {
+    display: grid;
+    grid-template-columns: repeat(7, 150px);
+    gap: 20px;
+    background-color: var(--theme_bg_color);
+    height: 80px;
+    position: relative;
+    z-index: 2;
+
+}
+
+#Football_Appointment .bottom_schdule_side .single_row.row_main .day_row .single_day {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 2px solid #dcdcdf;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 20px -20px;
+
+}
+
+#Football_Appointment .bottom_schdule_side .single_row.row_main .day_row .single_day span.day_num {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 23px;
+    color: var(--theme_card_content_title_color);
+}
+
+#Football_Appointment .bottom_schdule_side .single_row.row_main .day_row .single_day span.day_name {
+    font-family: 'Titillium Web', sans-serif;
+    margin-bottom: -10px;
+    font-size: 15px;
+    color: var(--theme_card_content_title_color);
+}
+
+
+
+
+
+
+
+
+
+
+
+#Football_Appointment .bottom_schdule_side .single_hour {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 98px;
+    min-width: 98px;
+    height: 100%;
+}
+
+#Football_Appointment .bottom_schdule_side .single_hour span {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--theme_card_content_title_color);
+}
+
+#Football_Appointment .bottom_schdule_side .schdule_side {
+    display: grid;
+    grid-template-columns: repeat(7, 150.5px);
+    gap: 20px;
+    background-color: var(--theme_bg_color);
+    height: 120px;
+    position: relative;
+    z-index: 2;
+    
+}
+
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row {
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    z-index: 2;
+    background-color: var(--theme_for_white_space_bg_color);
+    border-radius: 6px;
+    border: 1px solid transparent;
+}
+
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    cursor: pointer;
+    border: 1px solid #acacac75;
+}
+
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row.selected_hour::before {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row.selected_hour {
+    background-color: #FFFFFF;
+    border-radius: 7px;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    border-top: 5px solid #FE9B33;
+}
+
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row>div{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row.selected_hour .owner_img_of_selected_date {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row.selected_hour img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 100%;
+
+}
+
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row.selected_hour .owner_name_of_selected_date {
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+}
+
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row.selected_hour .owner_name_of_selected_date span {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+
+/** Modal */
+
+
+#Football_Appointment #selectedDateSettings.modal {}
+
+
+
+
+
+
+
+
+
+
+/* 
+
+#Football_Appointment {
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #F5F7FA;
 }
 
@@ -32,7 +328,7 @@
 
 #Football_Appointment .filter_part .text {
     background-color: #edfcfd;
-    /* border: 1px solid #FE9B33; */
+    /* border: 1px solid #FE9B33; 
     padding: 10px 30px;
     border-radius: 10px;
     font-weight: 600;
@@ -153,6 +449,7 @@
     align-items: flex-start;
     justify-content: stretch;
     margin-top: 20px;
+    background-color: red;
 }
 
 #Football_Appointment .bottom_schdule_side .hours_side {
@@ -259,7 +556,14 @@
 
 
 
-/** Modal */
+/** Modal 
 
 
 #Football_Appointment #selectedDateSettings.modal {}
+
+
+
+
+
+
+*/

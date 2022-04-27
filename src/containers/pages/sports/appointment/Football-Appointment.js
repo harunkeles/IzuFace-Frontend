@@ -1,160 +1,47 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import time_icon from '../../../../assets/img/icons/post_detail_icons/time_icon.png'
 import Menu from '../../../../components/menu/menu'
 import { routes } from '../../../../routes'
+import { AllAppointments_Api, AppointmentPost_Api } from '../../../../apis/Api';
+import MiniLoading from '../../../../components/loading/miniLoading';
 
 
 const Football_Appointment = () => {
 
+    var selected_box_ref = useRef();
     const user = useSelector(state => state.auth.authUser)
     const [selectedIndex, setSelectedIndex] = useState(null)
     const [selectedIndexList, setSelectedIndexList] = useState([])
     const [selected_e_, setSelected_e_] = useState(null)
-    const [selectedDate, setSelectedDate] = useState(null)
-
+    const [selectedHour, setSelectedHour] = useState(null)
 
 
     //* Modal Açıldığında Çalışır
-    const onClickHandler = async (index, e) => {
+    const onClickHandler = async (index, e, hour) => {
 
         //* Modal açıldığında seçilen kutunun index'i ve özelliklerinin ataması yapılır.
         setSelectedIndex(index)
         setSelected_e_(e)
-
-        //* Tarih ve saat ataması yapılacak olan func çağrılır.
-        await onModalSelectedDate(index)
+        setSelectedHour(hour)
 
     }
 
 
-    //* Modal Açıldıktan sonra seçilen tarih ve saat belirlemesi yapar
-    const onModalSelectedDate = (selectedIndex) => {
-        var hour = null
-        var date = null
 
-        //* Seçilen kutunun indexinin 7 ile bölümünden kalana göre bir tarih ataması yapılır
-        //* Bu tarih ataması calcDateNumAndName() func'dan dönen tarih ile yapılır.
-        //* Seçilen kutunun indexinin 7 ile bölümünden kalan 0 ise 0.column alınır.Eğer 1 ise 1.column alınır...
-        if (selectedIndex % 7 === 0) {
-            date = {
-                'year': calcDateNumAndName()['dateYearList'][0],
-                'month': calcDateNumAndName()['dateMonthList'][0],
-                'day': calcDateNumAndName()['dateNumList'][0],
-                'dayName': calcDateNumAndName()['dateNameList'][0]
-            }
-        }
-        else if (selectedIndex % 7 === 1) {
-            date = {
-                'year': calcDateNumAndName()['dateYearList'][1],
-                'month': calcDateNumAndName()['dateMonthList'][1],
-                'day': calcDateNumAndName()['dateNumList'][1],
-                'dayName': calcDateNumAndName()['dateNameList'][1]
-            }
-        }
-        else if (selectedIndex % 7 === 2) {
-            date = {
-                'year': calcDateNumAndName()['dateYearList'][2],
-                'month': calcDateNumAndName()['dateMonthList'][2],
-                'day': calcDateNumAndName()['dateNumList'][2],
-                'dayName': calcDateNumAndName()['dateNameList'][2]
-            }
-        }
-        else if (selectedIndex % 7 === 3) {
-            date = {
-                'year': calcDateNumAndName()['dateYearList'][3],
-                'month': calcDateNumAndName()['dateMonthList'][3],
-                'day': calcDateNumAndName()['dateNumList'][3],
-                'dayName': calcDateNumAndName()['dateNameList'][3]
-            }
-        }
-        else if (selectedIndex % 7 === 4) {
-            date = {
-                'year': calcDateNumAndName()['dateYearList'][4],
-                'month': calcDateNumAndName()['dateMonthList'][4],
-                'day': calcDateNumAndName()['dateNumList'][4],
-                'dayName': calcDateNumAndName()['dateNameList'][4]
-            }
-        }
-        else if (selectedIndex % 7 === 5) {
-            date = {
-                'year': calcDateNumAndName()['dateYearList'][5],
-                'month': calcDateNumAndName()['dateMonthList'][5],
-                'day': calcDateNumAndName()['dateNumList'][5],
-                'dayName': calcDateNumAndName()['dateNameList'][5]
-            }
-        }
-        else if (selectedIndex % 7 === 6) {
-            date = {
-                'year': calcDateNumAndName()['dateYearList'][6],
-                'month': calcDateNumAndName()['dateMonthList'][6],
-                'day': calcDateNumAndName()['dateNumList'][6],
-                'dayName': calcDateNumAndName()['dateNameList'][6]
-            }
-        }
-
-        //* Seçilen kutunun indexinin aralığına göre bir saat ataması yapılır
-        switch (selectedIndex >= 0) {
-            case selectedIndex <= 6:
-                hour = '09:00'
-                break;
-            case selectedIndex > 6 && selectedIndex <= 13:
-                hour = '10:00'
-                break;
-            case selectedIndex > 13 && selectedIndex <= 20:
-                hour = '11:00'
-                break;
-            case selectedIndex > 20 && selectedIndex <= 27:
-                hour = '12:00'
-                break;
-            case selectedIndex > 27 && selectedIndex <= 34:
-                hour = '13:00'
-                break;
-            case selectedIndex > 34 && selectedIndex <= 41:
-                hour = '14:00'
-                break;
-            case selectedIndex > 41 && selectedIndex <= 48:
-                hour = '15:00'
-                break;
-            case selectedIndex > 48 && selectedIndex <= 55:
-                hour = '16:00'
-                break;
-            case selectedIndex > 55 && selectedIndex <= 62:
-                hour = '17:00'
-                break;
-            case selectedIndex > 62 && selectedIndex <= 69:
-                hour = '18:00'
-                break;
-            case selectedIndex > 69 && selectedIndex <= 76:
-                hour = '19:00'
-                break;
-            case selectedIndex > 76 && selectedIndex <= 83:
-                hour = '20:00'
-                break;
-
-            default:
-                break;
-        }
-        var newDate = {
-            'hour': hour,
-            'date': date
-        }
-
-        setSelectedDate(newDate)
-
-        return newDate
-
-    }
+    // selected_box_ref.current.classList[1]
 
 
     //* Seçilmiş olan box'ı siliyor
     const onModalDeleteSelectedBox = () => {
+        console.log("AÇILDI : ", selectedIndexList)
 
         var selected_index = selectedIndexList.indexOf(selectedIndex);
         selectedIndexList.splice(selected_index, 1);
         setSelectedIndexList(selectedIndexList)
+        
 
         document.getElementsByClassName(selected_e_.target.className)[0].classList.remove('selected_hour')
         setSelectedIndex(null)
@@ -173,8 +60,23 @@ const Football_Appointment = () => {
         var list = selectedIndexList
         list.push(selectedIndex)
         setSelectedIndexList(list)
+
         setSelectedIndex(null)
         setSelected_e_(null)
+
+        var thisDateInfo = selectedIndexList.reverse()[0]
+        var new_data = {
+            "appointment_owner" : user.user_id,
+            "day": thisDateInfo.toString().substring(0, 2),
+            "month": thisDateInfo.toString().substring(2, 4),
+            "hour": selectedHour
+        }
+
+        AppointmentPost_Api(new_data)
+        .then(val =>{
+            getData()
+        })
+
     }
 
 
@@ -222,12 +124,37 @@ const Football_Appointment = () => {
         return dateList
     }
 
+    console.log("dateNumList : ", dateNumList)
+
+
+    const [gettingAppointmentData, setGettingAppointmentData] = useState(null)
+    const getData = async () => {
+        await AllAppointments_Api()
+            .then(res => {
+                setGettingAppointmentData(res.data)
+                var liste = []
+                for (let index = 0; index < res.data.length; index++) {
+                    var day = res.data[index].day
+                    var month = res.data[index].month
+                    var hour = res.data[index].hour
+                    var concat = day + month + hour
+                    liste.push(concat)
+                    document.getElementsByClassName(`draw_row ${concat}`)[0].classList.add('selected_hour')
+                }
+                setSelectedIndexList(liste)
+            })
+    }
+
+
 
     useEffect(() => {
+
         calcDateNumAndName()
+        getData()
+
     }, [])
 
-
+    
 
     return (
         <>
@@ -250,101 +177,79 @@ const Football_Appointment = () => {
                             </li>
                         </ul>
                     </div>
-                    <div className='date_row'>
-                        <div className='row_icon'>
-                            <img className='date_icon' src={time_icon} alt='' />
-                        </div>
-                        <div className='day_row'>
 
-                            {[...Array(calcDateNumAndName()['dateNameList'].length)].map((e, index) => {
-                                if (index <= 6) {
-
-                                    return (
-                                        <div className='single_day' key={index}>
-                                            <span className='day_num'>{calcDateNumAndName()['dateNumList'][index]}</span>
-                                            <span className='day_name'>{calcDateNumAndName()['dateNameList'][index]}</span>
-                                        </div>
-                                    );
-
-                                }
-                            })}
-
-                        </div>
-                    </div>
                     <div className='bottom_schdule_side'>
-                        <div className='hours_side'>
-                            <div className='single_hour'>
-                                <span>09:00</span>
+                        <div className='single_row row_main'>
+                            <div className='row_icon'>
+                                <img className='date_icon' src={time_icon} alt='' />
                             </div>
-                            <div className='single_hour'>
-                                <span>10:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>11:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>12:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>13:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>14:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>15:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>16:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>17:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>18:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>19:00</span>
-                            </div>
-                            <div className='single_hour'>
-                                <span>20:00</span>
-                            </div>
+                            <div className='day_row'>
 
+                                {[...Array(calcDateNumAndName()['dateNameList'].length)].map((e, index) => {
+                                    if (index <= 6) {
+
+                                        return (
+                                            <div className='single_day' key={index}>
+                                                <span className='day_num'>{calcDateNumAndName()['dateNumList'][index]}</span>
+                                                <span className='day_name'>{calcDateNumAndName()['dateNameList'][index]}</span>
+                                            </div>
+                                        );
+
+                                    }
+                                })}
+
+                            </div>
                         </div>
-                        <div className='schdule_side'>
-                            {[...Array(84)].map((e, index) => {
-                                return (
-                                    <div
-                                        data-mdb-toggle="modal"
-                                        data-mdb-target="#selectedDateSettings"
-                                        className={`draw_row this_hour_key_${index}`}
-                                        key={index}
-                                        onClick={(e) => onClickHandler(index, e)}
-                                    >
-                                        {selectedIndexList.map((res, i) => {
-                                            if (res === index) {
-                                                return (
-                                                    <div key={i}>
-                                                        <div className='owner_img_of_selected_date'>
-                                                            <img src={routes.url + user.more_info.profImage} alt='' />
+
+                        {[...Array(10)].map((e, index) => {
+                            return <div key={index} className={`single_row row_${index + 1}`}>
+                                <div className='single_hour'>
+                                    <span>{(index + 8).toString().length == 1 ? "0" + (index + 8) : index + 8}:00</span>
+                                </div>
+                                <div className='schdule_side'>
+                                    {[...Array(7)].map((e, i) => {
+                                        var hour = (index + 8).toString().length == 1 ? "0" + (index + 8) : index + 8
+                                        var day = (calcDateNumAndName()['dateNumList'][i]).toString().length == 1 ? "0" + (calcDateNumAndName()['dateNumList'][i]) : calcDateNumAndName()['dateNumList'][i]
+                                        var month = (calcDateNumAndName()['dateMonthList'][i]).toString().length == 1 ? "0" + (parseInt(calcDateNumAndName()['dateMonthList'][i]) + 1) : parseInt(calcDateNumAndName()['dateMonthList'][i]) + 1
+                                        return <div
+                                            ref={selected_box_ref}
+                                            data-mdb-toggle="modal"
+                                            data-mdb-target="#selectedDateSettings"
+                                            className={`draw_row ${day}${month}${hour}`}
+                                            key={i}
+                                            onClick={(e) => onClickHandler(day + month + hour, e, hour)}
+                                        >
+                                            {selectedIndexList.map((res, i) => {
+                                                var thisAppointment = Object.values(gettingAppointmentData).filter(val=>val.appointment_ref == res)
+                                                if (res == day + month + hour ) {
+                                                    if  (thisAppointment.length == 0)
+                                                    return <MiniLoading  key={i}/>
+                                                    else
+                                                    return (
+                                                        <div key={i}>
+                                                            <div className='owner_img_of_selected_date'>
+                                                                <img src={routes.url + '/media/' + thisAppointment[0].appointment_owner.prof_img} alt='' />
+                                                            </div>
+                                                            <div className='owner_name_of_selected_date'>
+                                                                <span>{thisAppointment[0].appointment_owner.full_name}</span>
+                                                            </div>
                                                         </div>
-                                                        <div className='owner_name_of_selected_date'>
-                                                            <span>{user.first_name} {user.last_name}</span>
-                                                        </div>
-                                                    </div>
-                                                );
+                                                    );                                                    
+                                                }
+                                            })
                                             }
-                                        })
-                                        }
 
 
-                                    </div>
-                                );
-                            })}
+                                        </div>
+                                    })}
+                                </div>
+                            </div>
+                        })}
 
-                        </div>
+
 
                     </div>
+
                 </div>
             </div>
             <div
@@ -361,16 +266,12 @@ const Football_Appointment = () => {
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">
 
-                                {selectedDate ?
+                                {selectedIndex &&
                                     <>
-                                        Saat : {selectedDate['hour']} &nbsp; <br />
-                                        Tarih : {selectedDate['date']['dayName']} &nbsp;
-                                        {selectedDate['date']['day']} / {parseInt(selectedDate['date']['month']) + 1} / {selectedDate['date']['year']}
+                                        Saat : {selectedHour + ":00"} &nbsp; <br />
+                                        Tarih : {selectedIndex.toString().substring(0, 2) + "/" + selectedIndex.toString().substring(2, 4) + "/" + dt.getFullYear()} &nbsp;
                                     </>
-                                    :
-                                    <></>
                                 }
-                                {console.log(selectedIndexList)}
                             </h5>
                         </div>
 
@@ -389,9 +290,7 @@ const Football_Appointment = () => {
                             <>
                                 {
                                     selectedIndexList.map(res => {
-                                        console.log("res : ", res)
                                         if (res === selectedIndex) {
-                                            console.log("selectedIndex 1 : " , selectedIndex)
                                             return (
                                                 <>
                                                     <div className="modal-body">
@@ -404,7 +303,7 @@ const Football_Appointment = () => {
                                                 </>
                                             );
                                         }
-                                       
+
                                     })
 
                                 }
@@ -412,8 +311,8 @@ const Football_Appointment = () => {
                             </>
                         }
 
-                        { !selectedIndexList.find(res=> res === selectedIndex) && selectedIndexList.length > 0 ?
-                                <>
+                        {!selectedIndexList.find(res => res === selectedIndex) && selectedIndexList.length > 0 ?
+                            <>
                                 <div className="modal-body">
                                     Seçtiğiniz tarihe randevu almak istiyor musunuz?
                                 </div>
@@ -421,10 +320,10 @@ const Football_Appointment = () => {
                                     <button type="button" className="btn btn-danger" data-mdb-dismiss="modal" >Hayır</button>
                                     <button type="button" className="btn btn-primary" data-mdb-dismiss="modal" onClick={() => onModalAcceptButton()}>Evet, Onaylıyorum</button>
                                 </div>
-                                </>
+                            </>
                             :
                             <></>
-                        
+
                         }
 
                     </div>

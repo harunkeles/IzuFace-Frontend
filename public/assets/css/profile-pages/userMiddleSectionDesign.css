@@ -138,3 +138,22 @@
     height: max-content;
     padding-bottom: 50px;
 }
+
+
+/** All Posts Tab 2 */
+
+#userProfileMediaPart{
+    height: max-content;
+    padding-bottom: 50px;
+    position: relative;
+    width: 100%;
+}
+
+#userProfileMediaPart .userProfileMediaPart_cover {
+    width: 100% ;
+}
+
+
+/** All Posts Tab 3 */
+
+#userProfileAboutPart{}

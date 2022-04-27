@@ -7,5 +7,18 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: row;
+    left: 50%;
+    transform: translateX(-50%);
 }
+
+
+@media screen and (min-width: 1500px) {
+    #studentUserProfile{
+        background-color: #F5F7FA;
+        width: max-content;
+        border-right: 1px solid #E6E7EE;
+        border-left: 1px solid #E6E7EE;
+    }
+  }
+
 

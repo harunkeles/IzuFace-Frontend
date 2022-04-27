@@ -159,8 +159,7 @@
     box-sizing: border-box;
 }
 body {
-    /* background: #F5F7FA fixed !important; */
-    background: var(--theme_bg_color) !important;
+    background-color: #F5F7FA !important;
 }
 
 .row {

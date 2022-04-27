@@ -140,6 +140,17 @@ export var StudentUserDepartment_Api = async (department) => {
 }
 
 
+
+//* GET
+//? Mini Posts 
+export var AllMiniPosts_Api = async () => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/mini-posts/`)
+        .catch(error => console.log(error))
+    return result
+}
+
+
+
 //* GET
 //? Mini Post Tags 
 export var AllMiniPostTags_Api = async () => {
@@ -147,6 +158,45 @@ export var AllMiniPostTags_Api = async () => {
         .catch(error => console.log(error))
     return result
 }
+
+
+
+//* GET
+//? All Appointments List 
+export var AllAppointments_Api = async () => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/appointments/`)
+        .catch(error => console.log(error))
+    return result
+}
+
+
+
+//* GET
+//? Single User Of Appointment List 
+export var SingleUserOfAppointments_Api = async (id) => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/appointments/${id}`)
+        .catch(error => console.log(error))
+    return result
+}
+
+
+
+//* POST
+//? Create Appointments Api
+export var AppointmentPost_Api = async (data) => {
+    console.log("DATATA : " , data)
+
+    var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/appointments/create/`, {
+        auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
+        credentials: 'include',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        data: data ,
+    })
+    return result
+}
+
+
 
 
 //* POST

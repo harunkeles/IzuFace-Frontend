@@ -3,6 +3,7 @@
     width: 100%;
     height: 100%;
     position: fixed;
+    overflow-y: scroll;
 }
 
 #Create_Post .create_post_cover {
@@ -89,6 +90,7 @@
     justify-content: flex-start;
     flex-direction: column;
     overflow-y: scroll;
+    padding-bottom: 30px;
 }
 
 #Text_area .writing_area::-webkit-scrollbar {
@@ -182,8 +184,6 @@
     margin: 20px 0;
     margin-bottom: 20px;
     padding-right: 50px;
-    max-height: 500px;
-    overflow-y: scroll;
     padding-left: 50px;
 }
 
@@ -207,11 +207,9 @@
     font-weight: 900;
     font-family: 'Titillium Web', sans-serif;
     font-size: 35px;
-    overflow: hidden;
     display: block;
     background-color: var(--theme_for_white_space_bg_color);
     color: var(--theme_card_content_title_color);
-
 }
 
 #Text_area .writing_area .article-form__body .article_base_title textarea::placeholder {
@@ -272,7 +270,9 @@
 #Text_area .writing_area .article-form__body .MuiAutocomplete-root svg.MuiSvgIcon-fontSizeMedium {
     color: var(--theme_card_content_title_color) !important;
 }
-
+.MuiAutocomplete-popper{
+    background-color: #F5F5F5 !important;
+}
 
 .MuiAutocomplete-popper div {
     background-color: var(--theme_for_white_space_bg_color) !important;
@@ -290,7 +290,6 @@
 
 .MuiAutocomplete-popper div li:hover {
     color: var(--theme_card_content_title_color) !important;
-
 }
 
 
@@ -346,7 +345,7 @@
     position: relative;
     /* background-color: transparent; */
     /* border: 1px solid #3D3D3D; */
-    height: calc(100vh - 200px);
+    height: calc(100% - 200px);
 }
 
 

@@ -1,4 +1,6 @@
 import React from 'react'
+import Moment from 'moment';
+import 'moment/locale/tr'
 
 import hearth from '../../assets/img/icons/main_icons/hearth.png'
 import more_icon from '../../assets/img/icons/post_detail_icons/more_icon.png'
@@ -25,19 +27,23 @@ function PostCard({data}) {
                             {data.post_tags ?
                                 Object.values(data.post_tags).map((val,index) =>{
                                     return <div key={index}>
-                                        <span className='color' style={{color:val.color}}>#</span>
-                                        <span className='tag_title'>{val.title}</span>
+                                        <span className='color' style={{color:val[1]}}>#</span>
+                                        <span className='tag_title'>{val[0]}</span>
                                     </div>
                                 })
                                 :
-                                <div></div>
+                                <></>
                             }
                             
              
                         </div>
                         <div className='divider'></div>
                         <div className='published_time'>
-                            <span>{data.published_time}</span>
+                            {data.published_time ?
+                                <span>{Moment(data.published_time, 'YYYYMMDD').fromNow()}</span>
+                                :
+                                <span>2 dakika önce</span>
+                            }
                         </div>
                     </div>
                 </div>

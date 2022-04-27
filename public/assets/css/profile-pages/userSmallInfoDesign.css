@@ -4,6 +4,7 @@
     height: 100%;
     position: relative;
     border-right: 1px solid #E6E7EE;
+    background-color: var(--theme_bg_color);
 }
 
 #userSmallInfoDesign .profile_detail_user_img {
