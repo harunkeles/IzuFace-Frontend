@@ -184,8 +184,6 @@ export var SingleUserOfAppointments_Api = async (id) => {
 //* POST
 //? Create Appointments Api
 export var AppointmentPost_Api = async (data) => {
-    console.log("DATATA : " , data)
-
     var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/appointments/create/`, {
         auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
         credentials: 'include',
@@ -290,3 +288,20 @@ export var PostMiniPost_Api = async (data) => {
         .catch(error => console.log(error))
     return result
 }
+
+
+
+
+
+//* DELETE
+//? Delete Single Appointment Api
+export var AppointmentDelete_Api = async (data) => {
+    console.log("data : " , data.toString())
+    var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/appointments/delete/${data.toString()}`, {
+        auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', },
+    })
+    return result
+}
+
