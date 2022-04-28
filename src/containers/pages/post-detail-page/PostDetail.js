@@ -36,6 +36,7 @@ import calendar_icon from '../../../assets/img/icons/main_icons/calendar_icon.pn
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {Grid,Pagination,Navigation, Autoplay} from 'swiper';
+import { Filtered_Last_Posts_Api, Follow_Unfollow_Api, Login_Api, Patch_SinglePost_Api, PostDetail_Api, RelatedPosts_Api, SinglePost_Api, UserRank_Api } from '../../../apis/Api';
 SwiperCore.use([Grid,Pagination]);
 
 function PostDetail() {
@@ -50,134 +51,114 @@ function PostDetail() {
 
     const [ isPageReady, setIsPageReady ] = useState(false);
 
+
+    const getData = async() => {
+        await PostDetail_Api(postID)
+        .then(single_post => {
+            dispatch(setSinglePost(single_post.data))
+            setIsPageReady(true)
+        })
+        if (post.id)
+        await RelatedPosts_Api(post.post_owner.id)
+        .then(related_single_post => {
+            dispatch(setPosts(related_single_post.data))
+        })
+    }
+
   
     useEffect(() => {
-        
-        //!! GET Auth User Informations
-        axios
-        .get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-info/${localStorage.getItem("_user_id")}-${localStorage.getItem("_authToken")}`)
-        .then(res => {
-            dispatch(login(res.data))
-            //!! GET Site Settings  
-            axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/all-endpoints/auth-user-site-settings/${localStorage.getItem("_user_id")}`)
-            .then(theme_res => {
-                dispatch(setDarkMode(theme_res.data.dark_theme))
-            })
-            .then(async() => {
-                //!! GET Post Informations  
-                await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/postId=${postID}`)
-                .then(single_post => {
-                    dispatch(setSinglePost(single_post.data))
-                    setIsPageReady(true)
-                })
-                .then(async() =>  {
-                    if (post.id) {
-                        //!! GET Related Post Informations  
-                        await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/related_posts/userId=${post.post_owner.id}`)
-                        .then(related_single_post => {
-                            dispatch(setPosts(related_single_post.data))
-                        })
-                    }
-                })
-            })
-        })
-        .catch(error => console.log(error))
-        
-        
-
+        getData()
       }, [isPageReady]);
 
 
-    const forceUpdateHandler =() =>{
-        //!! GET Post Informations  
-        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/postId=${postID}`)
-        .then(single_post => {
-            dispatch(setSinglePost(single_post.data))
-            setIsPageReady(true)
-        })
-    };
+ 
     
 
-    const onClickLikeButton = (postID) => {
-        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/post-with-filtered/${postID}`)
-        .then(res => {
-            let this_post_liked_user = res.data.likes
+    const onClickLikeButton = async (postID) => {
 
-            //!! Giriş yapmış olan kullanıcının id'si bu postu beğenen kişi id'leri içinde varmı
-            if (user.authUser.user_id === this_post_liked_user.find(res => res === user.authUser.user_id)) {
-                var index = this_post_liked_user.indexOf(user.authUser.user_id);
-                if (index !== -1)
-                    this_post_liked_user.splice(index, 1); 
-                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/post-with-filtered/${postID}`, {
-                    auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
-                    credentials: 'include',
-                    method: 'PATCH',
-                    headers: {'Content-Type': 'application/json', },
-                    data:{'likes':this_post_liked_user},
-                }).then(result => {
-                    forceUpdateHandler()
+        await SinglePost_Api(postID)
+        .then( async (res) => {
+            let this_post_liked_user = res.data.likes
+            
+
+            //* Giriş yapmış olan kullanıcının id'si bu postu beğenen kişi id'leri içinde varmı
+            if (this_post_liked_user.find(val => val === user.user_id)){
+                
+                //* ilk önce kişinin listede ki index numarasını bulduk
+                var index = this_post_liked_user.indexOf(user.user_id);
+                this_post_liked_user.splice(index, 1);
+                
+                //* Giriş yapmış kişinin id'sini listeden çıkardık
+                var data = {
+                    'likes': this_post_liked_user 
+                }
+                await Patch_SinglePost_Api(postID,data)
+
+                await Filtered_Last_Posts_Api()
+                .then(val => {
+                    setPosts(val.data);
                 })
-            }
-            else { 
-                this_post_liked_user.push(user.authUser.user_id);
-                axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/post-with-filtered/${postID}`, {
-                    auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
-                    credentials: 'include',
-                    method: 'PATCH',
-                    headers: {'Content-Type': 'application/json', },
-                    data:{'likes':this_post_liked_user},
-                }).then(result => {
-                    forceUpdateHandler()
+                
+                await UserRank_Api()
+                var lclStorage = JSON.parse(localStorage.getItem('lclStorage'))
+                await Login_Api()
+                .then(val => {
+                    lclStorage.authUser = val.data;
+                    localStorage.setItem('lclStorage' , JSON.stringify(lclStorage))
+                    dispatch(login(lclStorage.authUser))
                 })
+
+
+            } else {
+                
+                //* Giriş yapmış kişinin id'sini listeye ekledik
+                this_post_liked_user.push(user.user_id);
+
+                var data = {
+                    'likes': this_post_liked_user 
+                }
+                await Patch_SinglePost_Api(postID,data)
+
+                await Filtered_Last_Posts_Api()
+                .then(val => {
+                    setPosts(val.data);
+                })
+                
+                await UserRank_Api()
+                var lclStorage = JSON.parse(localStorage.getItem('lclStorage'))
+                await Login_Api()
+                .then(val => {
+                    lclStorage.authUser = val.data;
+                    localStorage.setItem('lclStorage' , JSON.stringify(lclStorage))
+                    dispatch(login(lclStorage.authUser))
+                })
+
+
             }
+
         })
         .catch(error => console.log(error))
-        
-    };
 
-    const forceUpdateFollowHandler =() =>{
-        //!! GET Post Informations  
-        axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/postId=${postID}`)
-        .then(single_post => {
-            dispatch(setSinglePost(single_post.data))
-            setIsPageReady(false)
-            setIsPageReady(true)
-        })
     };
     
 
     const onClickFollowutton = () => {
-            let deneme = user.authUser.more_info.following
-            deneme = Object.assign([], deneme);
-            deneme.push(post.post_owner.id);
-            axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
-                auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
-                credentials: 'include',
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json', },
-                data:{'following': deneme},
-            }).then(result => {
-                forceUpdateFollowHandler()
-            })
+        console.log("1")
+        let following = user.authUser.more_info.following
+        following = Object.assign([], following);
+        following.push(post.post_owner.id);
+        Follow_Unfollow_Api(following)
 
     };
 
     const onClickUnFollowutton = () => {
-        
-            let deneme = user.authUser.more_info.following
-            deneme = Object.assign([], deneme);
-            var index = deneme.indexOf(post.post_owner.id);
-            if (index !== -1)
-                deneme.splice(index, 1); 
-            axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/student-user/studentId=${localStorage.getItem("_user_id")}/`, {
-                auth: { username: user.authUser.username, password: localStorage.getItem('user_password') },
-                credentials: 'include',
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json', },
-                data:{'following':deneme},
-            }).then(result => {
-                forceUpdateFollowHandler()
-            })
+        console.log("2")
+        let following = user.authUser.more_info.following
+        following = Object.assign([], following);
+        var index = following.indexOf(post.post_owner.id);
+        if (index !== -1)
+            following.splice(index, 1); 
+        Follow_Unfollow_Api(following)
     };
 
 

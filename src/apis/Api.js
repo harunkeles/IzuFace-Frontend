@@ -58,6 +58,29 @@ export var SinglePost_Api = async (postID) => {
 }
 
 
+
+//* GET
+//? Post Detail Api 
+export var PostDetail_Api = async (postID) => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/postId=${postID}/`)
+        .catch(error => console.log(error))
+    return result
+}
+
+
+
+//* GET
+//? Related Posts Api 
+export var RelatedPosts_Api = async (userId) => {
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/related_posts/userId=${userId}/`)
+        .catch(error => console.log(error))
+    return result
+}
+
+
+
+
+
 //* GET
 //? Wheather Api
 export var Wheather_Api = async () => {
@@ -245,8 +268,6 @@ export var Patch_SinglePost_Api = async (postID, data) => {
 //* PATCH
 //? Follow/Unfollow Api ( With Filtered)
 export var Follow_Unfollow_Api = async (followList) => {
-    console.log("data2 : ", followList)
-
     var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/student-user/studentId=${lclStorage().user_id}/`, {
         auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
         credentials: 'include',
