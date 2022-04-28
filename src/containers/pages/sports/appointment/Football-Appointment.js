@@ -5,7 +5,7 @@ import "react-datetime/css/react-datetime.css";
 import time_icon from '../../../../assets/img/icons/post_detail_icons/time_icon.png'
 import Menu from '../../../../components/menu/menu'
 import { routes } from '../../../../routes'
-import { AllAppointments_Api, AppointmentPost_Api } from '../../../../apis/Api';
+import { AllAppointments_Api, AppointmentDelete_Api, AppointmentPost_Api } from '../../../../apis/Api';
 import MiniLoading from '../../../../components/loading/miniLoading';
 
 
@@ -35,13 +35,13 @@ const Football_Appointment = () => {
 
 
     //* Seçilmiş olan box'ı siliyor
-    const onModalDeleteSelectedBox = () => {
-        console.log("AÇILDI : ", selectedIndexList)
+    const onModalDeleteSelectedBox = async() => {
+        await AppointmentDelete_Api(selectedIndex)
 
         var selected_index = selectedIndexList.indexOf(selectedIndex);
+
         selectedIndexList.splice(selected_index, 1);
         setSelectedIndexList(selectedIndexList)
-        
 
         document.getElementsByClassName(selected_e_.target.className)[0].classList.remove('selected_hour')
         setSelectedIndex(null)
@@ -66,16 +66,16 @@ const Football_Appointment = () => {
 
         var thisDateInfo = selectedIndexList.reverse()[0]
         var new_data = {
-            "appointment_owner" : user.user_id,
+            "appointment_owner": user.user_id,
             "day": thisDateInfo.toString().substring(0, 2),
             "month": thisDateInfo.toString().substring(2, 4),
             "hour": selectedHour
         }
 
         AppointmentPost_Api(new_data)
-        .then(val =>{
-            getData()
-        })
+            .then(val => {
+                getData()
+            })
 
     }
 
@@ -124,7 +124,6 @@ const Football_Appointment = () => {
         return dateList
     }
 
-    console.log("dateNumList : ", dateNumList)
 
 
     const [gettingAppointmentData, setGettingAppointmentData] = useState(null)
@@ -144,8 +143,7 @@ const Football_Appointment = () => {
                 setSelectedIndexList(liste)
             })
     }
-
-
+ 
 
     useEffect(() => {
 
@@ -154,7 +152,7 @@ const Football_Appointment = () => {
 
     }, [])
 
-    
+
 
     return (
         <>
@@ -220,21 +218,21 @@ const Football_Appointment = () => {
                                             onClick={(e) => onClickHandler(day + month + hour, e, hour)}
                                         >
                                             {selectedIndexList.map((res, i) => {
-                                                var thisAppointment = Object.values(gettingAppointmentData).filter(val=>val.appointment_ref == res)
-                                                if (res == day + month + hour ) {
-                                                    if  (thisAppointment.length == 0)
-                                                    return <MiniLoading  key={i}/>
+                                                var thisAppointment = Object.values(gettingAppointmentData).filter(val => val.appointment_ref == res)
+                                                if (res == day + month + hour) {
+                                                    if (thisAppointment.length == 0)
+                                                        return <MiniLoading key={i} />
                                                     else
-                                                    return (
-                                                        <div key={i}>
-                                                            <div className='owner_img_of_selected_date'>
-                                                                <img src={routes.url + '/media/' + thisAppointment[0].appointment_owner.prof_img} alt='' />
+                                                        return (
+                                                            <div key={i}>
+                                                                <div className='owner_img_of_selected_date'>
+                                                                    <img src={routes.url + '/media/' + thisAppointment[0].appointment_owner.prof_img} alt='' />
+                                                                </div>
+                                                                <div className='owner_name_of_selected_date'>
+                                                                    <span>{thisAppointment[0].appointment_owner.full_name}</span>
+                                                                </div>
                                                             </div>
-                                                            <div className='owner_name_of_selected_date'>
-                                                                <span>{thisAppointment[0].appointment_owner.full_name}</span>
-                                                            </div>
-                                                        </div>
-                                                    );                                                    
+                                                        );
                                                 }
                                             })
                                             }
@@ -289,23 +287,38 @@ const Football_Appointment = () => {
                             :
                             <>
                                 {
-                                    selectedIndexList.map(res => {
+                                    selectedIndexList.map((res,i) => {
+                                        var thisAppointment = Object.values(gettingAppointmentData).filter(val => val.appointment_ref == res)
+
                                         if (res === selectedIndex) {
-                                            return (
-                                                <>
-                                                    <div className="modal-body">
-                                                        Seçtiğiniz tarihili halı saha randevunuzu silmek istiyor musunuz?
+                                            if (thisAppointment[0].appointment_owner.id === user.user_id) {
+                                                return (
+                                                    <div key={i}>
+                                                        <div className="modal-body">
+                                                            Seçtiğiniz tarihili halı saha randevunuzu silmek istiyor musunuz?
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-light" data-mdb-dismiss="modal">Hayır</button>
+                                                            <button type="button" className="btn btn-danger" data-mdb-dismiss="modal" onClick={() => onModalDeleteSelectedBox()}>Evet, Sil</button>
+                                                        </div>
                                                     </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-light" data-mdb-dismiss="modal">Hayır</button>
-                                                        <button type="button" className="btn btn-danger" data-mdb-dismiss="modal" onClick={() => onModalDeleteSelectedBox()}>Evet, Sil</button>
+                                                );
+                                            }
+                                            else {
+                                                return (
+                                                    <div key={i}>
+                                                        <div className="modal-body">
+                                                            Seçtiğiniz tarihde halı saha doludur. Lütfen başka bir tarih seçiniz.
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-light" data-mdb-dismiss="modal">Tamam</button>
+                                                        </div>
                                                     </div>
-                                                </>
-                                            );
+                                                );
+
+                                            }
                                         }
-
                                     })
-
                                 }
 
                             </>
