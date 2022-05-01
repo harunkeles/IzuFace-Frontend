@@ -1,32 +1,16 @@
 import React, { useState } from 'react'
 import { routes } from '../../routes';
-import {NavLink} from 'react-router-dom';
 
 
 import light_logo from '../../assets/img/icons/logo/light_logo.png';
 import dark_logo from '../../assets/img/icons/logo/dark_logo.png';
 import clubs from "../../assets/img/others/clubs.png"
-import all_posts_icon from "../../assets/img/icons/all_post_icons/all_posts_icon.png"
 import dark_news_icon from "../../assets/img/icons/news_icons/dark_news_icon.png"
 import dark_activities_icon from "../../assets/img/icons/activities_icons/dark_activities_icon.png"
 import light_activities_icon from "../../assets/img/icons/activities_icons/light_activities_icon.png"
 import department_icon from "../../assets/img/icons/department_icons/department_icon.png"
 import sport_icon from "../../assets/img/icons/sport_icons/sport_icon.png"
-import home_page_icon_2 from "../../assets/img/icons/home_page_icons/home_page_icon_2.png"
 import discussion_icon from '../../assets/img/icons/main_icons/discussions_icon.png'
-import more_menu from '../../assets/img/icons/main_icons/more_menu.png'
-import more_menu_color from '../../assets/img/icons/main_icons/more_menu_color.png'
-import user_img from '../../assets/img/icons/main_icons/user.png'
-import user_color from '../../assets/img/icons/main_icons/user_color.png'
-import my_face from '../../assets/img/icons/main_icons/my_face.png'
-import notifications from '../../assets/img/icons/main_icons/notifications.png'
-import bookmark from '../../assets/img/icons/main_icons/bookmark.png'
-import all_posts from '../../assets/img/icons/main_icons/all_posts.png'
-import my_face_color from '../../assets/img/icons/main_icons/my_face_color.png'
-import notifications_color from '../../assets/img/icons/main_icons/notifications_color.png'
-import bookmark_color from '../../assets/img/icons/main_icons/bookmark_color.png'
-import all_posts_color from '../../assets/img/icons/main_icons/all_posts_color.png'
-import home_page_color from '../../assets/img/icons/main_icons/home_page_color.png'
 import rank_icon from '../../assets/img/icons/main_icons/rank_icon.png'
 import like_icon from '../../assets/img/icons/main_icons/like_icon.png'
 import reliablity_icon from '../../assets/img/icons/main_icons/reliablity_icon.png'

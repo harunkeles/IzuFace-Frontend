@@ -57,7 +57,7 @@ const MainPage = () => {
                                 <div className="middle-side-contents">
                                     <div className="middle-side__cover">
                                         <Announcements />
-                                        <News news={news} />
+                                        <News />
                                         <Activities />
                                         <LastPosts posts={posts} />
                                     </div>

@@ -13,7 +13,7 @@ import MainPage from "./containers/pages/main-page/Main-Page";
 import AllPosts from "./containers/pages/all-posts-page/All-Posts";
 import NotFoundPage from './containers/pages/not-found-page/NotFoundPage'
 import StudentUserProfile from "./containers/pages/profile-page/student-profile-page/studentUserProfile";
-import News from "./components/news/News";
+import NewsPage from "./containers/pages/news/NewsPage";
 import Sports from "./containers/pages/sports/Sports";
 import Football from "./containers/pages/sports/sport_branches/Football";
 import PostDetail from "./containers/pages/post-detail-page/PostDetail";
@@ -71,7 +71,7 @@ const App = () => {
                 <Route path={routes.main.path} element={<MainPage />} />
                 <Route path={routes.posts.path} element={<AllPosts />} />
                 <Route path={routes.student_user_profiles.path} element={<StudentUserProfile />} />
-                <Route path={routes.news.path} element={<News />} />
+                <Route path={routes.news.path} element={<NewsPage />} />
                 <Route path={routes.posts.path + '/:postID'} element={<PostDetail />} />
                 <Route path={routes.sports.path} element={<Sports />} />
                 <Route path={routes.sports.football.path} element={<Football />} />
