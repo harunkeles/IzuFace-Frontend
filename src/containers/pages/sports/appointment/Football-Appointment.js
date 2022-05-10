@@ -138,6 +138,7 @@ const Football_Appointment = () => {
                     var hour = res.data[index].hour
                     var concat = day + month + hour
                     liste.push(concat)
+                    if(document.getElementsByClassName(`draw_row ${concat}`)[0])
                     document.getElementsByClassName(`draw_row ${concat}`)[0].classList.add('selected_hour')
                 }
                 setSelectedIndexList(liste)
