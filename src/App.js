@@ -23,6 +23,7 @@ import { routes } from './routes';
 import { Site_Settings_Api } from "../src/apis/Api"
 import { useSelector } from "react-redux";
 import Football_Appointment from "./containers/pages/sports/appointment/Football-Appointment";
+import Health_Appointment from "./containers/pages/sports/appointment/Health_Appointment";
 
 Modal.setAppElement('#root')
 
@@ -68,14 +69,15 @@ const App = () => {
                 {/* <Route path={routes.login.path} element={<LoginPage />} /> */}
               
                 {/* <Route path={routes.login.path} element={<Navigate to={routes.main.path} />} /> */}
-                <Route path={routes.main.path} element={<MainPage />} />
+                <Route path={routes.main.path} element={<Football />} />
                 <Route path={routes.posts.path} element={<AllPosts />} />
                 <Route path={routes.student_user_profiles.path} element={<StudentUserProfile />} />
                 <Route path={routes.news.path} element={<NewsPage />} />
                 <Route path={routes.posts.path + '/:postID'} element={<PostDetail />} />
-                <Route path={routes.sports.path} element={<Sports />} />
+                <Route path={routes.sports.path} element={<Football />} />
                 <Route path={routes.sports.football.path} element={<Football />} />
                 <Route path={routes.sports.football_appointment.path} element={<Football_Appointment />} />
+                <Route path={routes.sports.healt.path} element={<Health_Appointment />} />
                 <Route path={routes.discussions.path} element={<Discussion />} />
                 <Route path={routes.create.path} element={<Create_post />} />
                 <Route path={routes.notFound.path} element={<NotFoundPage />} />

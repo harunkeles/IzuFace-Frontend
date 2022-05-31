@@ -30,7 +30,18 @@
     }
 }
 
-
+#aaa{
+    background-color: #556927;
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    text-align: center;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 #sport_football {
     position: absolute;
@@ -63,6 +74,7 @@
     width: 100%;
     max-width: 1400px;
     height: 600px;
+    margin-top: 70px;
 }
 
 #sport_football .sport_football_cover .football_image_part .image_part {
@@ -120,6 +132,16 @@
     font-family: 'Titillium Web', sans-serif;
     font-weight: 800;
 }
+#sport_football .sport_football_cover .football_image_part .content a.btn.right {
+    color: #ffffff;
+    background-color: rgb(155, 145, 7);
+    border-radius: 10px;
+    margin-top: 40px;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 800;
+    margin-left: 10px;
+}
+
 
 
 

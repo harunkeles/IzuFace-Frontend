@@ -53,6 +53,9 @@
     font-weight: 700;
 }
 
+#abc {
+    margin-top: 170px;
+}
 
 
 #Football_Appointment .filter_part ul {
@@ -62,7 +65,6 @@
     flex-direction: row;
     padding: 0;
     margin: 0;
-    margin-left: 60px;
     display: none;
 }
 
@@ -107,7 +109,7 @@
     justify-content: flex-start;
     flex-direction: row;
     margin-bottom: 40px;
-    
+
 }
 
 
@@ -198,7 +200,7 @@
     height: 120px;
     position: relative;
     z-index: 2;
-    
+
 }
 
 #Football_Appointment .bottom_schdule_side .schdule_side .draw_row {
@@ -233,7 +235,7 @@
     border-top: 5px solid #FE9B33;
 }
 
-#Football_Appointment .bottom_schdule_side .schdule_side .draw_row>div{
+#Football_Appointment .bottom_schdule_side .schdule_side .draw_row>div {
     height: 100%;
     display: flex;
     align-items: center;

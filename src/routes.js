@@ -60,6 +60,10 @@ export const routes = {
             path: "/sports/football/appointment",
             title: "Football Appointment"
         },
+        healt:{
+            path: "/sports/health/appointment",
+            title: "Football Appointment"
+        },
         basketball:{
             path: "/sports/basketball",
             title: "Basketball"

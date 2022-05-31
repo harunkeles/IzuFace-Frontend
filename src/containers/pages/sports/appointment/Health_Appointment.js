@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Datetime from 'react-datetime';
@@ -7,10 +8,11 @@ import Menu from '../../../../components/menu/menu'
 import { routes } from '../../../../routes'
 import { AllAppointments_Api, AppointmentDelete_Api, AppointmentPost_Api } from '../../../../apis/Api';
 import MiniLoading from '../../../../components/loading/miniLoading';
+
 import izuspor from '../../../../assets/img/aaa.png'
 
 
-const Football_Appointment = () => {
+const Health_Appointment = () => {
 
     var selected_box_ref = useRef();
     const user = useSelector(state => state.auth.authUser)
@@ -36,7 +38,7 @@ const Football_Appointment = () => {
 
 
     //* Seçilmiş olan box'ı siliyor
-    const onModalDeleteSelectedBox = async() => {
+    const onModalDeleteSelectedBox = async () => {
         await AppointmentDelete_Api(selectedIndex)
 
         var selected_index = selectedIndexList.indexOf(selectedIndex);
@@ -139,13 +141,13 @@ const Football_Appointment = () => {
                     var hour = res.data[index].hour
                     var concat = day + month + hour
                     liste.push(concat)
-                    if(document.getElementsByClassName(`draw_row ${concat}`)[0])
-                    document.getElementsByClassName(`draw_row ${concat}`)[0].classList.add('selected_hour')
+                    if (document.getElementsByClassName(`draw_row ${concat}`)[0])
+                        document.getElementsByClassName(`draw_row ${concat}`)[0].classList.add('selected_hour')
                 }
                 setSelectedIndexList(liste)
             })
     }
- 
+
 
     useEffect(() => {
 
@@ -163,11 +165,59 @@ const Football_Appointment = () => {
             <div id='Football_Appointment_bg_cover'></div>
             <div id='Football_Appointment'>
                 <div className='Football_Appointment_cover'>
+                    <ul id='abc'>
+                        <li>
+                            <p>
+                                Ölçümden önceki gece uykunuzu almış olun.
+
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Ölçümden bir gün önce ve ölçüm günü alkol almayın.
+
+
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Ölçüm günü “zinde kalmalıyım” deyip çay, kahve, kola, yeşil çay, vb. kafeinli içecekler içmeyin.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Ölçümden 4 saat öncesine kadar yemeğinizi yemiş olun.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Ölçülene kadar 4 saat hiçbir şey yememeniz gerek.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Suyunuzu ölçümden 1 saat önce içebilirsiniz.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Ölçümünüze yarım saat kala mutlaka tuvalete uğrayın.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Bayan üyelerimizin ölçümlerini, menstrüasyon dönemlerinden en az 2 gün önce veya 2 gün sonra yaptırmaları, daha doğru bir sonuca ulaşmak açısından tavsiye edilir.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Sonuçlarınızın doğru çıkması için ölçümden önce egzersiz yapmayın.
+                            </p>
+                        </li>
+                    </ul>
                     <div className='filter_part'>
                         <div className='text'>
-                            <p> **Randevular en geç <span>30 dakika</span> önceden alınabilir.</p>
-                            <p> **Alacak olduğunuz randevunun onaylanması halinde okul mailinize <span>sporbirimi@izu.edu.tr</span> adresi tarafından bildirim gelecektir.</p>
-                            <p> Daha fazla bilgi için <span>sks@izu.edu.tr</span> mail adresi ile iletişime geçiniz.</p>
+
                         </div>
                         <ul>
                             <li>
@@ -202,7 +252,7 @@ const Football_Appointment = () => {
                             </div>
                         </div>
 
-                        {[...Array(10)].map((e, index) => {
+                        {[...Array(5)].map((e, index) => {
                             return <div key={index} className={`single_row row_${index + 1}`}>
                                 <div className='single_hour'>
                                     <span>{(index + 8).toString().length == 1 ? "0" + (index + 8) : index + 8}:00</span>
@@ -290,7 +340,7 @@ const Football_Appointment = () => {
                             :
                             <>
                                 {
-                                    selectedIndexList.map((res,i) => {
+                                    selectedIndexList.map((res, i) => {
                                         var thisAppointment = Object.values(gettingAppointmentData).filter(val => val.appointment_ref == res)
 
                                         if (res === selectedIndex) {
@@ -351,4 +401,4 @@ const Football_Appointment = () => {
 }
 
 
-export default Football_Appointment
+export default Health_Appointment

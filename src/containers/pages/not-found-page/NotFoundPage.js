@@ -7,7 +7,7 @@ const NotFoundPage = () => {
     return (
        <>
             <div id='not_found_page'>
-                <Navbar isPageReady={true}/>
+                {/* <Navbar isPageReady={true}/> */}
                 <div className='container'>
                     <div className='error_content'>
                         <h2>Sayfa Bulunamadı </h2>
