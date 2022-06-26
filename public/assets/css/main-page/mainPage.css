@@ -76,4 +76,52 @@
     /* border-left: 1px solid #5b616c1c; */
 }
 
+#main-page .sentiment-row {
+    margin-bottom: 30px;
+}
 
+#main-page .sentiment-row span {
+    font-family: 'Inika', serif;
+    font-size: 23px;
+    color: #233b55;
+    font-weight: 600;
+}
+
+#main-page .sentiment-row .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    margin-top: 10px;
+
+}
+
+
+
+#main-page .sentiment-row .buttons a {
+    padding: 7px 15px;
+    color: white;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    border-radius: 7px;
+}
+
+#main-page .sentiment-row .buttons a:nth-child(1) {
+    background-color: #01941f;
+}
+
+#main-page .sentiment-row .buttons a:nth-child(2) {
+    background-color: #00b997;
+}
+
+#main-page .sentiment-row .buttons a:nth-child(3) {
+    background-color: #00d2fe;
+}
+
+#main-page .sentiment-row .buttons a:nth-child(4) {
+    background-color: #9d00fe;
+}
+
+#main-page .sentiment-row .buttons a:nth-child(5) {
+    background-color: #b31523;
+}

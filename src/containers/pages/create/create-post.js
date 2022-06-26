@@ -114,6 +114,7 @@ function Create_post() {
         const formData = new FormData();
 
         formData.append('text', articleTitle);
+        formData.append('category', 1);
         formData.append('image', imageData);
         formData.append('tag', selectedTagList);
 

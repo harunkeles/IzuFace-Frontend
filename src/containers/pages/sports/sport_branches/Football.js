@@ -28,8 +28,7 @@ function Football() {
         <Loading />
         :
         <>
-          {/* <Menu/>  */}
-          <img id='aaa' src={izuspor} />
+          <Menu/> 
           <div id='sport_football'>
             <div className='sport_football_cover'>
               <div className='football_image_part'>

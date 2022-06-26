@@ -12,6 +12,8 @@ import {
     Filtered_News_Api,
     Filtered_Last_Posts_Api
 } from "../../../apis/Api"
+import { routes } from '../../../routes';
+import Sentiments from '../sentiments/Sentiments';
 
 
 
@@ -56,6 +58,16 @@ const MainPage = () => {
                                 <LeftSideMenu />
                                 <div className="middle-side-contents">
                                     <div className="middle-side__cover">
+                                        <div className='sentiment-row'>
+                                            <span>Duygulara göre paylaşımlar</span>
+                                            <div className='buttons'>
+                                                <a href={routes.sentiments.path+1}>Mükemmel</a>
+                                                <a href={routes.sentiments.path+2}>Çok iyi</a>
+                                                <a href={routes.sentiments.path+3}>İyi</a>
+                                                <a href={routes.sentiments.path+4}>Eh işte</a>
+                                                <a href={routes.sentiments.path+5}>Kötü</a>
+                                            </div>
+                                        </div>
                                         <Announcements />
                                         <News />
                                         <Activities />

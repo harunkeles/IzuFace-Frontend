@@ -81,6 +81,10 @@ export const routes = {
         path: "/create",
         title: "Create",
     },
+    sentiments:{
+        path: "/sentiments/",
+        title: "Sentiments",
+    },
     
 }
 

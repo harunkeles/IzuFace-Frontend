@@ -173,6 +173,17 @@ export var AllMiniPosts_Api = async () => {
 }
 
 
+//* GET
+//? Mini Posts 
+export var AllMiniPostsWithCategory_Api = async (data) => {
+    console.log("data : " , data)
+    var result = await axios.get(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/posts/mini-posts/sent=${data}`)
+        .catch(error => console.log(error))
+    return result
+}
+
+
+
 
 //* GET
 //? Mini Post Tags 
@@ -212,7 +223,7 @@ export var AppointmentPost_Api = async (data) => {
         credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json', },
-        data: data ,
+        data: data,
     })
     return result
 }
@@ -317,7 +328,7 @@ export var PostMiniPost_Api = async (data) => {
 //* DELETE
 //? Delete Single Appointment Api
 export var AppointmentDelete_Api = async (data) => {
-    console.log("data : " , data.toString())
+    console.log("data : ", data.toString())
     var result = await axios(`${process.env.REACT_APP_UNSPLASH_URL}api/v0/appointments/delete/${data.toString()}`, {
         auth: { username: lclStorage().authUser.username, password: lclStorage().user_password },
         method: 'DELETE',
