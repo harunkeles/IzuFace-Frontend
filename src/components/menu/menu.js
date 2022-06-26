@@ -47,6 +47,11 @@ const Menu = () => {
     }
 
 
+    const log_out = () => {
+        localStorage.clear();
+        window.location.reload();
+    }
+
 
   return (
       <>
@@ -167,7 +172,12 @@ const Menu = () => {
                                             <span>Kampüs Bilgi Sistemi</span>
                                         </a>
                                     </li>
-
+                                    <li className="log-out">
+                                        <a href="/" onClick={log_out}>
+                                            <i className="fas fa-sign-out-alt"></i>
+                                            <span>Çıkış yap</span>
+                                        </a>
+                                    </li>
                                 </ul>
 
                                 <ul className="sidebar__bottom-menu">

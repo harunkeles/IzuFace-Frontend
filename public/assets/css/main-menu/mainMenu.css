@@ -58,7 +58,7 @@
     transform: translatex(0);
     transition: transform 0.4s ease-in-out;
     background-color: var(--theme_for_white_space_bg_color);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.664) ;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.664);
 }
 
 
@@ -89,10 +89,10 @@
     height: 100%;
 }
 
-#mainMenu .sidebar .auth_user_about .auth_user_info .user_name{
+#mainMenu .sidebar .auth_user_about .auth_user_info .user_name {
     font-size: 20px;
     text-align: center;
-    font-family: 'Artifika', serif; 
+    font-family: 'Artifika', serif;
     font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -217,23 +217,23 @@
     list-style: none;
     overflow: scroll;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
-    
+
 }
 
 
 
 /* scroll-prop */
-#mainMenu  ::-webkit-scrollbar {
+#mainMenu ::-webkit-scrollbar {
     width: 10px;
     height: 100%;
 }
 
-#mainMenu  ::-webkit-scrollbar-track {
+#mainMenu ::-webkit-scrollbar-track {
     background-color: transparent;
     border-radius: 20px;
 }
 
-#mainMenu  ::-webkit-scrollbar-thumb {
+#mainMenu ::-webkit-scrollbar-thumb {
     background-image: linear-gradient(180deg, #233B55 0%, #8B2232 99%);
     box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
     border-radius: 100px;
@@ -249,6 +249,12 @@
 
 #mainMenu ul.sidebar__menu li:hover {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+#mainMenu ul.sidebar__menu li a i {
+    color: rgb(128, 0, 0);
+    text-align: center;
+    width: 45px;
 }
 
 #mainMenu ul.sidebar__menu li a img {
@@ -293,7 +299,7 @@
     flex-direction: row;
     margin-bottom: 10px;
     height: 70px;
-    border-top: 1px solid rgba(255, 255, 255, 0.205) ;
+    border-top: 1px solid rgba(255, 255, 255, 0.205);
 }
 
 #mainMenu .sidebar ul.sidebar__bottom-menu li {
@@ -301,7 +307,7 @@
     cursor: pointer;
 }
 
-#mainMenu .sidebar ul.sidebar__bottom-menu li img{
+#mainMenu .sidebar ul.sidebar__bottom-menu li img {
     width: 40px;
     height: 40px;
 }
